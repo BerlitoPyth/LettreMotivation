@@ -45,7 +45,6 @@ def main():
             ["🏠 Accueil",
              "👤 Présentation",
              "📈 Parcours",
-             "💡 Compétences",
              "🔧 Projets",
              "✉️ Motivation"]
         )
