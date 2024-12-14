@@ -65,6 +65,8 @@ def main():
         ### 📚 Formations
         - DAEU B (en cours)
         - Python for Everybody
+        - Python Data Structures
+        - Using Python to Acces Web Data
         - École 42 - La Piscine
         - Expérience professionnelle
         """)
@@ -243,35 +245,6 @@ def main():
         - Approche basée sur les données
         """)
 
-    elif selection == "💡 Compétences":
-        st.title("Mes Compétences")
-
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.info("""
-            ### 🔢 Mathématiques & Analyse
-            - Algèbre
-            - Analyse
-            - Probabilités
-            - Statistiques
-            - Analyse de performances
-            """)
-        with col2:
-            st.success("""
-            ### 💻 Technique
-            - Python (bases solides)
-            - Analyse de données (notions)
-            - Hardware PC
-            - Benchmarking
-            """)
-        with col3:
-            st.warning("""
-            ### 🤝 Business & Relationnel
-            - Analyse des besoins clients
-            - Communication claire
-            - Vulgarisation technique
-            - Gestion de projet
-            """)
 
     elif selection == "🔧 Projets":
         st.title("Mes Projets")
