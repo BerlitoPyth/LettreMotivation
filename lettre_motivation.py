@@ -13,7 +13,7 @@ def write_text_slowly(text):
 
 def main():
     st.set_page_config(
-        page_title="Candidature BUT Science des Données BERLIAT Adrien",
+        page_title="Candidature BUT Science des Donnée BERLIAT Adrien",
         layout="wide"
     )
 
