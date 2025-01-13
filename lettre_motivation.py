@@ -104,7 +104,7 @@ def main():
             st.info("""
             ### 🎓 Formation Actuelle
             - 📚 DAEU B à distance
-            - 💻 Certification Python for Everybody
+            - 💻 Certifications Python
             - 🔍 Auto-formation continue
             - 🌟 Excellents résultats en mathématiques
             """)
@@ -140,10 +140,8 @@ def main():
         ce qui démontre ma capacité à m'organiser de manière autonome et à maintenir un haut niveau d'exigence dans mes études. 
         Les excellents résultats obtenus en mathématiques confirment cette facilité et ce goût pour les raisonnements logiques.
 
-        Pour préparer ma reconversion et maximiser mes chances de réussite, j'ai pris l'initiative de suivre la formation 
-        certifiante "Python for Everybody". Cette formation m'a passionné et m'a permis de découvrir le monde de l'analyse 
-        de données. À travers divers projets personnels, j'ai particulièrement apprécié la façon dont la programmation permet 
-        d'automatiser des tâches et de donner vie aux concepts mathématiques.
+        Pour préparer ma reconversion et maximiser mes chances de réussite, j'ai pris l'initiative de suivre des formations certifiantes
+        sur Coursera, ce qui a consolidé mon intérêt pour la programmation et le secteur de la data.
 
         Le BUT Science des Données représente pour moi l'alliance parfaite entre :
         - Ma passion historique pour les mathématiques
@@ -237,7 +235,7 @@ def main():
 
         Création d'un concept innovant de vente PC Gaming :
         - Analyse détaillée des besoins clients
-        - Vulgarisation pour les nouveux utilisateurs de PC
+        - Vulgarisation pour les nouveaux utilisateurs de PC
         - Développement d'un questionnaire structuré pour satisfaire le besoin du client
         - Création de configurations optimisées
         - Documentation des performances
@@ -249,7 +247,7 @@ def main():
         st.title("Mes Projets")
 
         st.info("""
-        ### 🖥️ E-commerce PC Gaming Personnalisé
+        ### 🖥️ Projet PC Gamer
 
         Création d'un concept innovant de vente de PC gaming :
         - **Analyse des Besoins :**
@@ -279,14 +277,13 @@ def main():
         """)
 
         st.warning("""
-        ### 📊 Formation Python for Everybody
+        ### 📊 Formations Python
 
         Un parcours complet comprenant :
         - Apprentissage des fondamentaux Python
         - Structures de données
         - Utilisation de Python pour accéser aux données Web
         - Utilisation des bases de données avec Python
-        - Capstone: Récupération, traitement et visualisation des données avec Python
         """)
 
     elif selection == "✉️ Motivation":
@@ -297,8 +294,8 @@ def main():
 
         Une progression logique à travers :
         - Première expérience de code à l'École 42
-        - Création d'un projet e-commerce basé sur les données
-        - Formation Python for Everybody
+        - Création d'un projet basé sur les données
+        - Formations Python
         - Passion continue pour l'analyse et les mathématiques
         """)
 
