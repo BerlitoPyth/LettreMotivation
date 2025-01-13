@@ -13,7 +13,7 @@ def write_text_slowly(text):
 
 def main():
     st.set_page_config(
-        page_title="Candidature BUT Science des Données, BERLIAT Adrien",
+        page_title="Candidature BUT Science des Données",
         layout="wide"
     )
 
@@ -88,7 +88,7 @@ def main():
             except Exception as e:
                 st.info("📸 Photo non disponible")
 
-        st.title("Candidature BUT Science des Données")
+        st.title("Candidature BUT Science des Données, BERLIAT Adrien")
         st.markdown("---")
 
         # Points clés
