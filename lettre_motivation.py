@@ -67,6 +67,7 @@ def main():
         - Python Data Structures
         - Using Python to Acces Web Data
         - École 42 - La Piscine
+        - École Nationale des Scaphandriers
         - Expérience professionnelle
         """)
 
