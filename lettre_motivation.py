@@ -88,7 +88,7 @@ def main():
             except Exception as e:
                 st.info("📸 Photo non disponible")
 
-        st.title("Candidature BUT Science des Données, Berliat Adrien :")
+        st.title("Candidature BUT Science des Données, BERLIAT Adrien")
         st.markdown("---")
 
         # Points clés
