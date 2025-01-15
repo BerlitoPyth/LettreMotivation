@@ -151,7 +151,7 @@ def main():
         Les excellents résultats obtenus en mathématiques confirment cette facilité et ce goût pour les raisonnements logiques.
 
         Pour préparer ma reconversion et maximiser mes chances de réussite, j'ai pris l'initiative de suivre des formations certifiantes
-        sur Coursera, ce qui a consolidé mon intérêt pour la programmation et le secteur de la data.
+        en Python sur Coursera, ce qui a consolidé mon intérêt pour la programmation et le secteur de la data.
 
         Le BUT Science des Données représente pour moi l'alliance parfaite entre :
         - Ma passion historique pour les mathématiques
