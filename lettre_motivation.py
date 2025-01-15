@@ -129,12 +129,21 @@ def main():
         d'équipe et la gestion du stress étaient essentiels. Cette expérience m'a appris l'importance de la rigueur et de la 
         communication claire, des compétences précieuses dans le domaine de la data science.
 
+        Cette capacité à relever des défis remonte à ma jeunesse. À l'âge de 11 ans, j'ai remporté le titre de champion de France de
+        pentathlon lors de ma première participation à ce championnat national. Cet accomplissement m'a appris très tôt que la
+        persévérance, la rigueur et l'engagement sont indispensables pour atteindre ses objectifs, des qualités que je mets en pratique
+        dans tous les aspects de ma vie.
+
         Mon intérêt pour la technologie et l'analyse de données s'est récemment concrétisé à travers un projet entrepreneurial 
         innovant. J'ai créé un concept de vente de PC gaming basé sur l'analyse détaillée des besoins clients et des performances 
         réelles. Ce projet m'a permis de développer une approche data-driven : création d'un questionnaire client structuré, 
         analyse des besoins, création de tableaux de performances, et visualisation des données pour aider à la décision. 
         Cette expérience a renforcé ma conviction que l'analyse de données est un outil puissant pour créer des solutions 
         pertinentes et accessibles.
+
+        En parallèle, j'ai commencé à explorer des projets d'initiation sur Kaggle afin de me familiariser avec l'analyse de données.
+        Ces exercices m'ont permis de découvrir des techniques pratiques pour la manipulation et l'interprétation des données, tout 
+        en renforçant mon appétence pour ce domaine.
 
         Les mathématiques ont toujours été une passion pour moi. Cette affinité naturelle, présente depuis mon plus jeune âge, 
         s'est pleinement confirmée lors de ma reprise d'études en DAEU B. J'ai choisi de suivre cette formation à distance, 
