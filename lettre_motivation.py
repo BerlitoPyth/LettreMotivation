@@ -131,9 +131,8 @@ def main():
         Cette capacité à relever des défis remonte à ma jeunesse.À 11 ans, je suis devenu champion de France de pentathlon, une
         expérience formatrice qui m'a inculqué persévérance et rigueur dès mon plus jeune âge.
 
-        Dans un tout autre domaine, en 2019, j'ai réussi, en partant de zéro et en une période de temps relativement courte,
-        à me classer parmi les meilleurs joueurs mondiaux sur le jeu vidéo le plus joué et l'un des plus compétitifs de la 
-        scène e-sportive de l'époque.
+        Dans un tout autre domaine, en 2019, j'ai réussi à me classer parmi les meilleurs joueurs mondiaux sur le jeu vidéo le
+        plus joué et l'un des plus compétitifs de la scène e-sportive de l'époque.
         
         Mon intérêt pour la technologie et l'analyse de données s'est récemment concrétisé à travers un projet entrepreneurial 
         innovant. J'ai créé un concept de vente de PC gaming basé sur l'analyse détaillée des besoins clients et des performances 
