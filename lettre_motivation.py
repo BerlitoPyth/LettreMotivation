@@ -195,17 +195,6 @@ def main():
 
         st.markdown("---")
 
-        st.warning("""
-        ### 💫 Ma Démarche
-
-        Une progression logique vers la data science :
-        - Premier contact avec le code à l'École 42
-        - Développement d'un projet basé sur les données
-        - Retour aux études via le DAEU B
-        - Formation complémentaire en programmation (Python)
-        - Veille technologique régulière
-        """)
-
     elif selection == "📈 Parcours":
         st.title("Mon Parcours")
 
