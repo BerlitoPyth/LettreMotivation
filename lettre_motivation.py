@@ -187,10 +187,10 @@ def main():
             ### 🚀 Mon Projet
 
             Intégrer le BUT Science des Données pour :
-            - Apprendre à utiliser la Data pour concrétiser des projets personnels
+            - Évoluer professionnellement dans un domaine innovant
+            - Apprendre à utiliser la Data pour concrétiser des projets
             - Combiner mathématiques et programmation
             - Relever de nouveaux défis stimulants
-            - Évoluer dans un domaine innovant
             """)
 
         st.markdown("---")
@@ -225,9 +225,9 @@ def main():
         Création d'un concept innovant de vente PC Gaming :
         - Analyse détaillée des besoins clients
         - Vulgarisation pour les nouveaux utilisateurs de PC
-        - Développement d'un questionnaire structuré pour satisfaire le besoin du client
-        - Création de configurations optimisées
-        - Documentation des performances
+        - Développement d'un questionnaire structuré pour satisfaire les besoins du client
+        - Création de configurations optimisées 
+        - Démonstration des performances et transparence totale
         - Approche basée sur les données
         """)
 
@@ -252,6 +252,7 @@ def main():
 
         - **Objectif :**
             - Démocratiser le PC gaming
+            - Permettre au client de ne payer que pour ce dont il a réellement besoin
             - Conseils personnalisés basés sur les données
             - Transparence sur les performances réelles
         """)
