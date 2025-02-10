@@ -171,7 +171,7 @@ def main():
         """)
 
     elif selection == "👤 Qui suis-je ?":
-        st.title("Découvrez mon Profil")
+        st.title("Découvrez si nous matchons !")
         display_quiz()
         st.title("Présentation")
 
