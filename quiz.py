@@ -17,6 +17,11 @@ def display_quiz():
                 font-family: system-ui, -apple-system, sans-serif;
                 background-color: #0f172a;
                 color: white;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 2rem;
             }
             
             /* Classes utilitaires */
@@ -170,6 +175,9 @@ def display_quiz():
             .card {
                 border-radius: 0.5rem;
                 padding: 1.5rem;
+                max-width: 800px;
+                margin: 0 auto;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
             
             .card-header {
@@ -223,6 +231,17 @@ def display_quiz():
                 background-color: #3b82f6;
                 border-radius: 9999px;
                 transition: width 0.3s ease;
+            }
+
+            @media (max-width: 640px) {
+                .card {
+                    margin: 0;
+                    padding: 1rem;
+                }
+                
+                body {
+                    padding: 1rem;
+                }
             }
         </style>
     </head>
@@ -421,21 +440,30 @@ def display_quiz():
 
             const MatchProfile = ({ score, questions }) => {
                 const matches = questions.filter((q, i) => score > i).map(q => q.options[1].match);
+                const icons = [Star, Brain, Code, Trophy, Lightbulb];
                 
                 return (
                     <div className="w-full bg-slate-900 card">
-                        <div className="card-header">
+                        <div className="card-header flex items-center gap-3">
+                            <Trophy />
                             <h2 className="text-xl text-white">Votre Profil Correspondant</h2>
                         </div>
                         <div className="space-y-6">
                             <div className="p-6 bg-slate-800 rounded-lg">
-                                <h3 className="text-lg font-semibold mb-3 text-white">Félicitations !</h3>
+                                <h3 className="text-lg font-semibold mb-3 text-white flex items-center gap-2">
+                                    <Star />
+                                    Félicitations !
+                                </h3>
                                 <p className="text-slate-200 mb-6">Vous avez complété le quiz avec succès.</p>
-                                <p className="text-slate-200 mb-6">Votre score est de {score} sur {questions.length} points.</p>
+                                <p className="text-slate-200 mb-6 flex items-center gap-2">
+                                    <Brain />
+                                    Votre score est de {score} sur {questions.length} points
+                                </p>
                                 <div className="space-y-4">
                                     {matches.map((match, index) => (
-                                        <div key={index} className="p-4 bg-slate-700 rounded-lg">
-                                            <p className="text-slate-200">{match}</p>
+                                        <div key={index} className="p-4 bg-slate-700 rounded-lg flex gap-3">
+                                            {React.createElement(icons[index % icons.length])}
+                                            <p className="text-slate-200 flex-1">{match}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -451,4 +479,4 @@ def display_quiz():
     </html>
     """
     
-    components.html(quiz_html, height=800, scrolling=True)
+    components.html(quiz_html, height=1200, width=800, scrolling=True)
