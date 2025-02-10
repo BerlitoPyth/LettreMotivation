@@ -96,7 +96,7 @@ def display_quiz():
             
             /* Espacement */
             .p-6 {
-                padding: 1.5rem;
+                padding: 1rem;  /* Réduit de 1.5rem à 1rem */
             }
             .p-4 {
                 padding: 1rem;
@@ -105,7 +105,7 @@ def display_quiz():
                 padding-bottom: 0.5rem;
             }
             .mb-6 {
-                margin-bottom: 1.5rem;
+                margin-bottom: 0.75rem;  /* Réduit de 1.5rem à 0.75rem */
             }
             .mb-3 {
                 margin-bottom: 0.75rem;
@@ -139,7 +139,7 @@ def display_quiz():
             
             /* Espacement vertical */
             .space-y-6 > * + * {
-                margin-top: 1.5rem;
+                margin-top: 1rem;  /* Réduit de 1.5rem à 1rem */
             }
             .space-y-3 > * + * {
                 margin-top: 0.75rem;
@@ -174,10 +174,10 @@ def display_quiz():
             /* Composants spécifiques */
             .card {
                 border-radius: 0.5rem;
-                padding: 1.5rem;
+                padding: 1rem;  /* Réduit de 1.5rem à 1rem */
                 width: 100%;
-                max-width: 800px;
-                margin: 1rem auto;
+                max-width: 1000px;  /* Augmenté de 800px à 1000px */
+                margin: 0.5rem auto;  /* Réduit de 1rem à 0.5rem */
                 background-color: #0f172a;
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
@@ -251,6 +251,32 @@ def display_quiz():
                 width: 100%;
                 max-width: 800px;
                 margin: 0 auto;
+            }
+
+            /* Ajoutez ces styles pour le conteneur des résultats */
+            .results-container {
+                max-height: 400px;
+                overflow-y: auto;
+                padding-right: 1rem;
+            }
+
+            /* Style pour la barre de défilement */
+            .results-container::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            .results-container::-webkit-scrollbar-track {
+                background: #1e293b;
+                border-radius: 4px;
+            }
+
+            .results-container::-webkit-scrollbar-thumb {
+                background: #475569;
+                border-radius: 4px;
+            }
+
+            .results-container::-webkit-scrollbar-thumb:hover {
+                background: #64748b;
             }
         </style>
     </head>
@@ -457,25 +483,23 @@ def display_quiz():
                             <Trophy />
                             <h2 className="text-xl text-white">Votre Profil Correspondant</h2>
                         </div>
-                        <div className="space-y-6">
-                            <div className="p-6 bg-slate-800 rounded-lg">
-                                <h3 className="text-lg font-semibold mb-3 text-white flex items-center gap-2">
-                                    <Star />
-                                    Félicitations !
-                                </h3>
-                                <p className="text-slate-200 mb-6">Vous avez complété le quiz avec succès.</p>
-                                <p className="text-slate-200 mb-6 flex items-center gap-2">
-                                    <Brain />
-                                    Votre score est de {score} sur {questions.length} points
-                                </p>
-                                <div className="space-y-4">
-                                    {matches.map((match, index) => (
-                                        <div key={index} className="p-4 bg-slate-700 rounded-lg flex gap-3">
-                                            {React.createElement(icons[index % icons.length])}
-                                            <p className="text-slate-200 flex-1">{match}</p>
-                                        </div>
-                                    ))}
-                                </div>
+                        <div className="p-6 bg-slate-800 rounded-lg">
+                            <h3 className="text-lg font-semibold mb-3 text-white flex items-center gap-2">
+                                <Star />
+                                Félicitations !
+                            </h3>
+                            <p className="text-slate-200 mb-3">Vous avez complété le quiz avec succès.</p>
+                            <p className="text-slate-200 mb-3 flex items-center gap-2">
+                                <Brain />
+                                Votre score est de {score} sur {questions.length} points
+                            </p>
+                            <div className="results-container space-y-4">
+                                {matches.map((match, index) => (
+                                    <div key={index} className="p-4 bg-slate-700 rounded-lg flex gap-3">
+                                        {React.createElement(icons[index % icons.length])}
+                                        <p className="text-slate-200 flex-1">{match}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -488,4 +512,4 @@ def display_quiz():
     </html>
     """
     
-    components.html(quiz_html, height=600, width=None, scrolling=False)  # Hauteur réduite et largeur adaptative
+    components.html(quiz_html, height=700, width=1050, scrolling=True)  # Ajusté pour le nouveau format
