@@ -49,7 +49,7 @@ def main():
             "",
             ["🏠 Accueil",
              "✨ Quiz",
-             "👤 Qui suis-je ?",
+             "👤 Présentation",
              "📈 Parcours",
              "🔧 Projets",
              "✉️ Motivation"]
@@ -171,7 +171,11 @@ def main():
         Je vous prie d'agréer, Madame, Monsieur, l'expression de mes sincères salutations.
         """)
 
-    elif selection == "👤 Qui suis-je ?":
+    elif selection == "👤 Présentation":
+        from presentation import display_presentation
+
+        # Dans la section appropriée
+        display_presentation()
         st.title("Présentation")
 
         col1, col2 = st.columns(2)
