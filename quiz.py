@@ -363,7 +363,7 @@ def display_quiz():
                                 points: 0
                             },
                             {
-                                text: "Un passionné qui s'investit au-delà des attentes avec passio",
+                                text: "Un passionné qui s'investit au-delà des attentes avec détermination",
                                 points: 1,
                                 match: "Ma passion se reflète dans mes projets personnels (comme cette app par exemple). Je m'investis toujours à 100% dans ce qui me passionne."
                             }
