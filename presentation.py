@@ -13,10 +13,14 @@ def display_presentation():
         <style>
             body {
                 margin: 0;
-                padding: 16px;  /* Réduit de 20px à 16px pour plus de cohérence */
+                padding: 12px;  /* Réduit de 16px à 12px */
                 font-family: system-ui, -apple-system, sans-serif;
                 background-color: #0F1116;
                 color: white;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             .max-w-4xl {
@@ -42,11 +46,11 @@ def display_presentation():
             }
             
             .p-6 {
-                padding: 1.25rem;  /* Ajusté pour plus de compacité */
+                padding: 1rem;  /* Réduit de 1.25rem à 1rem */
             }
             
             .mb-6 {
-                margin-bottom: 1.5rem;
+                margin-bottom: 1.25rem;  /* Réduit de 1.5rem à 1.25rem */
             }
             
             .flex {
@@ -66,11 +70,11 @@ def display_presentation():
             }
             
             .space-y-6 > * + * {
-                margin-top: 1.5rem;
+                margin-top: 1.25rem;  /* Réduit de 1.5rem à 1.25rem */
             }
             
             .space-y-2 > * + * {
-                margin-top: 0.5rem;
+                margin-top: 0.4rem;  /* Réduit de 0.5rem à 0.4rem */
             }
             
             .mt-1 {
@@ -82,7 +86,7 @@ def display_presentation():
             }
             
             .text-xl {
-                font-size: 1.25rem;
+                font-size: 1.15rem;  /* Réduit de 1.25rem à 1.15rem */
                 line-height: 1.75rem;
             }
             
@@ -137,7 +141,8 @@ def display_presentation():
             ul li {
                 position: relative;
                 padding-left: 1rem;
-                line-height: 1.6;  /* Meilleur espacement des lignes */
+                line-height: 1.4;  /* Réduit de 1.6 à 1.4 */
+                font-size: 0.95rem;  /* Légèrement plus petit */
             }
 
             ul li:before {
@@ -282,5 +287,5 @@ def display_presentation():
     </html>
     """
     
-    # Ajustement de la hauteur du composant
-    components.html(presentation_html, height=720, scrolling=True)  # Réduit de 800 à 720 pour plus de compacité
+    # Modification de l'appel du composant
+    components.html(presentation_html, height=680, scrolling=False)  # Ajusté pour éviter le défilement
