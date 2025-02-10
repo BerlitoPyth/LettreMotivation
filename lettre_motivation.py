@@ -2,6 +2,7 @@ import streamlit as st
 import time
 from theme import toggle_theme
 from quiz import display_quiz  
+from presentation import display_presentation
 
 
 
@@ -172,9 +173,7 @@ def main():
         """)
 
     elif selection == "👤 Présentation":
-        from presentation import display_presentation
-
-        # Dans la section appropriée
+        
         display_presentation()
         st.title("Présentation")
 
