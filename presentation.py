@@ -2,8 +2,10 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 def display_presentation():
-    # Ajoutez un message de débogage
     st.write("Chargement de la présentation...")
+    
+    # Ajout de debug
+    st.write("Debug: Début du chargement du composant HTML")
     
     presentation_html = """
     <!DOCTYPE html>
@@ -244,10 +246,15 @@ def display_presentation():
     """
     
     try:
-        return components.html(
+        # Modification des paramètres du composant
+        components.html(
             presentation_html,
-            height=700,
-            scrolling=True
+            height=800,  # Augmenté pour s'assurer que tout est visible
+            scrolling=False,  # Désactivé pour éviter les problèmes de scroll
+            width=None  # Permet l'adaptation à la largeur
         )
+        st.write("Debug: Composant HTML chargé avec succès")
     except Exception as e:
         st.error(f"Erreur lors du chargement: {str(e)}")
+        # Affichage plus détaillé de l'erreur
+        st.exception(e)
