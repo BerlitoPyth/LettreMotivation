@@ -434,4 +434,12 @@ def display_quiz():
                     </div>
                 </div>
             </div>
-        </div
+        </div>
+    </div>
+);
+
+                if (showResults) {
+                    return <MatchProfile />;
+                }
+
+                return (
