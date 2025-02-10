@@ -18,6 +18,7 @@ def main():
         page_title="Candidature BUT Science des Données",
         layout="wide"
     )
+    toggle_theme()
 
     # Style personnalisé
     st.markdown("""
@@ -89,7 +90,6 @@ def main():
                 st.image(image_rotated, width=200)
             except Exception as e:
                 st.info("📸 Photo non disponible")
-        toggle_theme()
 
         st.title("Candidature BUT Science des Données, BERLIAT Adrien")
         st.markdown("---")
