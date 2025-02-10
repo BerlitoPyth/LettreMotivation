@@ -1,6 +1,8 @@
 import streamlit as st
 import time
 from theme import toggle_theme
+import streamlit.components.v1 as components
+
 
 
 
@@ -90,7 +92,180 @@ def main():
                 st.image(image_rotated, width=200)
             except Exception as e:
                 st.info("📸 Photo non disponible")
+        components.html("""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+            <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+            <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+            <style>
+                .quiz-container {
+                    font-family: system-ui, -apple-system, sans-serif;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    color: white;
+                }
+                .question-card {
+                    background: #1e1e1e;
+                    border-radius: 10px;
+                    padding: 20px;
+                    margin: 20px 0;
+                }
+                .option-button {
+                    width: 100%;
+                    padding: 15px;
+                    margin: 10px 0;
+                    background: #2d2d2d;
+                    border: none;
+                    border-radius: 5px;
+                    color: white;
+                    text-align: left;
+                    cursor: pointer;
+                    transition: background 0.3s;
+                }
+                .option-button:hover {
+                    background: #3d3d3d;
+                }
+                .progress-bar {
+                    width: 100%;
+                    height: 10px;
+                    background: #2d2d2d;
+                    border-radius: 5px;
+                    margin: 20px 0;
+                }
+                .progress-fill {
+                    height: 100%;
+                    background: #4CAF50;
+                    border-radius: 5px;
+                    transition: width 0.3s ease;
+                }
+                .result-card {
+                    background: #1e1e1e;
+                    border-radius: 10px;
+                    padding: 20px;
+                }
+                .profile-section {
+                    margin: 10px 0;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+            </style>
+        </head>
+        <body>
+            <div id="quiz-root"></div>
+            <script type="text/babel">
+                const Quiz = () => {
+                    const [currentStep, setCurrentStep] = React.useState(0);
+                    const [showResults, setShowResults] = React.useState(false);
+                    
+                    const questions = [
+                        {
+                            title: "La Motivation",
+                            question: "Quel type de candidat recherchez-vous pour votre formation ?",
+                            options: [
+                                {
+                                    text: "Une personne qui suit le mouvement général vers la data science",
+                                    isMatch: false
+                                },
+                                {
+                                    text: "Un passionné ayant déjà exploré le domaine par lui-même",
+                                    isMatch: true
+                                }
+                            ]
+                        },
+                        {
+                            title: "L'Expérience",
+                            question: "Quelle expérience préalable valorisez-vous le plus ?",
+                            options: [
+                                {
+                                    text: "Des connaissances théoriques uniquement",
+                                    isMatch: false
+                                },
+                                {
+                                    text: "Une combinaison d'expérience pratique et de fondements théoriques",
+                                    isMatch: true
+                                }
+                            ]
+                        },
+                        {
+                            title: "La Vision",
+                            question: "Quelle vision du BUT Science des Données privilégiez-vous ?",
+                            options: [
+                                {
+                                    text: "Un simple tremplin vers l'emploi",
+                                    isMatch: false
+                                },
+                                {
+                                    text: "Une étape réfléchie dans un projet professionnel construit",
+                                    isMatch: true
+                                }
+                            ]
+                        }
+                    ];
 
+                    const handleAnswer = () => {
+                        if (currentStep < questions.length - 1) {
+                            setCurrentStep(currentStep + 1);
+                        } else {
+                            setShowResults(true);
+                        }
+                    };
+
+                    if (showResults) {
+                        return (
+                            <div className="quiz-container">
+                                <div className="result-card">
+                                    <h2>Mon Profil - Candidat Idéal</h2>
+                                    <div className="profile-section">
+                                        <h3>🎯 Passion & Motivation</h3>
+                                        <p>Ma passion pour les mathématiques et l'informatique m'a conduit à m'auto-former via l'École 42 et à exceller en DAEU B.</p>
+                                    </div>
+                                    <div className="profile-section">
+                                        <h3>💡 Expérience Unique</h3>
+                                        <p>Mon parcours de plongeur scaphandrier m'a appris la rigueur, la précision et la gestion du stress.</p>
+                                    </div>
+                                    <div className="profile-section">
+                                        <h3>📚 Formation Continue</h3>
+                                        <p>Excellent niveau en mathématiques, formation en programmation, apprentissage constant.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    }
+
+                    return (
+                        <div className="quiz-container">
+                            <div className="progress-bar">
+                                <div 
+                                    className="progress-fill" 
+                                    style={{ width: `${((currentStep + 1) / questions.length) * 100}%` }}
+                                />
+                            </div>
+                            <div className="question-card">
+                                <h2>{questions[currentStep].title}</h2>
+                                <p>{questions[currentStep].question}</p>
+                                {questions[currentStep].options.map((option, index) => (
+                                    <button 
+                                        key={index}
+                                        className="option-button"
+                                        onClick={handleAnswer}
+                                    >
+                                        {option.text}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    );
+                };
+
+                ReactDOM.render(<Quiz />, document.getElementById('quiz-root'));
+            </script>
+        </body>
+        </html>
+        """, height=600)
         st.title("Candidature BUT Science des Données, BERLIAT Adrien")
         st.markdown("---")
 
