@@ -174,8 +174,7 @@ def main():
 
     elif selection == "👤 Présentation":
         
-        with st.container():
-            display_presentation()
+        display_presentation()
 
         col1, col2 = st.columns(2)
         with col1:
