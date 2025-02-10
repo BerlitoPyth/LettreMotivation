@@ -1,5 +1,4 @@
 import streamlit as st
-
 def toggle_theme():
     """
     Bascule entre le mode jour et nuit dans une application Streamlit.
@@ -31,7 +30,6 @@ def toggle_theme():
     # Bouton de bascule avec icône et texte
     if st.button("🌙 / ☀️ Changer de thème"):
         st.session_state.dark_mode = not st.session_state.dark_mode
-        # Force le rechargement de la page pour appliquer les changements
         st.rerun()
     
     # Sélection du thème actif
@@ -50,6 +48,19 @@ def toggle_theme():
     .stSidebar, .stSidebarContent {{
         background-color: {current_theme["sidebar_bg"]} !important;
         color: {current_theme["text_color"]} !important;
+    }}
+    
+    /* Style spécifique pour le menu de navigation */
+    div[data-testid="stSidebarNav"] {{
+        background-color: {current_theme["bg_color"]} !important;
+    }}
+    
+    div[data-testid="stSidebarNav"] > ul {{
+        background-color: {current_theme["bg_color"]} !important;
+    }}
+
+    div[data-testid="stSidebarNav"] section {{
+        background-color: {current_theme["bg_color"]} !important;
     }}
     
     /* Styles des conteneurs principaux */
