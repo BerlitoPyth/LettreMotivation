@@ -13,165 +13,118 @@ def display_presentation():
         <style>
             body {
                 margin: 0;
-                padding: 12px;  /* Réduit de 16px à 12px */
+                padding: 0;
                 font-family: system-ui, -apple-system, sans-serif;
-                background-color: #0F1116;
+                background-color: #0e1117;
                 color: white;
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .max-w-4xl {
-                max-width: 48rem;  /* Réduit de 56rem à 48rem pour une meilleure lisibilité */
-            }
-            
-            .mx-auto {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .bg-slate-800 {
-                background-color: #1E293B;  /* Légèrement plus foncé pour un meilleur contraste */
-            }
-            
-            .border-none {
-                border: none;
-            }
-            
-            .shadow-lg {
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 
-                            0 2px 4px -1px rgba(0, 0, 0, 0.1);  /* Ombre plus subtile */
-            }
-            
-            .p-6 {
-                padding: 1rem;  /* Réduit de 1.25rem à 1rem */
-            }
-            
-            .mb-6 {
-                margin-bottom: 1.25rem;  /* Réduit de 1.5rem à 1.25rem */
-            }
-            
-            .flex {
-                display: flex;
-            }
-            
-            .items-center {
-                align-items: center;
-            }
-            
-            .items-start {
-                align-items: flex-start;
-            }
-            
-            .gap-3 {
-                gap: 0.75rem;
-            }
-            
-            .space-y-6 > * + * {
-                margin-top: 1.25rem;  /* Réduit de 1.5rem à 1.25rem */
-            }
-            
-            .space-y-2 > * + * {
-                margin-top: 0.4rem;  /* Réduit de 0.5rem à 0.4rem */
-            }
-            
-            .mt-1 {
-                margin-top: 0.25rem;
-            }
-            
-            .mt-2 {
-                margin-top: 0.5rem;
-            }
-            
-            .text-xl {
-                font-size: 1.15rem;  /* Réduit de 1.25rem à 1.15rem */
-                line-height: 1.75rem;
-            }
-            
-            .font-bold {
-                font-weight: 700;
-            }
-            
-            .font-semibold {
-                font-weight: 600;
-            }
-            
-            .text-white {
-                color: white;
-            }
-            
-            .text-slate-300 {
-                color: #E2E8F0;  /* Plus clair pour une meilleure lisibilité */
-            }
-            
-            .text-blue-400 {
-                color: #60a5fa;
-            }
-            
-            .text-purple-400 {
-                color: #c084fc;
-            }
-            
-            .text-green-400 {
-                color: #4ade80;
-            }
-            
-            .text-yellow-400 {
-                color: #facc15;
-            }
-            
-            .text-red-400 {
-                color: #f87171;
             }
 
-            .icon {
-                width: 1.5rem;  /* Légèrement plus grand */
-                height: 1.5rem;
-                opacity: 0.9;  /* Légère transparence pour plus de douceur */
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 1rem;
             }
-            
-            ul {
-                list-style: none;
-                padding: 0;
+
+            .section {
+                background-color: #1E1F25;
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            }
+
+            .section:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .section-header {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                margin-bottom: 1.25rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #E2E8F0;
                 margin: 0;
             }
 
-            ul li {
-                position: relative;
+            .list-container {
                 padding-left: 1rem;
-                line-height: 1.4;  /* Réduit de 1.6 à 1.4 */
-                font-size: 0.95rem;  /* Légèrement plus petit */
             }
 
-            ul li:before {
+            .list-item {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.5rem 0;
+                color: #CBD5E1;
+                transition: transform 0.15s ease-in-out;
+            }
+
+            .list-item:hover {
+                transform: translateX(4px);
+                color: #F8FAFC;
+            }
+
+            .list-item::before {
                 content: "•";
-                position: absolute;
-                left: 0;
-                color: #60A5FA;  /* Bleu pour les puces */
+                color: #60A5FA;
+                font-size: 1.2em;
             }
 
-            .card {
-                border-radius: 0.75rem;
-                transition: transform 0.2s ease-in-out;
+            .icon {
+                width: 1.5rem;
+                height: 1.5rem;
+                color: currentColor;
+                opacity: 0.9;
             }
 
-            .card:hover {
-                transform: translateY(-2px);
+            .badge {
+                background-color: rgba(96, 165, 250, 0.1);
+                color: #60A5FA;
+                padding: 0.25rem 0.75rem;
+                border-radius: 9999px;
+                font-size: 0.875rem;
+                margin-left: auto;
+            }
+
+            .title-gradient {
+                background: linear-gradient(135deg, #60A5FA, #818CF8);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 1.75rem;
+                font-weight: 700;
+                margin-bottom: 2rem;
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .animate-fade-in {
+                animation: fadeIn 0.5s ease-out forwards;
             }
         </style>
     </head>
     <body>
         <div id="presentation-root"></div>
         <script type="text/babel">
+            // Icônes SVG...
             const User = () => (
-                <svg className="icon text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg className="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                     <circle cx="12" cy="7" r="4" />
                 </svg>
             );
-            
+
             const Book = () => (
                 <svg className="icon text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
@@ -195,7 +148,7 @@ def display_presentation():
             
             const Brain = () => (
                 <svg className="icon text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.04-.2 2.5 2.5 0 0 1 1-4.74 2.5 2.5 0 0 1 1.5-4.5 2.5 2.5 0 0 1 1.5-4.5Z" />
+                    <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.04-.2 2.5 2.5 0 0 1 1-4.74 2.5 2.5 0 0 1 1.5-4.5Z" />
                     <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.04-.2 2.5 2.5 0 0 0-1-4.74 2.5 2.5 0 0 0-1.5-4.5 2.5 2.5 0 0 0-1.5-4.5Z" />
                 </svg>
             );
@@ -206,77 +159,77 @@ def display_presentation():
                 </svg>
             );
 
+            const Section = ({ icon: Icon, title, items, badge }) => (
+                <div className="section animate-fade-in" style={{ animationDelay: \`\${Math.random() * 0.5}s\` }}>
+                    <div className="section-header">
+                        <Icon />
+                        <h3 className="section-title">{title}</h3>
+                        {badge && <span className="badge">{badge}</span>}
+                    </div>
+                    <div className="list-container">
+                        {items.map((item, index) => (
+                            <div key={index} className="list-item">{item}</div>
+                        ))}
+                    </div>
+                </div>
+            );
+
             const Presentation = () => {
+                const sections = [
+                    {
+                        icon: Book,
+                        title: "Formation en cours",
+                        items: [
+                            "DAEU B - Équivalent Bac Scientifique",
+                            "Spécialisation en Mathématiques",
+                            "Excellent niveau académique"
+                        ],
+                        badge: "En cours"
+                    },
+                    {
+                        icon: Briefcase,
+                        title: "Expérience Professionnelle",
+                        items: [
+                            "Ex-Plongeur Scaphandrier en Travaux Publics",
+                            "Gestion de projets techniques complexes",
+                            "Travail en équipe dans des conditions exigeantes"
+                        ]
+                    },
+                    {
+                        icon: Code,
+                        title: "Compétences Techniques",
+                        items: [
+                            "Formation à l'École 42 - Introduction à la programmation",
+                            "Certifications Python - Apprentissage autodidacte",
+                            "Bases solides en algorithmique"
+                        ]
+                    },
+                    {
+                        icon: Brain,
+                        title: "Points Forts",
+                        items: [
+                            "Capacité d'adaptation exceptionnelle",
+                            "Résolution méthodique des problèmes",
+                            "Rigueur et précision dans le travail"
+                        ]
+                    },
+                    {
+                        icon: Heart,
+                        title: "Centres d'Intérêt",
+                        items: [
+                            "Passionné par les mathématiques et l'informatique",
+                            "Veille technologique constante",
+                            "Entrepreneur en herbe dans le gaming"
+                        ]
+                    }
+                ];
+
                 return (
-                    <div className="max-w-4xl mx-auto">
-                        <div className="bg-slate-800 border-none shadow-lg p-6 card">
-                            <div className="flex items-center gap-3 mb-6">
-                                <User />
-                                <h2 className="text-xl font-bold text-white">À propos de moi</h2>
-                            </div>
-                            
-                            <div className="space-y-6">
-                                <div className="flex items-start gap-3">
-                                    <Book />
-                                    <div>
-                                        <h3 className="font-semibold text-white">Formation en cours</h3>
-                                        <ul className="text-slate-300 space-y-2 mt-2">
-                                            <li>• DAEU B - Équivalent Bac Scientifique</li>
-                                            <li>• Spécialisation en Mathématiques</li>
-                                            <li>• Excellent niveau académique</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <Briefcase />
-                                    <div>
-                                        <h3 className="font-semibold text-white">Expérience Professionnelle</h3>
-                                        <ul className="text-slate-300 space-y-2 mt-2">
-                                            <li>• Ex-Plongeur Scaphandrier en Travaux Publics</li>
-                                            <li>• Gestion de projets techniques complexes</li>
-                                            <li>• Travail en équipe dans des conditions exigeantes</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <Code />
-                                    <div>
-                                        <h3 className="font-semibold text-white">Compétences Techniques</h3>
-                                        <ul className="text-slate-300 space-y-2 mt-2">
-                                            <li>• Formation à l'École 42 - Introduction à la programmation</li>
-                                            <li>• Certifications Python - Apprentissage autodidacte</li>
-                                            <li>• Bases solides en algorithmique</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <Brain />
-                                    <div>
-                                        <h3 className="font-semibold text-white">Points Forts</h3>
-                                        <ul className="text-slate-300 space-y-2 mt-2">
-                                            <li>• Capacité d'adaptation exceptionnelle</li>
-                                            <li>• Résolution méthodique des problèmes</li>
-                                            <li>• Rigueur et précision dans le travail</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-start gap-3">
-                                    <Heart />
-                                    <div>
-                                        <h3 className="font-semibold text-white">Centres d'Intérêt</h3>
-                                        <ul className="text-slate-300 space-y-2 mt-2">
-                                            <li>• Passionné par les mathématiques et l'informatique</li>
-                                            <li>• Veille technologique constante</li>
-                                            <li>• Entrepreneur en herbe dans le gaming</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="container">
+                        <h1 className="title-gradient">À propos de moi</h1>
+                        {sections.map((section, index) => (
+                            <Section key={index} {...section} />
+                        ))}
                     </div>
                 );
             };
@@ -287,5 +240,4 @@ def display_presentation():
     </html>
     """
     
-    # Modification de l'appel du composant
-    components.html(presentation_html, height=680, scrolling=False)  # Ajusté pour éviter le défilement
+    components.html(presentation_html, height=700, scrolling=True)
