@@ -2,6 +2,9 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 def display_presentation():
+    # Ajoutez un message de débogage
+    st.write("Chargement de la présentation...")
+    
     presentation_html = """
     <!DOCTYPE html>
     <html>
@@ -239,4 +242,12 @@ def display_presentation():
     </body>
     </html>
     """
-    return components.html(presentation_html, height=700, scrolling=True)
+    
+    try:
+        return components.html(
+            presentation_html,
+            height=700,
+            scrolling=True
+        )
+    except Exception as e:
+        st.error(f"Erreur lors du chargement: {str(e)}")
