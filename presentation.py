@@ -144,16 +144,16 @@ def display_presentation():
                     icon: "💼",
                     title: "Expérience Professionnelle",
                     items: [
-                        "Ex-Plongeur Scaphandrier en Travaux Publics",
+                        "Plongeur Scaphandrier en Travaux Publics",
                         "Gestion de projets techniques complexes",
-                        "Travail en équipe dans des conditions exigeantes"
+                        "Travail en équipe et sous pression"
                     ]
                 },
                 {
                     icon: "💻",
                     title: "Compétences Techniques",
                     items: [
-                        "Formation à l'École 42 - Introduction à la programmation",
+                        "Piscine l'École 42 - Introduction à la programmation",
                         "Certifications Python - Apprentissage autodidacte",
                         "Bases solides en algorithmique"
                     ]
@@ -162,8 +162,8 @@ def display_presentation():
                     icon: "🎯",
                     title: "Points Forts",
                     items: [
-                        "Capacité d'adaptation exceptionnelle",
-                        "Résolution méthodique des problèmes",
+                        "Capacité d'adaptation",
+                        "Résolution des problèmes",
                         "Rigueur et précision dans le travail"
                     ]
                 }
