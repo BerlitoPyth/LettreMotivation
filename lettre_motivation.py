@@ -48,7 +48,7 @@ def main():
         selection = st.radio(
             "",
             ["🏠 Accueil",
-             "👤 Présentation",
+             "👤 Qui suis-je ?",
              "📈 Parcours",
              "🔧 Projets",
              "✉️ Motivation"]
@@ -92,8 +92,6 @@ def main():
                 st.image(image_rotated, width=200)
             except Exception as e:
                 st.info("📸 Photo non disponible")
-        st.title("Découvrez mon Profil")
-        display_quiz()
         st.title("Candidature BUT Science des Données, BERLIAT Adrien")
         st.markdown("---")
 
@@ -171,13 +169,13 @@ def main():
         Je vous prie d'agréer, Madame, Monsieur, l'expression de mes sincères salutations.
         """)
 
-    elif selection == "👤 Présentation":
+    elif selection == "👤 Qui suis-je ?":
         st.title("Présentation")
 
         col1, col2 = st.columns(2)
         with col1:
             st.info("""
-            ### 🎯 Qui suis-je ?
+            ### 🎯 A propos de moi 
 
             Un professionnel en reconversion, avec un parcours peu commun :
             - Terminale STI2D
@@ -193,6 +191,7 @@ def main():
             ### 🚀 Mon Projet
 
             Intégrer le BUT Science des Données pour :
+            - Me préparer à un Master ou une école d'ingénieur
             - Évoluer professionnellement dans un domaine innovant
             - Apprendre à utiliser la Data pour concrétiser des projets
             - Combiner mathématiques et programmation
