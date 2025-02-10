@@ -78,11 +78,11 @@ def display_quiz():
                 line-height: 1.25rem;
             }
             .text-lg {
-                font-size: 1.125rem;
-                line-height: 1.75rem;
+                font-size: 1rem;
+                line-height: 1.5rem;
             }
             .text-xl {
-                font-size: 1.25rem;
+                font-size: 1.125rem;
                 line-height: 1.75rem;
             }
             
@@ -96,7 +96,7 @@ def display_quiz():
             
             /* Espacement */
             .p-6 {
-                padding: 1rem;  /* Réduit de 1.5rem à 1rem */
+                padding: 0.75rem;
             }
             .p-4 {
                 padding: 1rem;
@@ -105,7 +105,7 @@ def display_quiz():
                 padding-bottom: 0.5rem;
             }
             .mb-6 {
-                margin-bottom: 0.75rem;  /* Réduit de 1.5rem à 0.75rem */
+                margin-bottom: 0.5rem;
             }
             .mb-3 {
                 margin-bottom: 0.75rem;
@@ -139,7 +139,7 @@ def display_quiz():
             
             /* Espacement vertical */
             .space-y-6 > * + * {
-                margin-top: 1rem;  /* Réduit de 1.5rem à 1rem */
+                margin-top: 0.75rem;
             }
             .space-y-3 > * + * {
                 margin-top: 0.75rem;
@@ -174,10 +174,10 @@ def display_quiz():
             /* Composants spécifiques */
             .card {
                 border-radius: 0.5rem;
-                padding: 1rem;  /* Réduit de 1.5rem à 1rem */
+                padding: 0.75rem;
                 width: 100%;
-                max-width: 1000px;  /* Augmenté de 800px à 1000px */
-                margin: 0.5rem auto;  /* Réduit de 1rem à 0.5rem */
+                max-width: 100%;
+                margin: 0.25rem auto;
                 background-color: #0f172a;
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
@@ -188,7 +188,7 @@ def display_quiz():
             
             .button {
                 width: 100%;
-                padding: 1rem;
+                padding: 0.75rem;
                 background-color: #334155;
                 color: white;
                 border: 1px solid #475569;
@@ -199,6 +199,7 @@ def display_quiz():
                 transition: background-color 0.2s;
                 font-size: 1rem;
                 text-align: left;
+                margin-bottom: 0.5rem;
             }
             
             .button:hover {
@@ -249,15 +250,16 @@ def display_quiz():
             /* Ajoutez ces styles pour le conteneur racine */
             #quiz-root {
                 width: 100%;
-                max-width: 800px;
+                max-width: 1200px;
                 margin: 0 auto;
+                height: auto;
             }
 
             /* Ajoutez ces styles pour le conteneur des résultats */
             .results-container {
-                max-height: 400px;
+                max-height: 300px;
                 overflow-y: auto;
-                padding-right: 1rem;
+                padding-right: 0.75rem;
             }
 
             /* Style pour la barre de défilement */
@@ -512,4 +514,4 @@ def display_quiz():
     </html>
     """
     
-    components.html(quiz_html, height=700, width=1050, scrolling=True)  # Ajusté pour le nouveau format
+    components.html(quiz_html, height=600, width=None, scrolling=False)  # Hauteur réduite et largeur adaptative
