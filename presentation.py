@@ -13,14 +13,14 @@ def display_presentation():
         <style>
             body {
                 margin: 0;
-                padding: 20px;
+                padding: 16px;  /* Réduit de 20px à 16px pour plus de cohérence */
                 font-family: system-ui, -apple-system, sans-serif;
-                background-color: #0f172a;
+                background-color: #0F1116;
                 color: white;
             }
             
             .max-w-4xl {
-                max-width: 56rem;
+                max-width: 48rem;  /* Réduit de 56rem à 48rem pour une meilleure lisibilité */
             }
             
             .mx-auto {
@@ -29,7 +29,7 @@ def display_presentation():
             }
             
             .bg-slate-800 {
-                background-color: #1e293b;
+                background-color: #1E293B;  /* Légèrement plus foncé pour un meilleur contraste */
             }
             
             .border-none {
@@ -37,11 +37,12 @@ def display_presentation():
             }
             
             .shadow-lg {
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 
+                            0 2px 4px -1px rgba(0, 0, 0, 0.1);  /* Ombre plus subtile */
             }
             
             .p-6 {
-                padding: 1.5rem;
+                padding: 1.25rem;  /* Ajusté pour plus de compacité */
             }
             
             .mb-6 {
@@ -98,7 +99,7 @@ def display_presentation():
             }
             
             .text-slate-300 {
-                color: #cbd5e1;
+                color: #E2E8F0;  /* Plus clair pour une meilleure lisibilité */
             }
             
             .text-blue-400 {
@@ -122,15 +123,37 @@ def display_presentation():
             }
 
             .icon {
-                width: 1.25rem;
-                height: 1.25rem;
-                flex-shrink: 0;
+                width: 1.5rem;  /* Légèrement plus grand */
+                height: 1.5rem;
+                opacity: 0.9;  /* Légère transparence pour plus de douceur */
             }
             
             ul {
                 list-style: none;
                 padding: 0;
                 margin: 0;
+            }
+
+            ul li {
+                position: relative;
+                padding-left: 1rem;
+                line-height: 1.6;  /* Meilleur espacement des lignes */
+            }
+
+            ul li:before {
+                content: "•";
+                position: absolute;
+                left: 0;
+                color: #60A5FA;  /* Bleu pour les puces */
+            }
+
+            .card {
+                border-radius: 0.75rem;
+                transition: transform 0.2s ease-in-out;
+            }
+
+            .card:hover {
+                transform: translateY(-2px);
             }
         </style>
     </head>
@@ -181,7 +204,7 @@ def display_presentation():
             const Presentation = () => {
                 return (
                     <div className="max-w-4xl mx-auto">
-                        <div className="bg-slate-800 border-none shadow-lg p-6">
+                        <div className="bg-slate-800 border-none shadow-lg p-6 card">
                             <div className="flex items-center gap-3 mb-6">
                                 <User />
                                 <h2 className="text-xl font-bold text-white">À propos de moi</h2>
@@ -259,4 +282,5 @@ def display_presentation():
     </html>
     """
     
-    components.html(presentation_html, height=800, scrolling=True)
+    # Ajustement de la hauteur du composant
+    components.html(presentation_html, height=720, scrolling=True)  # Réduit de 800 à 720 pour plus de compacité
