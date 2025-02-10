@@ -121,7 +121,7 @@ def main():
         st.markdown("""
         Madame, Monsieur,
 
-        C'est avec enthousiasme que je vous présente ma candidature pour le BUT Science des Données, une formation qui représente 
+        C'est  enthousiasme que je vous présente ma candidature pour le BUT Science des Données, une formation qui représente 
         pour moi l'opportunité idéale d'allier ma passion pour les mathématiques et l'informatique à mon désir d'évolution professionnelle.
 
         Mon parcours, bien qu'atypique, témoigne de mon intérêt précoce pour le monde numérique et de ma capacité d'adaptation.
