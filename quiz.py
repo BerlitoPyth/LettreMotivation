@@ -374,7 +374,7 @@ def display_quiz():
                 };
 
                 if (showResults) {
-                    return <MatchProfile />;
+                    return <MatchProfile score={score} questions={questions} />;
                 }
 
                 return (
@@ -419,20 +419,31 @@ def display_quiz():
                 );
             };
 
-            const MatchProfile = () => (
-                <div className="w-full bg-slate-900 card">
-                    <div className="card-header">
-                        <h2 className="text-xl text-white">Votre Profil Correspondant</h2>
-                    </div>
-                    <div className="space-y-6">
-                        <div className="p-6 bg-slate-800 rounded-lg">
-                            <h3 className="text-lg font-semibold mb-3 text-white">Félicitations !</h3>
-                            <p className="text-slate-200 mb-6">Vous avez complété le quiz avec succès.</p>
-                            <p className="text-slate-200 mb-6">Votre score est de {score} points.</p>
+            const MatchProfile = ({ score, questions }) => {
+                const matches = questions.filter((q, i) => score > i).map(q => q.options[1].match);
+                
+                return (
+                    <div className="w-full bg-slate-900 card">
+                        <div className="card-header">
+                            <h2 className="text-xl text-white">Votre Profil Correspondant</h2>
+                        </div>
+                        <div className="space-y-6">
+                            <div className="p-6 bg-slate-800 rounded-lg">
+                                <h3 className="text-lg font-semibold mb-3 text-white">Félicitations !</h3>
+                                <p className="text-slate-200 mb-6">Vous avez complété le quiz avec succès.</p>
+                                <p className="text-slate-200 mb-6">Votre score est de {score} sur {questions.length} points.</p>
+                                <div className="space-y-4">
+                                    {matches.map((match, index) => (
+                                        <div key={index} className="p-4 bg-slate-700 rounded-lg">
+                                            <p className="text-slate-200">{match}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            );
+                );
+            };
 
             ReactDOM.render(<Quiz />, document.getElementById('quiz-root'));
         </script>
