@@ -442,4 +442,48 @@ def display_quiz():
                     return <MatchProfile />;
                 }
 
-                return (
+                return (return (
+                    <div className="w-full bg-slate-900 card">
+                        <div className="card-header">
+                            <h2 className="text-xl text-white">Découvrez mon Profil</h2>
+                        </div>
+                        <div className="space-y-6">
+                            <div className="flex items-center gap-2 text-sm text-slate-300">
+                                <span>Question {currentStep + 1}/{questions.length}</span>
+                                <div className="flex-1 h-1 bg-slate-700 rounded-full">
+                                    <div 
+                                        className="h-1 bg-blue-500 rounded-full transition-all"
+                                        style={{ width: `${((currentStep + 1) / questions.length) * 100}%` }}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="p-6 bg-slate-800 rounded-lg">
+                                <h3 className="text-lg font-semibold mb-3 text-white">{questions[currentStep].title}</h3>
+                                <p className="text-slate-200 mb-6">{questions[currentStep].question}</p>
+                                
+                                <div className="space-y-3">
+                                    {questions[currentStep].options.map((option, index) => (
+                                        <button
+                                            key={index}
+                                            className="button"
+                                            onClick={() => handleAnswer(option.points)}
+                                        >
+                                            <ChevronRight />
+                                            <span>{option.text}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            };
+
+            ReactDOM.render(<Quiz />, document.getElementById('quiz-root'));
+        </script>
+    </body>
+    </html>
+    """
+    
+    components.html(quiz_html, height=800, scrolling=True)
