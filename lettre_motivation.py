@@ -48,6 +48,7 @@ def main():
         selection = st.radio(
             "",
             ["🏠 Accueil",
+             "✨ Quiz",
              "👤 Qui suis-je ?",
              "📈 Parcours",
              "🔧 Projets",
@@ -171,8 +172,6 @@ def main():
         """)
 
     elif selection == "👤 Qui suis-je ?":
-        st.title("Découvrez si nous matchons !")
-        display_quiz()
         st.title("Présentation")
 
         col1, col2 = st.columns(2)
@@ -202,7 +201,10 @@ def main():
             """)
 
         st.markdown("---")
-
+    elif pages == "✨ Quiz":
+        st.title("Découvrez si nous matchons !")
+        display_quiz()
+        
     elif selection == "📈 Parcours":
         st.title("Mon Parcours")
 
