@@ -11,7 +11,6 @@ def display_quiz():
         <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
         <style>
-            <style>
     body {
         margin: 0;
         padding: 20px;
@@ -226,7 +225,6 @@ def display_quiz():
         transition: width 0.3s ease;
     }
 </style>
-        </style>
     </head>
     <body>
         <div id="quiz-root"></div>
@@ -315,7 +313,7 @@ def display_quiz():
         {
           text: "Une combinaison d'expérience pratique et de fondements théoriques",
           points: 1,
-          match: "J'allie une solide base en mathématiques (DAEU B) à une expérience pratique en programmation, tout en ayant développé des compétences techniques précieuses lors de mon expérience de plongeur scaphandrier."
+          match: "J'allie une solide base en mathématiques (DAEU B) à une expérience pratique en programmation, tout en ayant développé des compétences techniques précieuses lors de mon expéri[...]
         }
       ]
     },
@@ -330,7 +328,7 @@ def display_quiz():
         {
           text: "Par sa capacité à apprendre et à se réinventer",
           points: 1,
-          match: "Mon parcours atypique démontre ma capacité d'adaptation : d'une carrière technique exigeante en plongée, j'ai su me reconvertir avec succès vers les mathématiques et l'informatique."
+          match: "Mon parcours atypique démontre ma capacité d'adaptation : d'une carrière technique exigeante en plongée, j'ai su me reconvertir avec succès vers les mathématiques et l'informat[...]
         }
       ]
     },
@@ -360,7 +358,7 @@ def display_quiz():
         {
           text: "Une étape réfléchie dans un projet professionnel construit",
           points: 1,
-          match: "Le BUT Science des Données représente pour moi l'opportunité parfaite de transformer ma passion en carrière, en m'appuyant sur mes compétences techniques et analytiques déjà acquises."
+          match: "Le BUT Science des Données représente pour moi l'opportunité parfaite de transformer ma passion en carrière, en m'appuyant sur mes compétences techniques et analytiques déjà a[...]
         }
       ]
     }
@@ -436,56 +434,4 @@ def display_quiz():
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-);
-
-                if (showResults) {
-                    return <MatchProfile />;
-                }
-
-                return (
-                    <div className="w-full bg-slate-900 card">
-                        <div className="card-header">
-                            <h2 className="text-xl text-white">Découvrez mon Profil</h2>
-                        </div>
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-2 text-sm text-slate-300">
-                                <span>Question {currentStep + 1}/{questions.length}</span>
-                                <div className="flex-1 h-1 bg-slate-700 rounded-full">
-                                    <div 
-                                        className="h-1 bg-blue-500 rounded-full transition-all"
-                                        style={{ width: `${((currentStep + 1) / questions.length) * 100}%` }}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="p-6 bg-slate-800 rounded-lg">
-                                <h3 className="text-lg font-semibold mb-3 text-white">{questions[currentStep].title}</h3>
-                                <p className="text-slate-200 mb-6">{questions[currentStep].question}</p>
-                                
-                                <div className="space-y-3">
-                                    {questions[currentStep].options.map((option, index) => (
-                                        <button
-                                            key={index}
-                                            className="button"
-                                            onClick={() => handleAnswer(option.points)}
-                                        >
-                                            <ChevronRight />
-                                            <span>{option.text}</span>
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                );
-            };
-
-            ReactDOM.render(<Quiz />, document.getElementById('quiz-root'));
-        </script>
-    </body>
-    </html>
-    """
-    
-    components.html(quiz_html, height=800, scrolling=True)
+        </div
