@@ -99,7 +99,7 @@ def display_quiz():
             
             /* Espacement */
             .p-6 {
-                padding: 0.75rem;
+                padding: 1.5rem;  /* Augmenté de 0.75rem à 1.5rem */
             }
             .p-4 {
                 padding: 0.75rem;
@@ -111,7 +111,7 @@ def display_quiz():
                 padding-bottom: 0.5rem;
             }
             .mb-6 {
-                margin-bottom: 0.5rem;
+                margin-bottom: 1.5rem;  /* Augmenté de 0.5rem à 1.5rem */
             }
             .mb-3 {
                 margin-bottom: 0.75rem;
@@ -148,7 +148,7 @@ def display_quiz():
             
             /* Espacement vertical */
             .space-y-6 > * + * {
-                margin-top: 0.75rem;
+                margin-top: 1.5rem;  /* Augmenté de 0.75rem à 1.5rem */
             }
             .space-y-3 > * + * {
                 margin-top: 0.5rem;
@@ -181,10 +181,10 @@ def display_quiz():
             /* Composants spécifiques */
             .card {
                 border-radius: 0.5rem;
-                padding: 0.5rem;
+                padding: 1rem;  /* Augmenté de 0.5rem à 1rem */
                 width: 100%;
                 max-width: 100%;
-                margin: 0.25rem auto;
+                margin: 0.5rem auto;  /* Augmenté de 0.25rem à 0.5rem */
                 background-color: #0f1116;  /* Changé en noir */
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
@@ -195,7 +195,7 @@ def display_quiz():
             
             .button {
                 width: 100%;
-                padding: 0.75rem;
+                padding: 1.25rem;  /* Augmenté de 0.75rem à 1.25rem */
                 background-color: #334155;
                 color: white;
                 border: 1px solid #475569;
@@ -204,9 +204,9 @@ def display_quiz():
                 align-items: center;
                 cursor: pointer;
                 transition: background-color 0.2s;
-                font-size: 1rem;
+                font-size: 1.1rem;  /* Légèrement plus grand */
                 text-align: left;
-                margin-bottom: 0.5rem;
+                margin-bottom: 1rem;  /* Augmenté de 0.5rem à 1rem */
             }
             
             .button:hover {
@@ -380,7 +380,7 @@ def display_quiz():
                             {
                                 text: "Une forte capacité à travailler en équipe et à tirer les autres vers le haut",
                                 points: 1,
-                                match: "Mon expérience de plongeur scaphandrier m'a appris l'importance vitale du travail d'équipe. Cette compétence, combinée à ma passion pour le partage de connaissances, fait de moi un excellent coéquipier."
+                                match: "Mon expérience de plongeur scaphandrier m'a appris l'importance du travail d'équipe. Cette compétence, combinée à ma passion pour le partage de connaissances, fait de moi un excellent coéquipier."
                             }
                         ]
                     },
@@ -527,4 +527,4 @@ def display_quiz():
     </html>
     """
     
-    components.html(quiz_html, height=858, width=None, scrolling=False)  # Augmenté de 780 à 858 (10% de plus)
+    components.html(quiz_html, height=1000, width=None, scrolling=False)  # Augmenté de 858 à 1000 pixels
