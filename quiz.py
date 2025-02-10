@@ -15,7 +15,7 @@ def display_quiz():
                 margin: 0;
                 padding: 0;
                 font-family: system-ui, -apple-system, sans-serif;
-                background-color: #0f172a;
+                background-color: #000000;  /* Changé en noir */
                 color: white;
                 min-height: 100%;
                 display: flex;
@@ -31,7 +31,7 @@ def display_quiz():
             
             /* Couleurs de fond */
             .bg-slate-900 {
-                background-color: #0f172a;
+                background-color: #000000;  /* Changé en noir */
             }
             .bg-slate-800 {
                 background-color: #1e293b;
@@ -185,7 +185,7 @@ def display_quiz():
                 width: 100%;
                 max-width: 100%;
                 margin: 0.25rem auto;
-                background-color: #0f172a;
+                background-color: #000000;  /* Changé en noir */
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
             
@@ -264,7 +264,7 @@ def display_quiz():
 
             /* Ajoutez ces styles pour le conteneur des résultats */
             .results-container {
-                max-height: 250px;
+                max-height: 400px;  /* Augmenté de 250px à 400px */
                 overflow-y: auto;
                 padding-right: 0.75rem;
             }
@@ -447,7 +447,7 @@ def display_quiz():
                 return (
                     <div className="w-full bg-slate-900 card">
                         <div className="card-header">
-                            <h2 className="text-xl text-white">Découvrez mon Profil</h2>
+                            <h2 className="text-xl text-white">Trouvez le profil idéal</h2>
                         </div>
                         <div className="space-y-6">
                             <div className="flex items-center gap-2 text-sm text-slate-300">
@@ -527,4 +527,4 @@ def display_quiz():
     </html>
     """
     
-    components.html(quiz_html, height=500, width=None, scrolling=False)  # Hauteur encore plus réduite
+    components.html(quiz_html, height=600, width=None, scrolling=False)  # Hauteur augmentée pour les résultats
