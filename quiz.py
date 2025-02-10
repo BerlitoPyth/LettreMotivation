@@ -264,7 +264,7 @@ def display_quiz():
 
             /* Ajoutez ces styles pour le conteneur des résultats */
             .results-container {
-                max-height: 520px;  /* Augmenté de 400px à 520px (30% de plus) */
+                max-height: 572px;  /* Augmenté de 520px à 572px (10% de plus) */
                 overflow-y: auto;
                 padding-right: 0.75rem;
             }
@@ -527,4 +527,4 @@ def display_quiz():
     </html>
     """
     
-    components.html(quiz_html, height=780, width=None, scrolling=False)  # Augmenté de 600 à 780 (30% de plus)
+    components.html(quiz_html, height=858, width=None, scrolling=False)  # Augmenté de 780 à 858 (10% de plus)
