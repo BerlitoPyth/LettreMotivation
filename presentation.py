@@ -239,5 +239,4 @@ def display_presentation():
     </body>
     </html>
     """
-    
-    components.html(presentation_html, height=700, scrolling=True)
+    return components.html(presentation_html, height=700, scrolling=True)
