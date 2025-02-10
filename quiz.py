@@ -113,6 +113,9 @@ def display_quiz():
             .mt-1 {
                 margin-top: 0.25rem;
             }
+            .mt-4 {
+                margin-top: 1rem;
+            }
             
             /* Flex */
             .flex {
@@ -166,9 +169,7 @@ def display_quiz():
             
             /* Transitions */
             .transition-all {
-                transition-property: all;
-                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-                transition-duration: 150ms;
+                transition: all 0.2s ease-in-out;
             }
             
             /* Composants spécifiques */
@@ -279,6 +280,10 @@ def display_quiz():
 
             .results-container::-webkit-scrollbar-thumb:hover {
                 background: #64748b;
+            }
+
+            .hover\:bg-slate-600:hover {
+                background-color: #475569;
             }
         </style>
     </head>
@@ -479,29 +484,41 @@ def display_quiz():
                 const matches = questions.filter((q, i) => score > i).map(q => q.options[1].match);
                 const icons = [Star, Brain, Code, Trophy, Lightbulb];
                 
+                const percentage = (score / questions.length) * 100;
+                const getMessage = () => {
+                    if (percentage === 100) {
+                        return "🌟 Nos attentes sont parfaitement alignées !";
+                    } else if (percentage >= 80) {
+                        return "✨ Nos objectifs se rejoignent fortement !";
+                    } else {
+                        return "Voici comment je peux répondre à vos attentes";
+                    }
+                };
+                
                 return (
                     <div className="w-full bg-slate-900 card">
                         <div className="card-header flex items-center gap-3">
                             <Trophy />
-                            <h2 className="text-xl text-white">Votre Profil Correspondant</h2>
+                            <h2 className="text-xl text-white">{getMessage()}</h2>
                         </div>
                         <div className="p-6 bg-slate-800 rounded-lg">
                             <h3 className="text-lg font-semibold mb-3 text-white flex items-center gap-2">
                                 <Star />
-                                Félicitations !
+                                <span>Mon profil correspond à {percentage}% à vos critères</span>
                             </h3>
-                            <p className="text-slate-200 mb-3">Vous avez complété le quiz avec succès.</p>
-                            <p className="text-slate-200 mb-3 flex items-center gap-2">
-                                <Brain />
-                                Votre score est de {score} sur {questions.length} points
-                            </p>
+                            <p className="text-slate-200 mb-3">Découvrez point par point comment je réponds à vos attentes :</p>
                             <div className="results-container space-y-4">
                                 {matches.map((match, index) => (
-                                    <div key={index} className="p-4 bg-slate-700 rounded-lg flex gap-3">
+                                    <div key={index} className="p-4 bg-slate-700 rounded-lg flex gap-3 hover:bg-slate-600 transition-all">
                                         {React.createElement(icons[index % icons.length])}
                                         <p className="text-slate-200 flex-1">{match}</p>
                                     </div>
                                 ))}
+                            </div>
+                            <div className="mt-4 p-4 bg-slate-700 rounded-lg">
+                                <p className="text-slate-200 text-sm">
+                                    🎯 Je suis prêt à m'investir pleinement dans ce BUT Science des Données pour concrétiser notre vision commune de l'excellence académique et professionnelle.
+                                </p>
                             </div>
                         </div>
                     </div>
