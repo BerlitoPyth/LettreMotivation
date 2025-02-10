@@ -15,7 +15,7 @@ def display_quiz():
                 margin: 0;
                 padding: 0;
                 font-family: system-ui, -apple-system, sans-serif;
-                background-color: #000000;  /* Changé en noir */
+                background-color: #0f1116;  /* Changé en noir */
                 color: white;
                 min-height: 100%;
                 display: flex;
@@ -31,7 +31,7 @@ def display_quiz():
             
             /* Couleurs de fond */
             .bg-slate-900 {
-                background-color: #000000;  /* Changé en noir */
+                background-color: #0f1116;  /* Changé en noir */
             }
             .bg-slate-800 {
                 background-color: #1e293b;
@@ -46,7 +46,7 @@ def display_quiz():
                 background-color: #3b82f6;
             }
             .bg-black {
-                background-color: #000000;
+                background-color: #0f1116;  /* Changé en noir */
             }
             
             /* Couleurs de texte */
@@ -185,7 +185,7 @@ def display_quiz():
                 width: 100%;
                 max-width: 100%;
                 margin: 0.25rem auto;
-                background-color: #000000;  /* Changé en noir */
+                background-color: #0f1116;  /* Changé en noir */
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
             
