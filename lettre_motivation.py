@@ -201,7 +201,7 @@ def main():
             """)
 
         st.markdown("---")
-    elif pages == "✨ Quiz":
+    elif selection == "✨ Quiz":
         st.title("Découvrez si nous matchons !")
         display_quiz()
         
