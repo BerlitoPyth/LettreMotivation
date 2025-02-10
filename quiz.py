@@ -45,6 +45,9 @@ def display_quiz():
             .bg-blue-500 {
                 background-color: #3b82f6;
             }
+            .bg-black {
+                background-color: #000000;
+            }
             
             /* Couleurs de texte */
             .text-white {
@@ -99,7 +102,10 @@ def display_quiz():
                 padding: 0.75rem;
             }
             .p-4 {
-                padding: 1rem;
+                padding: 0.75rem;
+            }
+            .p-3 {
+                padding: 0.5rem;
             }
             .pb-2 {
                 padding-bottom: 0.5rem;
@@ -145,7 +151,7 @@ def display_quiz():
                 margin-top: 0.75rem;
             }
             .space-y-3 > * + * {
-                margin-top: 0.75rem;
+                margin-top: 0.5rem;
             }
             .space-y-1 > * + * {
                 margin-top: 0.25rem;
@@ -175,7 +181,7 @@ def display_quiz():
             /* Composants spécifiques */
             .card {
                 border-radius: 0.5rem;
-                padding: 0.75rem;
+                padding: 0.5rem;
                 width: 100%;
                 max-width: 100%;
                 margin: 0.25rem auto;
@@ -258,7 +264,7 @@ def display_quiz():
 
             /* Ajoutez ces styles pour le conteneur des résultats */
             .results-container {
-                max-height: 300px;
+                max-height: 250px;
                 overflow-y: auto;
                 padding-right: 0.75rem;
             }
@@ -487,38 +493,28 @@ def display_quiz():
                 const percentage = (score / questions.length) * 100;
                 const getMessage = () => {
                     if (percentage === 100) {
-                        return "🌟 Nos attentes sont parfaitement alignées !";
+                        return "✨ Perfect Match ! Voici pourquoi je suis le candidat idéal";
                     } else if (percentage >= 80) {
-                        return "✨ Nos objectifs se rejoignent fortement !";
+                        return "🎯 Excellent ! Découvrez comment je corresponds à vos attentes";
                     } else {
-                        return "Voici comment je peux répondre à vos attentes";
+                        return "Voici comment je peux répondre à vos critères";
                     }
                 };
                 
                 return (
-                    <div className="w-full bg-slate-900 card">
+                    <div className="w-full bg-black card">
                         <div className="card-header flex items-center gap-3">
                             <Trophy />
                             <h2 className="text-xl text-white">{getMessage()}</h2>
                         </div>
-                        <div className="p-6 bg-slate-800 rounded-lg">
-                            <h3 className="text-lg font-semibold mb-3 text-white flex items-center gap-2">
-                                <Star />
-                                <span>Mon profil correspond à {percentage}% à vos critères</span>
-                            </h3>
-                            <p className="text-slate-200 mb-3">Découvrez point par point comment je réponds à vos attentes :</p>
-                            <div className="results-container space-y-4">
+                        <div className="p-4 bg-slate-800 rounded-lg">
+                            <div className="results-container space-y-3">
                                 {matches.map((match, index) => (
-                                    <div key={index} className="p-4 bg-slate-700 rounded-lg flex gap-3 hover:bg-slate-600 transition-all">
+                                    <div key={index} className="p-3 bg-slate-700 rounded-lg flex gap-3 hover:bg-slate-600 transition-all">
                                         {React.createElement(icons[index % icons.length])}
                                         <p className="text-slate-200 flex-1">{match}</p>
                                     </div>
                                 ))}
-                            </div>
-                            <div className="mt-4 p-4 bg-slate-700 rounded-lg">
-                                <p className="text-slate-200 text-sm">
-                                    🎯 Je suis prêt à m'investir pleinement dans ce BUT Science des Données pour concrétiser notre vision commune de l'excellence académique et professionnelle.
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -531,4 +527,4 @@ def display_quiz():
     </html>
     """
     
-    components.html(quiz_html, height=600, width=None, scrolling=False)  # Hauteur réduite et largeur adaptative
+    components.html(quiz_html, height=500, width=None, scrolling=False)  # Hauteur encore plus réduite
