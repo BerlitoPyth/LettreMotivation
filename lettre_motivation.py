@@ -171,6 +171,8 @@ def main():
         """)
 
     elif selection == "👤 Qui suis-je ?":
+        st.title("Découvrez mon Profil")
+        display_quiz()
         st.title("Présentation")
 
         col1, col2 = st.columns(2)
