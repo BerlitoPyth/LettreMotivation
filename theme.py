@@ -12,7 +12,7 @@ def toggle_theme():
     <style>
     body, .stApp { background-color: #0e1117; color: white; }
     .stSidebar, .stSidebarContent { background-color: #1a1d23 !important; color: white !important; }
-    .stHeader, .stToolbar { background-color: #0e1117 !important; color: white !important; }
+    .st-emotion-cache-h4xjwg, .st-emotion-cache-15ecox0 { background-color: #0e1117 !important; color: white !important; }
     h1, h2, h3, h4, h5, h6, p, span, div { color: white !important; }
     .stTextInput, .stButton>button, .stSelectbox, .stRadio { background-color: #25282e !important; color: white !important; border-color: white !important; }
     </style>
@@ -22,11 +22,15 @@ def toggle_theme():
     <style>
     body, .stApp { background-color: white; color: black; }
     .stSidebar, .stSidebarContent { background-color: #f0f0f0 !important; color: black !important; }
-    .stHeader, .stToolbar { background-color: white !important; color: black !important; }
+    .st-emotion-cache-h4xjwg, .st-emotion-cache-15ecox0 { background-color: white !important; color: black !important; }
     h1, h2, h3, h4, h5, h6, p, span, div { color: black !important; }
     .stTextInput, .stButton>button, .stSelectbox, .stRadio { background-color: white !important; color: black !important; border-color: black !important; }
     </style>
     """
+
+    header[data-testid="stHeader"] { background-color: white !important; color: black !important; }
+
+
 
 
     
