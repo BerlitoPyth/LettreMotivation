@@ -28,10 +28,4 @@ def toggle_theme():
     </style>
     """
 
-    header[data-testid="stHeader"] { background-color: white !important; color: black !important; }
-
-
-
-
-    
     st.markdown(dark_css if st.session_state.dark_mode else light_css, unsafe_allow_html=True)
