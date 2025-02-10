@@ -13,15 +13,15 @@ def display_quiz():
         <style>
             body {
                 margin: 0;
-                padding: 20px;
+                padding: 0;
                 font-family: system-ui, -apple-system, sans-serif;
                 background-color: #0f172a;
                 color: white;
-                min-height: 100vh;
+                min-height: 100%;
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 justify-content: center;
-                padding: 2rem;
+                padding: 1rem;
             }
             
             /* Classes utilitaires */
@@ -175,8 +175,10 @@ def display_quiz():
             .card {
                 border-radius: 0.5rem;
                 padding: 1.5rem;
+                width: 100%;
                 max-width: 800px;
-                margin: 0 auto;
+                margin: 1rem auto;
+                background-color: #0f172a;
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             }
             
@@ -242,6 +244,13 @@ def display_quiz():
                 body {
                     padding: 1rem;
                 }
+            }
+
+            /* Ajoutez ces styles pour le conteneur racine */
+            #quiz-root {
+                width: 100%;
+                max-width: 800px;
+                margin: 0 auto;
             }
         </style>
     </head>
@@ -479,4 +488,4 @@ def display_quiz():
     </html>
     """
     
-    components.html(quiz_html, height=1200, width=800, scrolling=True)
+    components.html(quiz_html, height=600, width=None, scrolling=False)  # Hauteur réduite et largeur adaptative
