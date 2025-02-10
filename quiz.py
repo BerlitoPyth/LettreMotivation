@@ -355,77 +355,77 @@ def display_quiz():
 
                 const questions = [
                     {
-                        title: "La Motivation",
-                        question: "Quel type de candidat recherchez-vous pour votre formation ?",
+                        title: "La Passion & Motivation",
+                        question: "Quel type d'étudiant recherchez-vous ?",
                         options: [
                             {
-                                text: "Une personne qui suit le mouvement général vers la data science",
+                                text: "Quelqu'un qui suit simplement le programme",
                                 points: 0
                             },
                             {
-                                text: "Un passionné ayant déjà exploré le domaine par lui-même",
+                                text: "Un passionné qui s'investit au-delà des attentes avec passio",
                                 points: 1,
-                                match: "Ma passion pour le domaine m'a poussé à m'auto-former en programmation via l'École 42 et à choisir l'option mathématiques en DAEU B."
+                                match: "Ma passion se reflète dans mes projets personnels (comme cette app par exemple). Je m'investis toujours à 100% dans ce qui me passionne."
                             }
                         ]
                     },
                     {
-                        title: "L'Expérience Technique",
-                        question: "Quelle expérience préalable valorisez-vous le plus ?",
+                        title: "L'Esprit d'Équipe",
+                        question: "Quelle approche privilégiez-vous pour les projets collaboratifs ?",
                         options: [
                             {
-                                text: "Des connaissances théoriques uniquement",
+                                text: "Une approche individualiste",
                                 points: 0
                             },
                             {
-                                text: "Une combinaison d'expérience pratique et de fondements théoriques",
+                                text: "Une forte capacité à travailler en équipe et à tirer les autres vers le haut",
                                 points: 1,
-                                match: "J'allie une solide base en mathématiques (DAEU B) à une expérience pratique en programmation, tout en ayant développé des compétences techniques précieuses lors de mon expérience de plongeur scaphandrier."
-                            }
-                        ]
-                    },
-                    {
-                        title: "La Capacité d'Apprentissage",
-                        question: "Comment évaluez-vous le potentiel d'un candidat ?",
-                        options: [
-                            {
-                                text: "Par ses diplômes traditionnels",
-                                points: 0
-                            },
-                            {
-                                text: "Par sa capacité à apprendre et à se réinventer",
-                                points: 1,
-                                match: "Mon parcours atypique démontre ma capacité d'adaptation : d'une carrière technique exigeante en plongée, j'ai su me reconvertir avec succès vers les mathématiques et l'informatique."
+                                match: "Mon expérience de plongeur scaphandrier m'a appris l'importance vitale du travail d'équipe. Cette compétence, combinée à ma passion pour le partage de connaissances, fait de moi un excellent coéquipier."
                             }
                         ]
                     },
                     {
                         title: "L'Engagement",
-                        question: "Que recherchez-vous en termes d'implication ?",
+                        question: "Quel niveau d'investissement attendez-vous ?",
                         options: [
                             {
-                                text: "Une approche standard des études",
+                                text: "Se contenter du minimum requis",
                                 points: 0
                             },
                             {
-                                text: "Un investissement personnel fort et une vraie passion",
+                                text: "Un investissement total dans les projets",
                                 points: 1,
-                                match: "Mon engagement se reflète dans mes excellents résultats en DAEU B et dans ma démarche d'autoformation continue en programmation."
+                                match: "Je ne compte pas mes heures quand il s'agit d'apprendre et de progresser. Que ce soit dans les études ou dans mes projets personnels, je donne toujours le meilleur de moi-même."
                             }
                         ]
                     },
                     {
-                        title: "La Vision Long Terme",
-                        question: "Quelle vision du BUT Science des Données privilégiez-vous ?",
+                        title: "L'Initiative",
+                        question: "Quelle attitude privilégiez-vous face aux défis ?",
                         options: [
                             {
-                                text: "Un simple tremplin vers l'emploi",
+                                text: "Attendre les consignes",
                                 points: 0
                             },
                             {
-                                text: "Une étape réfléchie dans un projet professionnel construit",
+                                text: "Prendre des initiatives et chercher des solutions",
                                 points: 1,
-                                match: "Le BUT Science des Données représente pour moi l'opportunité parfaite de transformer ma passion en carrière, en m'appuyant sur mes compétences techniques et analytiques déjà acquises."
+                                match: "Ma reconversion démontre ma capacité à prendre des initiatives. Je n'hésite pas à me lancer dans des projets ambitieux, comme l'apprentissage autodidacte de la programmation ou la création de nouvelles choses."
+                            }
+                        ]
+                    },
+                    {
+                        title: "L'Excellence",
+                        question: "Quelle approche de l'apprentissage recherchez-vous ?",
+                        options: [
+                            {
+                                text: "Viser la moyenne",
+                                points: 0
+                            },
+                            {
+                                text: "Viser l'excellence et le dépassement de soi",
+                                points: 1,
+                                match: "Que ce soit dans le milieu professionnel, dans mes projets personnels ou dans le sport je vise toujours l'excellence. Mon objectif est de toujours m'améliorer et de repousser mes limites."
                             }
                         ]
                     }
