@@ -15,61 +15,56 @@ def write_text_slowly(text):
     placeholder.markdown(f"### {text}")
 
 def display_data_animation():
+    """Animation binaire avec messages de chargement"""
     loading_container = st.empty()
     
-    # Données pour simuler l'analyse
-    loading_steps = [
+    # Style CSS
+    st.markdown("""
+        <style>
+        .binary-animation {
+            font-family: monospace;
+            padding: 1rem;
+            color: #00ff00;
+            text-align: center;
+        }
+        .binary-text {
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        .message-text {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # Messages de chargement
+    messages = [
         "📊 Chargement des données...",
         "🔍 Analyse du profil...",
         "📈 Calcul des compétences...",
         "🎯 Évaluation du potentiel...",
         "✨ Génération du projet..."
     ]
-    
-    # Style CSS
-    st.markdown("""
-        <style>
-        .loading-animation {
-            font-family: monospace;
-            padding: 2rem;
-            background-color: black;
-            border-radius: 10px;
-            color: #00ff00;
-            text-align: center;
-            margin: 2rem 0;
-        }
-        .binary-stream {
-            font-size: 12px;
-            opacity: 0.7;
-            margin: 10px 0;
-        }
-        .progress-text {
-            font-size: 20px;
-            margin: 15px 0;
-        }
-        </style>
-    """, unsafe_allow_html=True)
 
-    # Animation principale
-    binary_data = "01" * 50
-    for step in loading_steps:
-        for i in range(0, len(binary_data), 2):
+    # Animation
+    binary = "01" * 30
+    for message in messages:
+        for i in range(len(binary)):
             loading_container.markdown(f"""
-                <div class="loading-animation">
-                    <div class="binary-stream">{binary_data[:i]}▌</div>
-                    <div class="progress-text">{step}</div>
-                    <div class="binary-stream">{binary_data[i:]}▌</div>
+                <div class="binary-animation">
+                    <div class="binary-text">{binary[:i]}▌</div>
+                    <div class="message-text">{message}</div>
                 </div>
             """, unsafe_allow_html=True)
-            time.sleep(0.05)
+            time.sleep(0.03)
         time.sleep(0.5)
-    
+
     # Message final
     loading_container.markdown(f"""
-        <div class="loading-animation">
-            <div class="binary-stream">{binary_data}</div>
-            <div class="progress-text">🚀 Bienvenue et merci pour le temps que vous m'accordez !</div>
-            <div class="binary-stream">{binary_data}</div>
+        <div class="binary-animation">
+            <div class="binary-text">{binary}</div>
+            <div class="message-text">🚀 Bienvenue et merci pour le temps que vous m'accordez !</div>
         </div>
     """, unsafe_allow_html=True)
     time.sleep(2)
@@ -282,15 +277,7 @@ def main():
         bien incapable de la réaliser seul. Le véritable objectif était de me démarquer en illustrant l’investissement que je mets dans mes projets
         et mon désir de rejoindre votre établissement. J’ai toujours pensé qu’il est préférable d’agir que de parler. J’espère que vous aurez pris le
         temps de me lire jusqu’ici et que cela vous aura convaincu car j’y ai consacré beaucoup de temps et d’efforts. Merci :)
-
-
-
-
-
-
-
-
-
+                    
 
         """)
 
