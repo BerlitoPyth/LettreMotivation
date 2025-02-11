@@ -89,6 +89,12 @@ def generate_response(client, message, conversation_history):
     if message.lower() == "pourquoi le but sd ?" or message.lower() == "pourquoi le but sd":
         return """La science des données est un domaine en pleine expansion, au cœur de l'innovation, et c'est précisément ce qui m'attire. Je suis passionné par les mathématiques et l'informatique, et j'ai toujours aimé jouer avec les chiffres. Ce qui me motive particulièrement, c'est d'apprendre à « faire parler les données », à en extraire du sens et des informations utiles pour la prise de décision.
 Je suis de près l'actualité de la data science, car c'est un secteur qui évolue constamment, et j'ai besoin de cette stimulation intellectuelle. Pour moi, la science des données est bien plus qu'un domaine technique : c'est une manière de comprendre et d'agir sur le monde grâce aux chiffres."""
+    
+    # Add new predefined answer for parcours question
+    if message.lower() in ["quel est ton parcours ?", "quel est ton parcours", "ton parcours ?", "ton parcours"]:
+        return """J'ai commencé en terminale STI2D, que j'ai quittée en cours d'année, avant de passer par la piscine de l'école 42. Après un détour par l'entrepreneuriat et un diplôme à l'École Nationale des Scaphandriers, j'ai décidé de me réorienter vers la science des données.
+
+Cette année, je prépare un DAEU B à distance avec l'objectif d'intégrer un BUT Sciences des Données, puis de poursuivre en master ou école d'ingénieur pour devenir data analyst. En parallèle, je me certifie en Python sur Coursera et développe un projet entrepreneurial dans le domaine du gaming et de l'informatique."""
 
     system_prompt = """
     Tu es Adrien BERLIAT, 25ans actuellement en préparation d'un DAEU-B après une reprise d'étude et tu réponds aux questions sur ta candidature pour le BUT Science des Données.
