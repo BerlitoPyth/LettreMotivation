@@ -265,8 +265,8 @@ def handle_chat_input():
     """
     
     try:
-        if "message" in st.query_params:
-            user_message = st.query_params["message"]
+        if "message" in st.experimental_get_query_params():
+            user_message = st.experimental_get_query_params()["message"][0]
             if user_message.strip():
                 response = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
@@ -287,5 +287,6 @@ def add_floating_chat_to_app():
         init_floating_chat()
         st.session_state.chat_initialized = True
     
-    if "message" in st.query_params:
-        return handle_chat_input()
+    response = handle_chat_input()
+    if response:
+        st.session_state.chat_messages.append(response)
