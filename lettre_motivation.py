@@ -37,6 +37,18 @@ def main():
         .stButton > button {
             width: 100%;
         }
+        .stImage {
+            transition: transform 0.3s ease;
+        }
+        .stImage:hover {
+            transform: scale(1.02);
+            cursor: pointer;
+        }
+        .thumbnail-container {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
         </style>
     """, unsafe_allow_html=True)
 
