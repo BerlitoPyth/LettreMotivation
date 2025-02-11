@@ -24,42 +24,24 @@ def init_floating_chat():
     }
 
     #chat-button {
-        width: 60px;
-        height: 60px;
-        border-radius: 30px;
-        background: #2D3748;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        color: white;
-        border: none;
-        transition: transform 0.3s ease;
-        z-index: 999999;
-    }
-
-    #chat-button:hover {
-        transform: scale(1.1);
+        display: none; /* Masquer le bouton de chat */
     }
 
     #chat-window {
         position: fixed;
-        bottom: 90px;
+        bottom: 20px;
         right: 20px;
         width: 380px;
         height: 500px;
         background: #1E1F25;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        display: none;
+        display: flex;
         flex-direction: column;
         overflow: hidden;
         z-index: 999999;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        opacity: 1;
+        visibility: visible;
     }
 
     .chat-header {
@@ -80,14 +62,7 @@ def init_floating_chat():
     }
 
     .chat-close {
-        cursor: pointer;
-        opacity: 0.8;
-        transition: opacity 0.2s ease;
-        padding: 4px 8px;
-    }
-
-    .chat-close:hover {
-        opacity: 1;
+        display: none; /* Masquer le bouton de fermeture */
     }
 
     .chat-body {
@@ -162,12 +137,6 @@ def init_floating_chat():
         background: rgba(49, 130, 206, 0.2);
     }
 
-    #chat-window.open {
-        display: flex !important;
-        opacity: 1;
-        visibility: visible;
-    }
-
     @keyframes slideUp {
         from { transform: translateY(10px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
@@ -179,14 +148,12 @@ def init_floating_chat():
     </style>
 
     <div id="floating-chat-container">
-        <button id="chat-button">💬</button>
         <div id="chat-window">
             <div class="chat-header">
                 <div class="chat-header-title">
                     <span>💬</span>
                     <span>Chat avec Adrien</span>
                 </div>
-                <span class="chat-close">✕</span>
             </div>
             <div class="chat-body" id="chatBody">
                 <div class="message bot-message">
@@ -206,20 +173,10 @@ def init_floating_chat():
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Éléments du DOM
-        const chatButton = document.getElementById('chat-button');
-        const chatWindow = document.getElementById('chat-window');
-        const chatClose = document.querySelector('.chat-close');
         const chatInput = document.querySelector('.chat-input');
         const chatBody = document.getElementById('chatBody');
         const suggestionChips = document.querySelectorAll('.suggestion-chip');
 
-        // Fonction pour basculer l'affichage du chat
-        function toggleChat() {
-            chatWindow.classList.toggle('open');
-        }
-
-        // Fonction pour ajouter un message
         function appendMessage(message, isUser = false) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'} animate-in`;
@@ -228,7 +185,6 @@ def init_floating_chat():
             chatBody.scrollTop = chatBody.scrollHeight;
         }
 
-        // Fonction pour envoyer un message
         async function sendMessage(message) {
             appendMessage(message, true);
             try {
@@ -256,10 +212,6 @@ def init_floating_chat():
             }
         }
 
-        // Event Listeners
-        chatButton.addEventListener('click', toggleChat);
-        chatClose.addEventListener('click', toggleChat);
-
         chatInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 const message = this.value.trim();
@@ -276,54 +228,6 @@ def init_floating_chat():
             });
         });
     });
-    </script>
-
-    <script>
-    (function() {
-        function initChat() {
-            const chatButton = document.getElementById('chat-button');
-            const chatWindow = document.getElementById('chat-window');
-            const chatClose = document.querySelector('.chat-close');
-
-            if (!chatButton || !chatWindow || !chatClose) {
-                console.error('Chat elements not found');
-                return;
-            }
-
-            console.log('Chat elements found:', { chatButton, chatWindow, chatClose });
-
-            function toggleChat(event) {
-                if (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                chatWindow.classList.toggle('open');
-                console.log('Chat toggled:', chatWindow.classList.contains('open'));
-            }
-
-            // Remove previous event listeners
-            chatButton.replaceWith(chatButton.cloneNode(true));
-            chatClose.replaceWith(chatClose.cloneNode(true));
-
-            // Get fresh references
-            const newChatButton = document.getElementById('chat-button');
-            const newChatClose = document.querySelector('.chat-close');
-
-            // Add new event listeners
-            newChatButton.onclick = toggleChat;
-            newChatClose.onclick = toggleChat;
-        }
-
-        // Initialize immediately
-        initChat();
-
-        // Initialize after DOM content loaded
-        document.addEventListener('DOMContentLoaded', initChat);
-
-        // Periodically check for elements
-        const initInterval = setInterval(initChat, 1000);
-        setTimeout(() => clearInterval(initInterval), 5000);
-    })();
     </script>
     """, unsafe_allow_html=True)
 
@@ -345,7 +249,6 @@ def handle_chat_input():
     """
     
     try:
-        # Utiliser st.query_params au lieu de st.experimental_get_query_params
         if "message" in st.query_params:
             user_message = st.query_params["message"]
             if user_message.strip():
@@ -368,6 +271,5 @@ def add_floating_chat_to_app():
         init_floating_chat()
         st.session_state.chat_initialized = True
     
-    # Utiliser st.query_params
     if "message" in st.query_params:
         return handle_chat_input()
