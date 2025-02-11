@@ -4,6 +4,7 @@ from theme import toggle_theme
 from quiz import display_quiz  
 from presentation import display_presentation
 from floating_chat import add_floating_chat_to_app
+from PIL import Image
 
 def write_text_slowly(text):
     """Fonction pour l'effet machine à écrire"""
@@ -102,8 +103,7 @@ def main():
             
             with letter_col:
                 try:
-                    from PIL import Image
-                    lettre = Image.open("assets/lettre_recommandation.jpg")
+                    lettre = Image.open(".assets/lettre_recommandation.jpg")
                     st.image(lettre, width=200, caption="Lettre de recommandation")
                     if st.button("Agrandir la lettre"):
                         st.image(lettre, use_column_width=True)
@@ -117,7 +117,7 @@ def main():
         with col2:
             try:
                 # Photo en haut à droite
-                image = Image.open("assets/photo.jpg")
+                image = Image.open(".assets/photo.jpg")
                 image_rotated = image.rotate(-90, expand=True)
                 st.image(image_rotated, width=200)
             except Exception as e:
