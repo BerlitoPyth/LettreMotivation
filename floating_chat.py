@@ -24,42 +24,24 @@ def init_floating_chat():
     }
 
     #chat-button {
-        width: 60px;
-        height: 60px;
-        border-radius: 30px;
-        background: #2D3748;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        color: white;
-        border: none;
-        transition: transform 0.3s ease;
-        z-index: 999999;
-    }
-
-    #chat-button:hover {
-        transform: scale(1.1);
+        display: none; /* Masquer le bouton de chat */
     }
 
     #chat-window {
         position: fixed;
-        bottom: 90px;
+        bottom: 20px;
         right: 20px;
         width: 380px;
         height: 500px;
         background: #1E1F25;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        display: none;
+        display: flex;
         flex-direction: column;
         overflow: hidden;
         z-index: 999999;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        opacity: 1;
+        visibility: visible;
     }
 
     .chat-header {
@@ -79,14 +61,14 @@ def init_floating_chat():
         gap: 8px;
     }
 
-    .chat-close, .chat-minimize {
+    .chat-close {
         cursor: pointer;
         opacity: 0.8;
         transition: opacity 0.2s ease;
         padding: 4px 8px;
     }
 
-    .chat-close:hover, .chat-minimize:hover {
+    .chat-close:hover {
         opacity: 1;
     }
 
@@ -162,12 +144,6 @@ def init_floating_chat():
         background: rgba(49, 130, 206, 0.2);
     }
 
-    #chat-window.open {
-        display: flex !important;
-        opacity: 1;
-        visibility: visible;
-    }
-
     @keyframes slideUp {
         from { transform: translateY(10px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
@@ -179,14 +155,12 @@ def init_floating_chat():
     </style>
 
     <div id="floating-chat-container">
-        <button id="chat-button">💬</button>
         <div id="chat-window">
             <div class="chat-header">
                 <div class="chat-header-title">
                     <span>💬</span>
                     <span>Chat avec Adrien</span>
                 </div>
-                <span class="chat-minimize">_</span>
                 <span class="chat-close">✕</span>
             </div>
             <div class="chat-body" id="chatBody">
@@ -207,26 +181,14 @@ def init_floating_chat():
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const chatButton = document.getElementById('chat-button');
         const chatWindow = document.getElementById('chat-window');
         const chatClose = document.querySelector('.chat-close');
-        const chatMinimize = document.querySelector('.chat-minimize');
         const chatInput = document.querySelector('.chat-input');
         const chatBody = document.getElementById('chatBody');
         const suggestionChips = document.querySelectorAll('.suggestion-chip');
 
-        function toggleChat() {
-            chatWindow.classList.toggle('open');
-        }
-
-        function minimizeChat() {
+        function closeChat() {
             chatWindow.style.display = 'none';
-            chatButton.style.display = 'flex';
-        }
-
-        function openChat() {
-            chatWindow.style.display = 'flex';
-            chatButton.style.display = 'none';
         }
 
         function appendMessage(message, isUser = false) {
@@ -264,9 +226,7 @@ def init_floating_chat():
             }
         }
 
-        chatButton.addEventListener('click', openChat);
-        chatClose.addEventListener('click', minimizeChat);
-        chatMinimize.addEventListener('click', minimizeChat);
+        chatClose.addEventListener('click', closeChat);
 
         chatInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
