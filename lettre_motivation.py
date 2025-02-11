@@ -67,7 +67,29 @@ def main():
              "✉️ Motivation"]
         )
 
-        # Informations dans la sidebar
+        # Lettre de recommandation (nouvelle position)
+        st.markdown("### 📄 Lettre de recommandation")
+        try:
+            lettre = Image.open(".assets/lettre_recommandation.jpg")
+            if "lettre_agrandie" not in st.session_state:
+                st.session_state.lettre_agrandie = False
+            
+            if not st.session_state.lettre_agrandie:
+                st.image(lettre, use_container_width=True, caption="Lettre de recommandation")
+                if st.button("Agrandir la lettre"):
+                    st.session_state.lettre_agrandie = True
+                    st.experimental_rerun()
+            else:
+                # Créer une colonne pleine largeur pour la lettre agrandie
+                with st.container():
+                    st.image(lettre, use_container_width=True, caption="Lettre de recommandation")
+                if st.button("Réduire la lettre"):
+                    st.session_state.lettre_agrandie = False
+                    st.experimental_rerun()
+        except Exception as e:
+            st.error("Lettre de recommandation non disponible")
+            print(f"Erreur: {e}")
+
         st.markdown("---")
         st.markdown("### 👤 À propos")
         st.info("""
@@ -96,35 +118,6 @@ def main():
         with col1:
             # Animation du titre
             write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
-            
-            # Lettre de recommandation
-            st.markdown("### 📄 Lettre de recommandation")
-            letter_col, desc_col = st.columns([1, 2])
-            
-            with letter_col:
-                try:
-                    lettre = Image.open(".assets/lettre_recommandation.jpg")
-                    # Créer une variable d'état pour suivre si la lettre est agrandie
-                    if "lettre_agrandie" not in st.session_state:
-                        st.session_state.lettre_agrandie = False
-                    
-                    # Afficher soit la miniature, soit la version agrandie
-                    if not st.session_state.lettre_agrandie:
-                        st.image(lettre, width=200, caption="Lettre de recommandation")
-                        if st.button("Agrandir la lettre"):
-                            st.session_state.lettre_agrandie = True
-                            st.experimental_rerun()
-                    else:
-                        st.image(lettre, use_container_width=True, caption="Lettre de recommandation")
-                        if st.button("Réduire la lettre"):
-                            st.session_state.lettre_agrandie = False
-                            st.experimental_rerun()
-                except Exception as e:
-                    st.error("Lettre de recommandation non disponible")
-                    print(f"Erreur: {e}")
-            
-            with desc_col:
-                st.info("👆 Cliquez sur le bouton pour agrandir la lettre de recommandation")
         
         with col2:
             try:
