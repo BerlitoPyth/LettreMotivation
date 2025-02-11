@@ -4,18 +4,34 @@ from openai import OpenAI
 def init_chat_client():
     """Initialize OpenAI client with API key"""
     try:
-        if "OPENAI_API_KEY" not in st.secrets:
-            st.error("Clé API OpenAI manquante dans les secrets")
+        # Debug prints for secrets
+        print("Checking for secrets...")
+        
+        # Check if we're running on Streamlit Cloud
+        if hasattr(st.secrets, "OPENAI_API_KEY"):
+            api_key = st.secrets.OPENAI_API_KEY
+            print("API Key found in Streamlit secrets")
+        else:
+            st.error("Clé API OpenAI manquante dans les secrets Streamlit")
             return None
         
-        # Debug print
-        print("Initializing OpenAI client...")
-        client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+        client = OpenAI(api_key=api_key)
         print("OpenAI client initialized successfully")
+        
+        # Test API connection
+        test_response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": "Test"}],
+            max_tokens=5
+        )
+        print("API connection test successful")
+        
         return client
         
     except Exception as e:
+        import traceback
         print(f"Error initializing OpenAI client: {str(e)}")
+        print(f"Full traceback:\n{traceback.format_exc()}")
         st.error(f"Error initializing OpenAI client: {str(e)}")
         return None
 
