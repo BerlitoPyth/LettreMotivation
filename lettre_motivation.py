@@ -14,46 +14,79 @@ def write_text_slowly(text):
         time.sleep(0.03)
     placeholder.markdown(f"### {text}")
 
-def create_loading_animation():
-    loading_container = st.empty()
+def display_data_animation():
+    """Affiche une animation style data science au démarrage"""
+    # Conteneur pour l'animation
+    animation_placeholder = st.empty()
     
-    # Animation style données binaires
-    binary_data = "01" * 20
-    for i in range(len(binary_data)):
-        loading_container.markdown(f"""
-        <div style='text-align: center; font-family: monospace; font-size: 24px; color: #3182CE;'>
-        <br/><br/>
-        {binary_data[:i]}▌
-        <br/><br/>
-        Chargement des données...
-        <div class='progress-bar' style='width: {i/len(binary_data)*100}%'></div>
-        </div>
+    # Données pour simuler l'analyse
+    data_elements = [
+        "📊 Chargement des données...",
+        "🔍 Analyse du profil...",
+        "📈 Calcul des compétences...",
+        "🎯 Évaluation du potentiel...",
+        "✨ Génération du projet..."
+    ]
+    
+    # Style CSS pour l'animation
+    st.markdown("""
+        <style>
+        @keyframes gradient {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .data-animation {
+            background: linear-gradient(270deg, #0066ff, #00ff99);
+            background-size: 200% 200%;
+            animation: gradient 2s ease infinite;
+            padding: 2rem;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .binary-text {
+            font-family: monospace;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
+    # Animation principale
+    for element in data_elements:
+        animation_placeholder.markdown(f"""
+            <div class="data-animation">
+                <h2>{element}</h2>
+                <div class="binary-text">{'01' * 20}</div>
+            </div>
         """, unsafe_allow_html=True)
-        time.sleep(0.05)
+        time.sleep(1)
     
-    # Animation finale
-    loading_container.markdown("""
-        <div style='text-align: center; font-family: monospace; font-size: 24px; color: #3182CE;'>
-        <br/><br/>
-        Données chargées avec succès! 🎯
-        <br/><br/>
-        <div class='progress-bar' style='width: 100%'></div>
+    # Message final
+    animation_placeholder.markdown(f"""
+        <div class="data-animation">
+            <h2>🚀 Bienvenue et merci pour le temps que vous m'accordez !</h2>
+            <div class="binary-text">{'01' * 20}</div>
         </div>
     """, unsafe_allow_html=True)
     time.sleep(1)
-    loading_container.empty()
+    animation_placeholder.empty()
 
 def main():
     st.set_page_config(
         page_title="Candidature BUT Science des Données",
         layout="wide"
     )
-    
-    # Ajoutez l'animation au début
-    create_loading_animation()
-    
     toggle_theme()
     add_floating_chat_to_app()
+
+    # Ajouter l'animation au début
+    if 'animation_shown' not in st.session_state:
+        st.session_state.animation_shown = False
+        display_data_animation()
+        st.session_state.animation_shown = True
 
     # Style personnalisé
     st.markdown("""
@@ -80,23 +113,6 @@ def main():
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 5px;
-        }
-        .progress-bar {
-            height: 4px;
-            background-color: #3182CE;
-            margin: 10px auto;
-            transition: width 0.5s ease;
-            max-width: 300px;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-        
-        .loading-text {
-            animation: pulse 1.5s infinite;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -216,52 +232,65 @@ def main():
         st.header("📝 Ma Lettre de Motivation")
         st.markdown("""
         Madame, Monsieur,
-
-        C'est avec enthousiasme que je vous présente ma candidature pour le BUT Science des Données, une formation qui représente 
-        pour moi l'opportunité idéale d'allier ma passion pour les mathématiques et l'informatique à mon désir d'évolution professionnelle.
-
-        Mon parcours, bien qu'atypique, témoigne de mon intérêt précoce pour le monde numérique et de ma capacité d'adaptation.
         
-        À 17 ans, après avoir décidé d'arrêter ma terminale STI-2D pour diverses raisons, j'ai participé à la 'piscine' de l'École 42, une expérience 
-        intense qui a confirmé mon attrait pour la programmation et renforcé ma logique algorithmique.
+        C'est avec enthousiasme que je vous présente ma candidature pour le BUT Science des Données.
+        Une formation qui représente pour moi l'opportunité idéale d'allier ma passion pour les mathématiques
+        et l'informatique à mon désir d’acquérir les compétences nécessaires pour apprendre à faire parler les données,
+        par là j'entends en extraire du sens et des informations utiles pour la prise de décision.
         
-        Par la suite, en tant que plongeur scaphandrier, j'ai évolué dans un environnement exigeant où la précision, le travail 
-        d'équipe et la gestion du stress étaient essentiels.
-
-        Cette capacité à relever des défis remonte à ma jeunesse.À 11 ans, je suis devenu champion de France de pentathlon, une
-        expérience formatrice qui m'a inculqué persévérance et rigueur dès mon plus jeune âge.
-
-        Dans un tout autre domaine, en 2019, j'ai réussi à me classer parmi les meilleurs joueurs mondiaux sur le jeu vidéo le
-        plus joué et l'un des plus compétitifs de la scène e-sportive de l'époque.
+        Dès mon plus jeune âge, j’ai développé une affinité naturelle pour les mathématiques et la logique, et j’ai toujours
+        trouvé la résolution de problèmes stimulante.
         
-        Mon intérêt pour la technologie et l'analyse de données s'est récemment concrétisé à travers un projet entrepreneurial 
-        innovant. J'ai créé un concept de vente de PC gaming basé sur l'analyse détaillée des besoins clients et des performances 
-        réelles. Cette expérience a renforcé ma conviction que l'analyse de données est un outil puissant pour créer des solutions 
-        pertinentes et accessibles.
-
-        Les mathématiques ont toujours été une passion pour moi. Cette affinité naturelle, présente depuis mon plus jeune âge, 
-        s'est pleinement confirmée lors de ma reprise d'études en DAEU B. J'ai choisi de suivre cette formation à distance, 
-        ce qui m'a apprit à m'organiser de manière autonome et à maintenir un haut niveau d'exigence dans mes études. 
-
-        Pour préparer ma reconversion et maximiser mes chances de réussite, j'ai pris l'initiative, en parallèle, de suivre des formations certifiantes
-        en Python sur Coursera, ce qui a consolidé mon intérêt pour la programmation et le secteur de la data. Je me suis également initié
-        à l'analyse de données à travers des projets sur Kaggle, renforçant ainsi mes compétences techniques.
-
-        Le BUT Science des Données représente pour moi l'alliance parfaite entre :
-        - Ma passion historique pour les mathématiques
-        - Mon expérience précoce en programmation avec l'École 42
-        - Mes projets personnels
-        - Mon goût pour les défis techniques
-        - Mon désir d'apprentissage continu
-
-        Ma reconversion professionnelle est le fruit d'une réflexion approfondie. Je suis pleinement conscient des efforts 
-        qu'implique ce changement de carrière, mais je suis persuadé que ma détermination et mes capacités d'adaptation 
-        sont des atouts solides pour réussir dans cette voie. 
+        Mon parcours, bien que singulier, reflète mon esprit d’initiative, ma détermination et ma capacité d’adaptation.
+        Après avoir interrompu ma terminale STI2D, j’ai intégré la piscine de l’École 42, où j’ai découvert mon goût pour la
+        programmation et renforcé ma logique algorithmique. 
         
-        Je suis convaincu que mon parcours atypique et mon désir d'apprendre feront de moi un atout pour votre formation. 
-        Je reste à votre disposition pour vous présenter mon projet plus en détail.
-
+        Le sport de haut niveau a également façonné ma persévérance : j’ai été, plus jeune, champion de France de pentathlon
+        . Une expérience qui m’a appris le dépassement de soi et la rigueur. 
+        
+        Plus tard, mon expérience en tant que plongeur scaphandrier m’a permis d’évoluer dans un environnement exigeant où la précision,
+        l’esprit d’équipe et la gestion du stress et la communication étaient primordiaux.
+        
+        Grâce à des échanges avec des data analysts, j’ai découvert ce domaine qui m’est rapidement apparu comme une évidence
+        tant il correspond à mes affinités. Depuis, je m’y intéresse de près, suivant avec assiduité l’actualité du secteur ainsi 
+        que des podcasts et conférences de professionnels.
+        
+        Suite à cette découverte, et après mûres réflexions, j’ai décidé de me réorienter vers la science des données et ai repris
+        mes études avec un DAEU B en distanciel. Mon sérieux et mon engagement dans cette formation se reflètent à travers mes résultats 
+        ainsi que la lettre de recommandation de mon professeur de physique. Cette reprise d’étude à distance m'a appris à m'organiser
+        de manière autonome et à maintenir un haut niveau d'exigence dans mes études.
+        
+        Par ailleurs, en parallèle de mes révisions, je me suis formé à Python en passant des formations certifiantes sur Coursera. 
+        J’ai aussi créé un concept innovant (voir section "Projet") de vente de PC gaming basé sur l'analyse détaillée des besoins clients à travers un questionnaire
+        sur mesure et des performances réelles des machines sur les différents jeux. Cette expérience a renforcé ma conviction que l'analyse de données
+        est un outil puissant et essentiel pour créer des solutions pertinentes.
+        
+        Lors des journées portes ouvertes de l’IUT, j’ai beaucoup apprécié l’ambiance générale ainsi que les échanges que j’ai pu avoir avec
+        les enseignants et les étudiants, notamment avec Monsieur Mellouk, qui a gentiment pris le temps de répondre à mes questions.
+        Cette expérience a d’autant plus renforcé mon envie d’intégrer votre établissement, qui correspond pleinement à mes attentes en termes 
+        d’exigence et de quête d’excellence.
+        
+        Pour conclure, ma reconversion professionnelle est le fruit d'une réflexion approfondie et je suis convaincu que mon profil atypique 
+        et mon désir d'apprendre seront des atouts précieux pour réussir et contribuer activement à la dynamique de votre formation.
+        
         Je vous prie d'agréer, Madame, Monsieur, l'expression de mes sincères salutations.
+        
+        Adrien BERLIAT
+
+        PS : Je tiens à préciser que je n’ai pas créé cette application pour mettre en avant mes compétences en programmation, j’aurais été
+        bien incapable de la réaliser seul. Le véritable objectif était de me démarquer en illustrant l’investissement que je mets dans mes projets
+        et mon désir de rejoindre votre établissement. J’ai toujours pensé qu’il est préférable d’agir que de parler. J’espère que vous aurez pris le
+        temps de me lire jusqu’ici et que cela vous aura convaincu car j’y ai consacré beaucoup de temps et d’efforts. Merci :)
+
+
+
+
+
+
+
+
+
+
         """)
 
     elif selection == "👤 Présentation":
