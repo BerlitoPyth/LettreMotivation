@@ -57,6 +57,9 @@ def init_floating_chat():
         flex-direction: column;
         overflow: hidden;
         z-index: 999999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .chat-header {
@@ -160,7 +163,9 @@ def init_floating_chat():
     }
 
     #chat-window.open {
-        display: flex;
+        display: flex !important;
+        opacity: 1;
+        visibility: visible;
     }
 
     @keyframes slideUp {
@@ -272,6 +277,54 @@ def init_floating_chat():
         });
     });
     </script>
+
+    <script>
+    (function() {
+        function initChat() {
+            const chatButton = document.getElementById('chat-button');
+            const chatWindow = document.getElementById('chat-window');
+            const chatClose = document.querySelector('.chat-close');
+
+            if (!chatButton || !chatWindow || !chatClose) {
+                console.error('Chat elements not found');
+                return;
+            }
+
+            console.log('Chat elements found:', { chatButton, chatWindow, chatClose });
+
+            function toggleChat(event) {
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                chatWindow.classList.toggle('open');
+                console.log('Chat toggled:', chatWindow.classList.contains('open'));
+            }
+
+            // Remove previous event listeners
+            chatButton.replaceWith(chatButton.cloneNode(true));
+            chatClose.replaceWith(chatClose.cloneNode(true));
+
+            // Get fresh references
+            const newChatButton = document.getElementById('chat-button');
+            const newChatClose = document.querySelector('.chat-close');
+
+            // Add new event listeners
+            newChatButton.onclick = toggleChat;
+            newChatClose.onclick = toggleChat;
+        }
+
+        // Initialize immediately
+        initChat();
+
+        // Initialize after DOM content loaded
+        document.addEventListener('DOMContentLoaded', initChat);
+
+        // Periodically check for elements
+        const initInterval = setInterval(initChat, 1000);
+        setTimeout(() => clearInterval(initInterval), 5000);
+    })();
+    </script>
     """, unsafe_allow_html=True)
 
 def handle_chat_input():
@@ -292,14 +345,10 @@ def handle_chat_input():
     """
     
     try:
-        # Utilisation des query parameters pour récupérer le message
-        query_params = st.experimental_get_query_params()
-        if "message" in query_params:
-            user_message = query_params["message"][0]
-            
-            # Vérification que le message n'est pas vide
+        # Utiliser st.query_params au lieu de st.experimental_get_query_params
+        if "message" in st.query_params:
+            user_message = st.query_params["message"]
             if user_message.strip():
-                # Appel à l'API OpenAI
                 response = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[
@@ -309,7 +358,6 @@ def handle_chat_input():
                     temperature=0.7,
                     max_tokens=150
                 )
-                
                 return {"response": response.choices[0].message["content"]}
     except Exception as e:
         st.error(f"Erreur: {str(e)}")
@@ -320,6 +368,6 @@ def add_floating_chat_to_app():
         init_floating_chat()
         st.session_state.chat_initialized = True
     
-    # Gérer les messages du chat
-    if "message" in st.experimental_get_query_params():
+    # Utiliser st.query_params
+    if "message" in st.query_params:
         return handle_chat_input()
