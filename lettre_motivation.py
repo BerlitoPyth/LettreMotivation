@@ -104,9 +104,21 @@ def main():
             with letter_col:
                 try:
                     lettre = Image.open(".assets/lettre_recommandation.jpg")
-                    st.image(lettre, width=200, caption="Lettre de recommandation")
-                    if st.button("Agrandir la lettre"):
-                        st.image(lettre, use_column_width=True)
+                    # Créer une variable d'état pour suivre si la lettre est agrandie
+                    if "lettre_agrandie" not in st.session_state:
+                        st.session_state.lettre_agrandie = False
+                    
+                    # Afficher soit la miniature, soit la version agrandie
+                    if not st.session_state.lettre_agrandie:
+                        st.image(lettre, width=200, caption="Lettre de recommandation")
+                        if st.button("Agrandir la lettre"):
+                            st.session_state.lettre_agrandie = True
+                            st.experimental_rerun()
+                    else:
+                        st.image(lettre, use_container_width=True, caption="Lettre de recommandation")
+                        if st.button("Réduire la lettre"):
+                            st.session_state.lettre_agrandie = False
+                            st.experimental_rerun()
                 except Exception as e:
                     st.error("Lettre de recommandation non disponible")
                     print(f"Erreur: {e}")
