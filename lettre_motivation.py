@@ -3,7 +3,7 @@ import time
 from theme import toggle_theme
 from quiz import display_quiz  
 from presentation import display_presentation
-from floating_chat import add_floating_chat_to_app
+from floating_chat import ChatBot, display_chat, initialize_chat
 
 
 
@@ -23,7 +23,8 @@ def main():
         layout="wide"
     )
     toggle_theme()
-    add_floating_chat_to_app()
+    initialize_chat()
+    display_chat()
 
 
     # Style personnalisé
