@@ -42,12 +42,12 @@ def create_chat_interface():
         #chat-container {
             position: fixed;
             bottom: 0;
-            right: 20px;
+            left: 20px;  /* Changed from right to left */
             width: 400px;
             background-color: #1E1F25;
             border-radius: 10px 10px 0 0;
             box-shadow: 0 0 10px rgba(0,0,0,0.2);
-            z-index: 1000;
+            z-index: 9999;  /* Increased z-index to ensure visibility */
             transition: transform 0.3s ease-in-out;
         }
 
@@ -66,7 +66,8 @@ def create_chat_interface():
             height: 400px;
             overflow-y: auto;
             padding: 20px;
-            display: none;
+            display: block;  /* Changed from none to block to make it visible by default */
+            background-color: #1E1F25;
         }
 
         #chat-body.open {
@@ -113,7 +114,7 @@ def create_chat_interface():
                 <span>Chat avec Adrien</span>
                 <button class="chat-toggle">▼</button>
             </div>
-            <div id="chat-body">
+            <div id="chat-body" class="open">  <!-- Added class="open" -->
                 <div id="chat-messages"></div>
                 <input type="text" id="chat-input" placeholder="Posez votre question...">
             </div>
@@ -124,7 +125,7 @@ def create_chat_interface():
             const chatHeader = document.getElementById('chat-header');
             const chatBody = document.getElementById('chat-body');
             const chatToggle = document.querySelector('.chat-toggle');
-            let isOpen = false;
+            let isOpen = true;  // Changed to true for default open state
 
             function toggleChat() {
                 isOpen = !isOpen;
