@@ -15,54 +15,51 @@ def write_text_slowly(text):
     placeholder.markdown(f"### {text}")
 
 def display_data_animation():
-    """Animation binaire avec messages de chargement"""
+    """Animation binaire style hacker"""
     loading_container = st.empty()
     
     # Style CSS
     st.markdown("""
         <style>
-        .binary-animation {
-            font-family: monospace;
-            padding: 1rem;
-            color: #00ff00;
+        .hacker-animation {
+            font-family: 'Courier New', monospace;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 5px;
+            color: #0f0;
             text-align: center;
+            text-shadow: 0 0 5px #0f0;
         }
         .binary-text {
-            font-size: 14px;
-            letter-spacing: 2px;
+            font-size: 16px;
+            letter-spacing: 3px;
+            opacity: 0.8;
         }
         .message-text {
-            font-size: 18px;
-            margin: 10px 0;
+            font-size: 20px;
+            margin: 15px 0;
+            font-weight: bold;
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # Messages de chargement
-    messages = [
-        "📊 Chargement des données...",
-        "🔍 Analyse du profil...",
-        "📈 Calcul des compétences...",
-        "🎯 Évaluation du potentiel...",
-        "✨ Génération du projet..."
-    ]
-
     # Animation
-    binary = "01" * 30
-    for message in messages:
-        for i in range(len(binary)):
-            loading_container.markdown(f"""
-                <div class="binary-animation">
-                    <div class="binary-text">{binary[:i]}▌</div>
-                    <div class="message-text">{message}</div>
-                </div>
-            """, unsafe_allow_html=True)
-            time.sleep(0.03)
-        time.sleep(0.5)
-
+    binary = "01" * 40
+    # Premier message
+    for i in range(len(binary)):
+        loading_container.markdown(f"""
+            <div class="hacker-animation">
+                <div class="binary-text">{binary[:i]}▌</div>
+                <div class="message-text">📊 Chargement des données...</div>
+            </div>
+        """, unsafe_allow_html=True)
+        time.sleep(0.02)
+    
+    time.sleep(1)
+    
     # Message final
     loading_container.markdown(f"""
-        <div class="binary-animation">
+        <div class="hacker-animation">
             <div class="binary-text">{binary}</div>
             <div class="message-text">🚀 Bienvenue et merci pour le temps que vous m'accordez !</div>
         </div>
@@ -76,13 +73,13 @@ def main():
         layout="wide"
     )
     toggle_theme()
-    add_floating_chat_to_app()
 
     # Ajouter l'animation au début
     if 'animation_shown' not in st.session_state:
         st.session_state.animation_shown = False
         display_data_animation()
         st.session_state.animation_shown = True
+        add_floating_chat_to_app()  # Déplacé ici
 
     # Style personnalisé
     st.markdown("""
