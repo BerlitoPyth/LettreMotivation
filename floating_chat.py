@@ -39,12 +39,39 @@ def create_chat_interface():
     """Create chat interface using Streamlit components"""
     st.markdown("""
         <style>
-        .chat-container {
+        /* Light mode styles */
+        [data-theme="light"] .chat-container {
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+        }
+        [data-theme="light"] .bot-message {
+            background-color: #f0f2f6;
+            color: #262730;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Dark mode styles */
+        [data-theme="dark"] .chat-container {
             border-radius: 10px;
             background-color: #1E1F25;
             padding: 20px;
             margin-bottom: 20px;
         }
+        [data-theme="dark"] .bot-message {
+            background-color: #2D3748;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+        }
+
+        /* Common styles */
         .user-message {
             background-color: #3182CE;
             color: white;
@@ -52,13 +79,6 @@ def create_chat_interface():
             border-radius: 10px;
             margin: 5px 0;
             text-align: right;
-        }
-        .bot-message {
-            background-color: #2D3748;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 5px 0;
         }
         </style>
     """, unsafe_allow_html=True)
