@@ -1,267 +1,45 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 
-def init_floating_chat():
-    # Debug print for API key
+def init_chat_client():
+    """Initialize OpenAI client with API key"""
     if "OPENAI_API_KEY" not in st.secrets:
         st.error("Clé API OpenAI manquante dans les secrets")
-        return
-    else:
-        print("OpenAI API Key found in secrets")  # Debug log
-    
-    openai.api_key = st.secrets["OPENAI_API_KEY"]
-    
-    # Initialisation de l'état du chat
-    if 'chat_messages' not in st.session_state:
-        st.session_state.chat_messages = []
+        return None
+    return OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
+def create_chat_interface():
+    """Create chat interface using Streamlit components"""
     st.markdown("""
-    <style>
-    #floating-chat-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 999999;
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-
-    #chat-button {
-        display: none; /* Masquer le bouton de chat */
-    }
-
-    #chat-window {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 380px;
-        height: 500px;
-        background: #1E1F25;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-        z-index: 999999;
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .chat-header {
-        padding: 16px;
-        background: #2D3748;
-        color: white;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .chat-header-title {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .chat-close {
-        cursor: pointer;
-        opacity: 0.8;
-        transition: opacity 0.2s ease;
-        padding: 4px 8px;
-    }
-
-    .chat-close:hover {
-        opacity: 1;
-    }
-
-    .chat-body {
-        flex-grow: 1;
-        padding: 16px;
-        overflow-y: auto;
-        background: #1E1F25;
-    }
-
-    .message {
-        max-width: 80%;
-        padding: 10px 14px;
-        margin-bottom: 10px;
-        border-radius: 12px;
-        font-size: 14px;
-        line-height: 1.4;
-    }
-
-    .user-message {
-        background: #3182CE;
-        color: white;
-        margin-left: auto;
-        border-bottom-right-radius: 4px;
-    }
-
-    .bot-message {
-        background: #2D3748;
-        color: white;
-        margin-right: auto;
-        border-bottom-left-radius: 4px;
-    }
-
-    .chat-input-container {
-        padding: 16px;
-        background: #2D3748;
-        border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .chat-input {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.2);
-        background: #1E1F25;
-        color: white;
-        font-size: 14px;
-    }
-
-    .chat-input:focus {
-        outline: none;
-        border-color: #3182CE;
-    }
-
-    .suggestions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 12px;
-    }
-
-    .suggestion-chip {
-        padding: 6px 12px;
-        background: rgba(49, 130, 206, 0.1);
-        color: #60A5FA;
-        border-radius: 16px;
-        font-size: 12px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .suggestion-chip:hover {
-        background: rgba(49, 130, 206, 0.2);
-    }
-
-    @keyframes slideUp {
-        from { transform: translateY(10px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-
-    .animate-in {
-        animation: slideUp 0.3s ease forwards;
-    }
-    </style>
-
-    <div id="floating-chat-container">
-        <div id="chat-window">
-            <div class="chat-header">
-                <div class="chat-header-title">
-                    <span>💬</span>
-                    <span>Chat avec Adrien</span>
-                </div>
-                <span class="chat-close">✕</span>
-            </div>
-            <div class="chat-body" id="chatBody">
-                <div class="message bot-message">
-                    Bonjour ! Je suis Adrien. N'hésitez pas à me poser des questions sur mon profil ou mes motivations !
-                </div>
-                <div class="suggestions">
-                    <div class="suggestion-chip">Pourquoi le BUT SD ?</div>
-                    <div class="suggestion-chip">Ton parcours ?</div>
-                    <div class="suggestion-chip">Tes motivations ?</div>
-                </div>
-            </div>
-            <div class="chat-input-container">
-                <input type="text" class="chat-input" placeholder="Posez votre question...">
-            </div>
-        </div>
-    </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const chatWindow = document.getElementById('chat-window');
-        const chatClose = document.querySelector('.chat-close');
-        const chatInput = document.querySelector('.chat-input');
-        const chatBody = document.getElementById('chatBody');
-        const suggestionChips = document.querySelectorAll('.suggestion-chip');
-
-        function closeChat() {
-            chatWindow.style.display = 'none';
+        <style>
+        .chat-container {
+            border-radius: 10px;
+            background-color: #1E1F25;
+            padding: 20px;
+            margin-bottom: 20px;
         }
-
-        function appendMessage(message, isUser = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'} animate-in`;
-            messageDiv.textContent = message;
-            chatBody.appendChild(messageDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
+        .user-message {
+            background-color: #3182CE;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
+            text-align: right;
         }
-
-        async function sendMessage(message) {
-            appendMessage(message, true);
-            try {
-                // Add timestamp to prevent caching
-                const timestamp = new Date().getTime();
-                const queryString = new URLSearchParams({ 
-                    message: message,
-                    t: timestamp 
-                }).toString();
-                
-                // Make request to Streamlit backend
-                const response = await fetch(`?${queryString}`, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                    },
-                    cache: 'no-store'
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                
-                const data = await response.json();
-                console.log('Received response:', data);  // Debug log
-                
-                if (data && data.response) {
-                    appendMessage(data.response);
-                } else {
-                    throw new Error('Invalid response format');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                appendMessage('Désolé, une erreur est survenue. Veuillez réessayer.');
-            }
+        .bot-message {
+            background-color: #2D3748;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px 0;
         }
-
-        chatClose.addEventListener('click', closeChat);
-
-        chatInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                const message = this.value.trim();
-                if (message) {
-                    sendMessage(message);
-                    this.value = '';
-                }
-            }
-        });
-
-        suggestionChips.forEach(chip => {
-            chip.addEventListener('click', function() {
-                sendMessage(this.textContent);
-            });
-        });
-    });
-    </script>
+        </style>
     """, unsafe_allow_html=True)
 
-def handle_chat_input():
+def generate_response(client, message, conversation_history):
+    """Generate response using OpenAI API"""
     system_prompt = """
-    Tu es Adrien BERLIAT, et tu réponds aux questions sur ta candidature pour le BUT Science des Données. 
+    Tu es Adrien BERLIAT, et tu réponds aux questions sur ta candidature pour le BUT Science des Données.
     
     Ton profil :
     - Actuellement en DAEU B avec d'excellents résultats en mathématiques
@@ -270,45 +48,86 @@ def handle_chat_input():
     - Passionné de programmation et de mathématiques
     - Grande capacité d'adaptation prouvée par ta reconversion
     
-    Ton objectif : Intégrer le BUT Science des Données pour allier ta passion des mathématiques à l'informatique
+    Ton objectif : Intégrer le BUT Science des Données pour allier ta passion des mathématiques à l'informatique.
     
     Réponds de manière professionnelle mais sympathique, en quelques phrases concises.
     Mets en avant ta motivation et ton parcours unique quand c'est pertinent.
     """
     
+    messages = [
+        {"role": "system", "content": system_prompt},
+        *conversation_history,
+        {"role": "user", "content": message}
+    ]
+    
     try:
-        # Get message from query parameters
-        params = st.query_params
-        if "message" in params:
-            user_message = params["message"]
-            if isinstance(user_message, list):
-                user_message = user_message[0]
-                
-            if user_message.strip():
-                # Create chat completion
-                response = openai.ChatCompletion.create(
-                    model="gpt-3.5-turbo",
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_message}
-                    ],
-                    temperature=0.7,
-                    max_tokens=150
-                )
-                
-                # Return response as JSON
-                bot_response = response.choices[0].message["content"]
-                return {"response": bot_response}
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=0.7,
+            max_tokens=150
+        )
+        return response.choices[0].message.content
     except Exception as e:
         st.error(f"Erreur: {str(e)}")
-    return {"response": "Désolé, une erreur est survenue."}
+        return "Désolé, une erreur est survenue."
 
 def add_floating_chat_to_app():
-    if "chat_initialized" not in st.session_state:
-        init_floating_chat()
-        st.session_state.chat_initialized = True
+    """Main function to add chat functionality to Streamlit app"""
+    # Initialize chat state
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
     
-    # Handle chat input and return JSON response
-    if "message" in st.query_params:
-        response = handle_chat_input()
-        st.json(response)
+    # Initialize OpenAI client
+    client = init_chat_client()
+    if not client:
+        return
+    
+    # Create chat interface
+    create_chat_interface()
+    
+    # Chat container
+    with st.container():
+        # Display chat history
+        for message in st.session_state.messages:
+            div_class = "user-message" if message["role"] == "user" else "bot-message"
+            st.markdown(f"""
+                <div class="{div_class}">
+                    {message["content"]}
+                </div>
+            """, unsafe_allow_html=True)
+        
+        # Chat input
+        if prompt := st.chat_input("Posez votre question..."):
+            # Add user message to state
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            
+            # Generate response
+            response = generate_response(client, prompt, st.session_state.messages)
+            
+            # Add assistant response to state
+            st.session_state.messages.append({"role": "assistant", "content": response})
+            
+            # Rerun to update chat display
+            st.rerun()
+
+        # Suggestion buttons
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            if st.button("Pourquoi le BUT SD ?"):
+                st.session_state.messages.append({"role": "user", "content": "Pourquoi le BUT SD ?"})
+                response = generate_response(client, "Pourquoi le BUT SD ?", st.session_state.messages)
+                st.session_state.messages.append({"role": "assistant", "content": response})
+                st.rerun()
+        with col2:
+            if st.button("Ton parcours ?"):
+                st.session_state.messages.append({"role": "user", "content": "Quel est ton parcours ?"})
+                response = generate_response(client, "Quel est ton parcours ?", st.session_state.messages)
+                st.session_state.messages.append({"role": "assistant", "content": response})
+                st.rerun()
+        with col3:
+            if st.button("Tes motivations ?"):
+                st.session_state.messages.append({"role": "user", "content": "Quelles sont tes motivations ?"})
+                response = generate_response(client, "Quelles sont tes motivations ?", st.session_state.messages)
+                st.session_state.messages.append({"role": "assistant", "content": response})
+                st.rerun()
