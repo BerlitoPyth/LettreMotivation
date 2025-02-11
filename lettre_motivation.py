@@ -5,7 +5,6 @@ from quiz import display_quiz
 from presentation import display_presentation
 from floating_chat import add_floating_chat_to_app
 
-
 def write_text_slowly(text):
     """Fonction pour l'effet machine à écrire"""
     placeholder = st.empty()
