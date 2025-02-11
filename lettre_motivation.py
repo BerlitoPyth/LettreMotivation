@@ -13,7 +13,6 @@ def write_text_slowly(text):
         time.sleep(0.03)
     placeholder.markdown(f"### {text}")
 
-
 def main():
     st.set_page_config(
         page_title="Candidature BUT Science des Données",
@@ -21,7 +20,6 @@ def main():
     )
     toggle_theme()
     add_floating_chat_to_app()
-
 
     # Style personnalisé
     st.markdown("""
@@ -84,7 +82,7 @@ def main():
         - DAEU B (en cours)
         - Python for Everybody
         - Python Data Structures
-        - Using Python to Acces Web Data
+        - Using Python to Access Web Data
         - École 42 - La Piscine
         - École Nationale des Scaphandriers
         - Expérience professionnelle
@@ -92,21 +90,40 @@ def main():
 
     # Contenu principal basé sur la sélection
     if selection == "🏠 Accueil":
+        # Première rangée avec le titre et la photo
         col1, col2 = st.columns([3, 1])
         with col1:
             # Animation du titre
             write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
+            
+            # Lettre de recommandation
+            st.markdown("### 📄 Lettre de recommandation")
+            letter_col, desc_col = st.columns([1, 2])
+            
+            with letter_col:
+                try:
+                    from PIL import Image
+                    lettre = Image.open("assets/lettre_recommandation.jpg")
+                    st.image(lettre, width=200, caption="Lettre de recommandation")
+                    if st.button("Agrandir la lettre"):
+                        st.image(lettre, use_column_width=True)
+                except Exception as e:
+                    st.error("Lettre de recommandation non disponible")
+                    print(f"Erreur: {e}")
+            
+            with desc_col:
+                st.info("👆 Cliquez sur le bouton pour agrandir la lettre de recommandation")
+        
         with col2:
             try:
                 # Photo en haut à droite
-                import PIL
-                from PIL import Image
-                image = Image.open("photo.jpg")
+                image = Image.open("assets/photo.jpg")
                 image_rotated = image.rotate(-90, expand=True)
                 st.image(image_rotated, width=200)
             except Exception as e:
                 st.info("📸 Photo non disponible")
-                
+                print(f"Erreur: {e}")
+        
         st.title("Candidature BUT Science des Données, BERLIAT Adrien")
         st.markdown("---")
 
@@ -185,7 +202,6 @@ def main():
         """)
 
     elif selection == "👤 Présentation":
-        
         display_presentation()
 
         col1, col2 = st.columns(2)
@@ -215,6 +231,7 @@ def main():
             """)
 
         st.markdown("---")
+
     elif selection == "✨ Quiz":
         st.title("Découvrez si nous matchons !")
         display_quiz()
@@ -254,7 +271,6 @@ def main():
         - Démonstration des performances et transparence totale
         - Approche basée sur les données
         """)
-
 
     elif selection == "🔧 Projets":
         st.title("Mes Projets")
@@ -296,7 +312,7 @@ def main():
         Un parcours complet comprenant :
         - Apprentissage des fondamentaux Python
         - Structures de données
-        - Utilisation de Python pour accéser aux données Web
+        - Utilisation de Python pour accéder aux données Web
         - Utilisation des bases de données avec Python
         """)
 
@@ -337,7 +353,6 @@ def main():
     # Footer
     st.markdown("---")
     st.markdown("*Document interactif créé pour accompagner ma candidature au BUT Science des Données*")
-
 
 if __name__ == "__main__":
     main()
