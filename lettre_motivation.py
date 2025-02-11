@@ -70,18 +70,13 @@ def main():
         # Lettre de recommandation
         st.markdown("### 📄 Lettre de recommandation")
         try:
-            # Initialiser l'état de la lettre si pas déjà fait
             if "lettre_agrandie" not in st.session_state:
                 st.session_state.lettre_agrandie = False
             
-            # Charger l'image une seule fois
             lettre = Image.open(".assets/lettre_recommandation.jpg")
-            
-            # Afficher la miniature dans la sidebar
             st.image(lettre, width=200, caption="Lettre de recommandation")
             if st.button("📄 Voir en plein écran"):
                 st.session_state.lettre_agrandie = True
-
         except Exception as e:
             print(f"Erreur lors du chargement de la lettre: {str(e)}")
             st.error("Lettre de recommandation non disponible")
@@ -109,15 +104,20 @@ def main():
 
     # Affichage plein écran de la lettre si demandé
     if st.session_state.get('lettre_agrandie', False):
-        with st.dialog("Lettre de recommandation"):
-            try:
-                lettre = Image.open(".assets/lettre_recommandation.jpg")
-                st.image(lettre, use_container_width=True)
-                if st.button("❌ Fermer"):
-                    st.session_state.lettre_agrandie = False
-                    st.rerun()
-            except Exception as e:
-                st.error("Impossible d'afficher la lettre en plein écran")
+        # Création d'une overlay pour l'image en plein écran
+        overlay_container = st.container()
+        with overlay_container:
+            col1, col2, col3 = st.columns([1, 6, 1])
+            with col2:
+                try:
+                    lettre = Image.open(".assets/lettre_recommandation.jpg")
+                    st.image(lettre, use_container_width=True)
+                    if st.button("❌ Fermer", key="close_fullscreen"):
+                        st.session_state.lettre_agrandie = False
+                        st.rerun()
+                except Exception as e:
+                    st.error("Impossible d'afficher la lettre en plein écran")
+                    print(f"Erreur: {e}")
 
     # Contenu principal basé sur la sélection
     if selection == "🏠 Accueil":
