@@ -15,12 +15,10 @@ def write_text_slowly(text):
     placeholder.markdown(f"### {text}")
 
 def display_data_animation():
-    """Affiche une animation style data science au démarrage"""
-    # Conteneur pour l'animation
-    animation_placeholder = st.empty()
+    loading_container = st.empty()
     
     # Données pour simuler l'analyse
-    data_elements = [
+    loading_steps = [
         "📊 Chargement des données...",
         "🔍 Analyse du profil...",
         "📈 Calcul des compétences...",
@@ -28,51 +26,54 @@ def display_data_animation():
         "✨ Génération du projet..."
     ]
     
-    # Style CSS pour l'animation
+    # Style CSS
     st.markdown("""
         <style>
-        @keyframes gradient {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
-        }
-        .data-animation {
-            background: linear-gradient(270deg, #0066ff, #00ff99);
-            background-size: 200% 200%;
-            animation: gradient 2s ease infinite;
+        .loading-animation {
+            font-family: monospace;
             padding: 2rem;
+            background-color: black;
             border-radius: 10px;
-            color: white;
+            color: #00ff00;
             text-align: center;
             margin: 2rem 0;
         }
-        .binary-text {
-            font-family: monospace;
+        .binary-stream {
             font-size: 12px;
             opacity: 0.7;
+            margin: 10px 0;
+        }
+        .progress-text {
+            font-size: 20px;
+            margin: 15px 0;
         }
         </style>
     """, unsafe_allow_html=True)
-    
+
     # Animation principale
-    for element in data_elements:
-        animation_placeholder.markdown(f"""
-            <div class="data-animation">
-                <h2>{element}</h2>
-                <div class="binary-text">{'01' * 20}</div>
-            </div>
-        """, unsafe_allow_html=True)
-        time.sleep(1)
+    binary_data = "01" * 50
+    for step in loading_steps:
+        for i in range(0, len(binary_data), 2):
+            loading_container.markdown(f"""
+                <div class="loading-animation">
+                    <div class="binary-stream">{binary_data[:i]}▌</div>
+                    <div class="progress-text">{step}</div>
+                    <div class="binary-stream">{binary_data[i:]}▌</div>
+                </div>
+            """, unsafe_allow_html=True)
+            time.sleep(0.05)
+        time.sleep(0.5)
     
     # Message final
-    animation_placeholder.markdown(f"""
-        <div class="data-animation">
-            <h2>🚀 Bienvenue et merci pour le temps que vous m'accordez !</h2>
-            <div class="binary-text">{'01' * 20}</div>
+    loading_container.markdown(f"""
+        <div class="loading-animation">
+            <div class="binary-stream">{binary_data}</div>
+            <div class="progress-text">🚀 Bienvenue et merci pour le temps que vous m'accordez !</div>
+            <div class="binary-stream">{binary_data}</div>
         </div>
     """, unsafe_allow_html=True)
-    time.sleep(1)
-    animation_placeholder.empty()
+    time.sleep(2)
+    loading_container.empty()
 
 def main():
     st.set_page_config(
