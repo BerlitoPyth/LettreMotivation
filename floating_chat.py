@@ -3,6 +3,10 @@ import openai
 
 def init_floating_chat():
     # Configuration de l'API OpenAI
+    if "OPENAI_API_KEY" not in st.secrets:
+        st.error("Clé API OpenAI manquante dans les secrets")
+        return
+    
     openai.api_key = st.secrets["OPENAI_API_KEY"]
     
     # Initialisation de l'état du chat
@@ -11,16 +15,14 @@ def init_floating_chat():
 
     st.markdown("""
     <style>
-    /* Styles de base */
     #floating-chat-container {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        z-index: 9999;
+        z-index: 999999;
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    /* Bouton de chat */
     #chat-button {
         width: 60px;
         height: 60px;
@@ -35,13 +37,13 @@ def init_floating_chat():
         color: white;
         border: none;
         transition: transform 0.3s ease;
+        z-index: 999999;
     }
 
     #chat-button:hover {
         transform: scale(1.1);
     }
 
-    /* Fenêtre de chat */
     #chat-window {
         position: fixed;
         bottom: 90px;
@@ -54,9 +56,9 @@ def init_floating_chat():
         display: none;
         flex-direction: column;
         overflow: hidden;
+        z-index: 999999;
     }
 
-    /* En-tête du chat */
     .chat-header {
         padding: 16px;
         background: #2D3748;
@@ -78,26 +80,24 @@ def init_floating_chat():
         cursor: pointer;
         opacity: 0.8;
         transition: opacity 0.2s ease;
+        padding: 4px 8px;
     }
 
     .chat-close:hover {
         opacity: 1;
     }
 
-    /* Corps du chat */
     .chat-body {
         flex-grow: 1;
         padding: 16px;
         overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
+        background: #1E1F25;
     }
 
-    /* Messages */
     .message {
         max-width: 80%;
         padding: 10px 14px;
+        margin-bottom: 10px;
         border-radius: 12px;
         font-size: 14px;
         line-height: 1.4;
@@ -117,7 +117,6 @@ def init_floating_chat():
         border-bottom-left-radius: 4px;
     }
 
-    /* Zone de saisie */
     .chat-input-container {
         padding: 16px;
         background: #2D3748;
@@ -139,18 +138,17 @@ def init_floating_chat():
         border-color: #3182CE;
     }
 
-    /* Suggestions */
     .suggestions {
-        padding: 16px;
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
+        margin-top: 12px;
     }
 
     .suggestion-chip {
         padding: 6px 12px;
         background: rgba(49, 130, 206, 0.1);
-        color: #3182CE;
+        color: #60A5FA;
         border-radius: 16px;
         font-size: 12px;
         cursor: pointer;
@@ -161,99 +159,122 @@ def init_floating_chat():
         background: rgba(49, 130, 206, 0.2);
     }
 
-    /* Animations */
+    #chat-window.open {
+        display: flex;
+    }
+
     @keyframes slideUp {
-        from { transform: translateY(20px); opacity: 0; }
+        from { transform: translateY(10px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
 
-    .chat-window.open {
-        display: flex;
-        animation: slideUp 0.3s ease;
+    .animate-in {
+        animation: slideUp 0.3s ease forwards;
     }
     </style>
 
     <div id="floating-chat-container">
-        <button id="chat-button" onclick="toggleChat()">💬</button>
+        <button id="chat-button">💬</button>
         <div id="chat-window">
             <div class="chat-header">
                 <div class="chat-header-title">
                     <span>💬</span>
                     <span>Chat avec Adrien</span>
                 </div>
-                <span class="chat-close" onclick="toggleChat()">✕</span>
+                <span class="chat-close">✕</span>
             </div>
             <div class="chat-body" id="chatBody">
                 <div class="message bot-message">
                     Bonjour ! Je suis Adrien. N'hésitez pas à me poser des questions sur mon profil ou mes motivations !
                 </div>
                 <div class="suggestions">
-                    <div class="suggestion-chip" onclick="sendSuggestion(this)">Pourquoi le BUT SD ?</div>
-                    <div class="suggestion-chip" onclick="sendSuggestion(this)">Ton parcours ?</div>
-                    <div class="suggestion-chip" onclick="sendSuggestion(this)">Tes motivations ?</div>
+                    <div class="suggestion-chip">Pourquoi le BUT SD ?</div>
+                    <div class="suggestion-chip">Ton parcours ?</div>
+                    <div class="suggestion-chip">Tes motivations ?</div>
                 </div>
             </div>
             <div class="chat-input-container">
-                <input type="text" class="chat-input" placeholder="Posez votre question..."
-                    onkeypress="handleKeyPress(event)">
+                <input type="text" class="chat-input" placeholder="Posez votre question...">
             </div>
         </div>
     </div>
 
     <script>
-    function toggleChat() {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Éléments du DOM
+        const chatButton = document.getElementById('chat-button');
         const chatWindow = document.getElementById('chat-window');
-        chatWindow.classList.toggle('open');
-    }
-
-    function appendMessage(message, isUser = false) {
+        const chatClose = document.querySelector('.chat-close');
+        const chatInput = document.querySelector('.chat-input');
         const chatBody = document.getElementById('chatBody');
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
-        messageDiv.textContent = message;
-        chatBody.appendChild(messageDiv);
-        chatBody.scrollTop = chatBody.scrollHeight;
-    }
+        const suggestionChips = document.querySelectorAll('.suggestion-chip');
 
-    function handleKeyPress(event) {
-        if (event.key === 'Enter') {
-            const input = event.target;
-            const message = input.value.trim();
-            if (message) {
-                sendMessage(message);
-                input.value = '';
+        // Fonction pour basculer l'affichage du chat
+        function toggleChat() {
+            chatWindow.classList.toggle('open');
+        }
+
+        // Fonction pour ajouter un message
+        function appendMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'} animate-in`;
+            messageDiv.textContent = message;
+            chatBody.appendChild(messageDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // Fonction pour envoyer un message
+        async function sendMessage(message) {
+            appendMessage(message, true);
+            try {
+                const queryString = new URLSearchParams({ message: message }).toString();
+                const response = await fetch(`?${queryString}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                if (data && data.response) {
+                    appendMessage(data.response);
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                appendMessage('Désolé, une erreur est survenue. Veuillez réessayer.');
             }
         }
-    }
 
-    function sendSuggestion(element) {
-        sendMessage(element.textContent);
-    }
+        // Event Listeners
+        chatButton.addEventListener('click', toggleChat);
+        chatClose.addEventListener('click', toggleChat);
 
-    async function sendMessage(message) {
-        appendMessage(message, true);
-        
-        try {
-            const response = await fetch('/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({message: message})
+        chatInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                const message = this.value.trim();
+                if (message) {
+                    sendMessage(message);
+                    this.value = '';
+                }
+            }
+        });
+
+        suggestionChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                sendMessage(this.textContent);
             });
-            
-            const data = await response.json();
-            appendMessage(data.response);
-        } catch (error) {
-            console.error('Error:', error);
-            appendMessage('Désolé, une erreur est survenue. Veuillez réessayer.');
-        }
-    }
+        });
+    });
     </script>
     """, unsafe_allow_html=True)
 
 def handle_chat_input():
-    # Système de prompt pour GPT
     system_prompt = """
     Tu es Adrien BERLIAT, et tu réponds aux questions sur ta candidature pour le BUT Science des Données. 
     
@@ -269,25 +290,36 @@ def handle_chat_input():
     Réponds de manière professionnelle mais sympathique, en quelques phrases concises.
     Mets en avant ta motivation et ton parcours unique quand c'est pertinent.
     """
-
-    # Endpoint pour recevoir les messages du chat
-    if st.request_method == "POST":
-        data = st.request_json()
-        user_message = data["message"]
-
-        # Appel à l'API GPT
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_message}
-            ],
-            temperature=0.7,
-            max_tokens=150
-        )
-
-        return {"response": response.choices[0].message["content"]}
+    
+    try:
+        # Utilisation des query parameters pour récupérer le message
+        query_params = st.experimental_get_query_params()
+        if "message" in query_params:
+            user_message = query_params["message"][0]
+            
+            # Vérification que le message n'est pas vide
+            if user_message.strip():
+                # Appel à l'API OpenAI
+                response = openai.ChatCompletion.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_message}
+                    ],
+                    temperature=0.7,
+                    max_tokens=150
+                )
+                
+                return {"response": response.choices[0].message["content"]}
+    except Exception as e:
+        st.error(f"Erreur: {str(e)}")
+        return {"response": "Désolé, une erreur est survenue."}
 
 def add_floating_chat_to_app():
-    init_floating_chat()
-    handle_chat_input()
+    if "chat_initialized" not in st.session_state:
+        init_floating_chat()
+        st.session_state.chat_initialized = True
+    
+    # Gérer les messages du chat
+    if "message" in st.experimental_get_query_params():
+        return handle_chat_input()
