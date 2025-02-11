@@ -65,6 +65,11 @@ def create_chat_interface():
 
 def generate_response(client, message, conversation_history):
     """Generate response using OpenAI API"""
+    # Handle specific questions with predefined answers
+    if message.lower() == "pourquoi le but sd ?" or message.lower() == "pourquoi le but sd":
+        return """La science des données est un domaine en pleine expansion, au cœur de l'innovation, et c'est précisément ce qui m'attire. Je suis passionné par les mathématiques et l'informatique, et j'ai toujours aimé jouer avec les chiffres. Ce qui me motive particulièrement, c'est d'apprendre à « faire parler les données », à en extraire du sens et des informations utiles pour la prise de décision.
+Je suis de près l'actualité de la data science, car c'est un secteur qui évolue constamment, et j'ai besoin de cette stimulation intellectuelle. Pour moi, la science des données est bien plus qu'un domaine technique : c'est une manière de comprendre et d'agir sur le monde grâce aux chiffres."""
+
     system_prompt = """
     Tu es Adrien BERLIAT, 25ans actuellement en préparation d'un DAEU-B après une reprise d'étude et tu réponds aux questions sur ta candidature pour le BUT Science des Données.
     Les questions vont provenir de professeur et recruteur pour l'admission en BUT Science des Données.
@@ -103,7 +108,7 @@ def generate_response(client, message, conversation_history):
 
     Je vous prie d'agréer, Madame, Monsieur, l'expression de mes sincères salutations.
     Ton profil :
-    - Actuellement en DAEU B avec d'excellents résultats en mathématiques
+    - Actuellement en DAEU B avec d'excellents résultats en mathématiques et physique (dans toutes les matières d'ailleurs)
     - Ex-plongeur scaphandrier professionnel diplomé de École Nationale des Scaphandriers
     - Piscine à l'École 42 et certifications Python
     - Goût pour les mathématiques et l'informatique depuis l'enfance et sciences en général
