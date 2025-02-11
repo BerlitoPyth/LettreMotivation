@@ -170,7 +170,7 @@ def main():
         C'est avec enthousiasme que je vous présente ma candidature pour le BUT Science des Données.
         Une formation qui représente pour moi l'opportunité idéale d'allier ma passion pour les mathématiques
         et l'informatique à mon désir d’acquérir les compétences nécessaires pour apprendre à faire parler les données,
-        c’est-à-dire en extraire du sens et des informations utiles pour la prise de décision.
+        par là j'entends en extraire du sens et des informations utiles pour la prise de décision.
         
         Dès mon plus jeune âge, j’ai développé une affinité naturelle pour les mathématiques et la logique, et j’ai toujours
         trouvé la résolution de problèmes stimulante.
