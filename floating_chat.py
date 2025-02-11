@@ -3,10 +3,21 @@ from openai import OpenAI
 
 def init_chat_client():
     """Initialize OpenAI client with API key"""
-    if "OPENAI_API_KEY" not in st.secrets:
-        st.error("Clé API OpenAI manquante dans les secrets")
+    try:
+        if "OPENAI_API_KEY" not in st.secrets:
+            st.error("Clé API OpenAI manquante dans les secrets")
+            return None
+        
+        # Debug print
+        print("Initializing OpenAI client...")
+        client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+        print("OpenAI client initialized successfully")
+        return client
+        
+    except Exception as e:
+        print(f"Error initializing OpenAI client: {str(e)}")
+        st.error(f"Error initializing OpenAI client: {str(e)}")
         return None
-    return OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def create_chat_interface():
     """Create chat interface using Streamlit components"""
@@ -54,23 +65,36 @@ def generate_response(client, message, conversation_history):
     Mets en avant ta motivation et ton parcours unique quand c'est pertinent.
     """
     
-    messages = [
-        {"role": "system", "content": system_prompt},
-        *conversation_history,
-        {"role": "user", "content": message}
-    ]
-    
     try:
+        # Debug print
+        print(f"Sending message to OpenAI: {message}")
+        
+        # Prepare messages for the API call
+        messages = [
+            {"role": "system", "content": system_prompt},
+            *[{"role": msg["role"], "content": msg["content"]} for msg in conversation_history],
+            {"role": "user", "content": message}
+        ]
+        
+        # Make API call
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=messages,
             temperature=0.7,
             max_tokens=150
         )
+        
+        # Debug print
+        print(f"Received response: {response.choices[0].message.content}")
+        
         return response.choices[0].message.content
     except Exception as e:
-        st.error(f"Erreur: {str(e)}")
-        return "Désolé, une erreur est survenue."
+        # Detailed error logging
+        import traceback
+        print(f"Error in generate_response: {str(e)}")
+        print(traceback.format_exc())
+        st.error(f"Error: {str(e)}")
+        return f"Désolé, une erreur est survenue: {str(e)}"
 
 def add_floating_chat_to_app():
     """Main function to add chat functionality to Streamlit app"""
