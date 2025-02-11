@@ -39,12 +39,40 @@ def create_chat_interface():
     """Create chat interface using Streamlit components"""
     st.markdown("""
         <style>
-        .chat-container {
-            border-radius: 10px;
+        #chat-container {
+            position: fixed;
+            bottom: 0;
+            right: 20px;
+            width: 400px;
             background-color: #1E1F25;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
         }
+
+        #chat-header {
+            background-color: #2D3748;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #chat-body {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+        }
+
+        #chat-body.open {
+            display: block;
+        }
+
         .user-message {
             background-color: #3182CE;
             color: white;
@@ -53,6 +81,7 @@ def create_chat_interface():
             margin: 5px 0;
             text-align: right;
         }
+
         .bot-message {
             background-color: #2D3748;
             color: white;
@@ -60,7 +89,52 @@ def create_chat_interface():
             border-radius: 10px;
             margin: 5px 0;
         }
+
+        #chat-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #4A5568;
+            background-color: #2D3748;
+            color: white;
+        }
+
+        .chat-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+        }
         </style>
+
+        <div id="chat-container">
+            <div id="chat-header">
+                <span>Chat avec Adrien</span>
+                <button class="chat-toggle">▼</button>
+            </div>
+            <div id="chat-body">
+                <div id="chat-messages"></div>
+                <input type="text" id="chat-input" placeholder="Posez votre question...">
+            </div>
+        </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatHeader = document.getElementById('chat-header');
+            const chatBody = document.getElementById('chat-body');
+            const chatToggle = document.querySelector('.chat-toggle');
+            let isOpen = false;
+
+            function toggleChat() {
+                isOpen = !isOpen;
+                chatBody.style.display = isOpen ? 'block' : 'none';
+                chatToggle.textContent = isOpen ? '▼' : '▲';
+            }
+
+            chatHeader.addEventListener('click', toggleChat);
+        });
+        </script>
     """, unsafe_allow_html=True)
 
 def generate_response(client, message, conversation_history):
@@ -194,6 +268,41 @@ def add_floating_chat_to_app():
     
     # Create chat interface
     create_chat_interface()
+    
+    # Add JavaScript for handling chat interactions
+    st.markdown("""
+        <script>
+        const chatInput = document.getElementById('chat-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        function appendMessage(content, isUser) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'user-message' : 'bot-message';
+            messageDiv.textContent = content;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        chatInput.addEventListener('keypress', async function(e) {
+            if (e.key === 'Enter') {
+                const message = this.value.trim();
+                if (message) {
+                    appendMessage(message, true);
+                    this.value = '';
+                    
+                    // Send message to Streamlit backend
+                    const queryString = new URLSearchParams({ message: message }).toString();
+                    const response = await fetch(`?${queryString}`);
+                    const data = await response.json();
+                    
+                    if (data && data.response) {
+                        appendMessage(data.response, false);
+                    }
+                }
+            }
+        });
+        </script>
+    """, unsafe_allow_html=True)
     
     # Chat container
     with st.container():
