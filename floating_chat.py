@@ -266,7 +266,7 @@ def handle_chat_input():
     
     try:
         if "message" in st.query_params:
-            user_message = st.query_params["message"]
+            user_message = st.query_params["message"][0]
             if user_message.strip():
                 response = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
