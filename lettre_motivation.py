@@ -77,18 +77,10 @@ def main():
             # Charger l'image une seule fois
             lettre = Image.open(".assets/lettre_recommandation.jpg")
             
-            # Créer deux colonnes pour le bouton et l'image
-            if not st.session_state.lettre_agrandie:
-                # Afficher la version miniature
-                st.image(lettre, width=200, caption="Lettre de recommandation")
-                if st.button("📄 Agrandir"):
-                    st.session_state.lettre_agrandie = True
-            else:
-                # Afficher la version agrandie dans un conteneur
-                with st.container():
-                    st.image(lettre, caption="Lettre de recommandation (version agrandie)")
-                if st.button("📝 Réduire"):
-                    st.session_state.lettre_agrandie = False
+            # Afficher la miniature dans la sidebar
+            st.image(lettre, width=200, caption="Lettre de recommandation")
+            if st.button("📄 Voir en plein écran"):
+                st.session_state.lettre_agrandie = True
 
         except Exception as e:
             print(f"Erreur lors du chargement de la lettre: {str(e)}")
@@ -114,6 +106,18 @@ def main():
         - École Nationale des Scaphandriers
         - Expérience professionnelle
         """)
+
+    # Affichage plein écran de la lettre si demandé
+    if st.session_state.get('lettre_agrandie', False):
+        with st.dialog("Lettre de recommandation"):
+            try:
+                lettre = Image.open(".assets/lettre_recommandation.jpg")
+                st.image(lettre, use_container_width=True)
+                if st.button("❌ Fermer"):
+                    st.session_state.lettre_agrandie = False
+                    st.rerun()
+            except Exception as e:
+                st.error("Impossible d'afficher la lettre en plein écran")
 
     # Contenu principal basé sur la sélection
     if selection == "🏠 Accueil":
