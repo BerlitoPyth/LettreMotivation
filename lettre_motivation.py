@@ -67,28 +67,32 @@ def main():
              "✉️ Motivation"]
         )
 
-        # Lettre de recommandation (nouvelle position)
+        # Lettre de recommandation
         st.markdown("### 📄 Lettre de recommandation")
         try:
-            lettre = Image.open(".assets/lettre_recommandation.jpg")
+            # Initialiser l'état de la lettre si pas déjà fait
             if "lettre_agrandie" not in st.session_state:
                 st.session_state.lettre_agrandie = False
             
+            # Charger l'image une seule fois
+            lettre = Image.open(".assets/lettre_recommandation.jpg")
+            
+            # Créer deux colonnes pour le bouton et l'image
             if not st.session_state.lettre_agrandie:
-                st.image(lettre, use_container_width=True, caption="Lettre de recommandation")
-                if st.button("Agrandir la lettre"):
+                # Afficher la version miniature
+                st.image(lettre, width=200, caption="Lettre de recommandation")
+                if st.button("📄 Agrandir"):
                     st.session_state.lettre_agrandie = True
-                    st.experimental_rerun()
             else:
-                # Créer une colonne pleine largeur pour la lettre agrandie
+                # Afficher la version agrandie dans un conteneur
                 with st.container():
-                    st.image(lettre, use_container_width=True, caption="Lettre de recommandation")
-                if st.button("Réduire la lettre"):
+                    st.image(lettre, caption="Lettre de recommandation (version agrandie)")
+                if st.button("📝 Réduire"):
                     st.session_state.lettre_agrandie = False
-                    st.experimental_rerun()
+
         except Exception as e:
+            print(f"Erreur lors du chargement de la lettre: {str(e)}")
             st.error("Lettre de recommandation non disponible")
-            print(f"Erreur: {e}")
 
         st.markdown("---")
         st.markdown("### 👤 À propos")
