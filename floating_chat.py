@@ -2,10 +2,12 @@ import streamlit as st
 import openai
 
 def init_floating_chat():
-    # Configuration de l'API OpenAI
+    # Debug print for API key
     if "OPENAI_API_KEY" not in st.secrets:
         st.error("Clé API OpenAI manquante dans les secrets")
         return
+    else:
+        print("OpenAI API Key found in secrets")  # Debug log
     
     openai.api_key = st.secrets["OPENAI_API_KEY"]
     
@@ -202,12 +204,20 @@ def init_floating_chat():
         async function sendMessage(message) {
             appendMessage(message, true);
             try {
-                const queryString = new URLSearchParams({ message: message }).toString();
+                // Add timestamp to prevent caching
+                const timestamp = new Date().getTime();
+                const queryString = new URLSearchParams({ 
+                    message: message,
+                    t: timestamp 
+                }).toString();
+                
+                // Make request to Streamlit backend
                 const response = await fetch(`?${queryString}`, {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json',
-                    }
+                        'Accept': 'application/json',
+                    },
+                    cache: 'no-store'
                 });
                 
                 if (!response.ok) {
@@ -215,6 +225,8 @@ def init_floating_chat():
                 }
                 
                 const data = await response.json();
+                console.log('Received response:', data);  // Debug log
+                
                 if (data && data.response) {
                     appendMessage(data.response);
                 } else {
@@ -265,9 +277,15 @@ def handle_chat_input():
     """
     
     try:
-        if "message" in st.query_params:
-            user_message = st.query_params["message"][0]
+        # Get message from query parameters
+        params = st.query_params
+        if "message" in params:
+            user_message = params["message"]
+            if isinstance(user_message, list):
+                user_message = user_message[0]
+                
             if user_message.strip():
+                # Create chat completion
                 response = openai.ChatCompletion.create(
                     model="gpt-3.5-turbo",
                     messages=[
@@ -277,16 +295,20 @@ def handle_chat_input():
                     temperature=0.7,
                     max_tokens=150
                 )
-                return {"response": response.choices[0].message["content"]}
+                
+                # Return response as JSON
+                bot_response = response.choices[0].message["content"]
+                return {"response": bot_response}
     except Exception as e:
         st.error(f"Erreur: {str(e)}")
-        return {"response": "Désolé, une erreur est survenue."}
+    return {"response": "Désolé, une erreur est survenue."}
 
 def add_floating_chat_to_app():
     if "chat_initialized" not in st.session_state:
         init_floating_chat()
         st.session_state.chat_initialized = True
     
-    response = handle_chat_input()
-    if response:
-        st.session_state.chat_messages.append(response)
+    # Handle chat input and return JSON response
+    if "message" in st.query_params:
+        response = handle_chat_input()
+        st.json(response)
