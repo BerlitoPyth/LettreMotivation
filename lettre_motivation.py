@@ -3,8 +3,7 @@ import time
 from theme import toggle_theme
 from quiz import display_quiz  
 from presentation import display_presentation
-from floating_chat import init_floating_chat  
-
+from floating_chat import add_floating_chat_to_app
 
 
 def write_text_slowly(text):
@@ -22,7 +21,7 @@ def main():
         layout="wide"
     )
     toggle_theme()
-    init_floating_chat()
+    add_floating_chat_to_app()
 
 
     # Style personnalisé
