@@ -5,6 +5,7 @@ from quiz import display_quiz
 from presentation import display_presentation
 from floating_chat import add_floating_chat_to_app
 from PIL import Image
+import random
 
 def write_text_slowly(text):
     """Fonction pour l'effet machine à écrire"""
@@ -15,66 +16,87 @@ def write_text_slowly(text):
     placeholder.markdown(f"### {text}")
 
 def display_data_animation():
-    """Animation binaire avec barre de progression"""
+    """Animation style Matrix"""
     loading_container = st.empty()
     
-    # Style CSS
+    # Style CSS Matrix
     st.markdown("""
         <style>
-        .loading-animation {
-            text-align: center;
+        @keyframes matrix-rain {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #0f0; }
+            50% { text-shadow: 0 0 20px #0f0, 0 0 30px #0f0; }
+            100% { text-shadow: 0 0 5px #0f0; }
+        }
+        
+        .matrix-animation {
             font-family: 'Courier New', monospace;
-            font-size: 20px;
-            color: #3182CE;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #0f0;
             padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
         }
-        .binary-text {
-            letter-spacing: 2px;
-            margin: 20px 0;
+        
+        .binary-stream {
+            font-size: 16px;
+            letter-spacing: 4px;
+            animation: glow 2s infinite;
+            opacity: 0.8;
         }
+        
         .message-text {
             font-size: 24px;
-            margin: 15px 0;
-            animation: pulse 1.5s infinite;
+            margin: 20px 0;
+            color: #fff;
+            text-shadow: 0 0 10px #0f0;
+            animation: glow 1.5s infinite;
         }
-        .progress-bar {
-            height: 4px;
-            background-color: #3182CE;
-            margin: 10px auto;
-            transition: width 0.5s ease;
-            max-width: 300px;
-        }
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+        
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            pointer-events: none;
+            font-size: 14px;
+            color: #0f0;
+            opacity: 0.3;
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # Animation
-    binary = "01" * 30
-    for i in range(len(binary)):
+    # Animation Matrix
+    matrix_chars = "01"
+    for i in range(50):  # Plus de cycles pour un effet plus fluide
+        binary = ''.join(random.choice(matrix_chars) for _ in range(40))
         loading_container.markdown(f"""
-            <div class="loading-animation">
-                <div class="binary-text">{binary[:i]}▌</div>
-                <div class="message-text">📊 Chargement des données...</div>
-                <div class="progress-bar" style="width: {(i/len(binary))*100}%"></div>
+            <div class="matrix-animation">
+                <div class="matrix-rain">{binary}</div>
+                <div class="binary-stream">{binary[:int(i/50*len(binary))]}▌</div>
+                <div class="message-text">📊 Initialisation de la Matrice...</div>
             </div>
         """, unsafe_allow_html=True)
-        time.sleep(0.03)
+        time.sleep(0.02)  # Animation plus rapide
     
-    time.sleep(1)
+    time.sleep(0.5)
     
-    # Message final
+    # Message final avec effet Matrix
     loading_container.markdown(f"""
-        <div class="loading-animation">
-            <div class="binary-text">{binary}</div>
-            <div class="message-text">🚀 Bienvenue et merci pour le temps que vous m'accordez !</div>
-            <div class="progress-bar" style="width: 100%"></div>
+        <div class="matrix-animation">
+            <div class="matrix-rain">{binary}</div>
+            <div class="binary-stream">{binary}</div>
+            <div class="message-text">🚀 Bienvenue dans la Matrice. Merci pour le temps que vous m'accordez.</div>
         </div>
     """, unsafe_allow_html=True)
-    time.sleep(2)
+    time.sleep(1.5)
     loading_container.empty()
 
 def main():
