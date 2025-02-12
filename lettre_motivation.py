@@ -243,8 +243,12 @@ def main():
         # Première rangée avec le titre et la photo
         col1, col2 = st.columns([3, 1])
         with col1:
-            # Animation du titre
-            write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
+            # Vérifier si le titre a déjà été écrit
+            if 'title_written' not in st.session_state:
+                write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
+                st.session_state.title_written = True
+            else:
+                st.markdown("### De la profondeur des océans à la profondeur des données... 🌊➡️📊")
         
         with col2:
             try:
