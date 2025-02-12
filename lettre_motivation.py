@@ -130,14 +130,21 @@ def main():
         layout="wide"
     )
 
+    # Créer un conteneur pour le toggle theme
+    theme_container = st.empty()
+
     # Ajouter l'animation au début
     if 'animation_shown' not in st.session_state:
         st.session_state.animation_shown = False
         display_data_animation()
         st.session_state.animation_shown = True
-        
-    # Déplacer le toggle_theme après l'animation
-    toggle_theme()
+        # Afficher le toggle theme seulement après l'animation
+        with theme_container:
+            toggle_theme()
+    else:
+        # Si l'animation a déjà été montrée, afficher directement le toggle theme
+        with theme_container:
+            toggle_theme()
 
     # Ajouter le chat après l'animation
     add_floating_chat_to_app()
