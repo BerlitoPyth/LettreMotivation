@@ -6,8 +6,6 @@ from presentation import display_presentation
 from floating_chat import add_floating_chat_to_app
 from PIL import Image
 import random
-from projet_gaming import display_project_concept
-
 
 def write_text_slowly(text):
     """Fonction pour l'effet machine à écrire"""
@@ -130,13 +128,15 @@ def main():
         page_title="Candidature BUT Science des Données",
         layout="wide"
     )
-    toggle_theme()
 
     # Ajouter l'animation au début
     if 'animation_shown' not in st.session_state:
         st.session_state.animation_shown = False
         display_data_animation()
         st.session_state.animation_shown = True
+        
+    # Déplacer le toggle_theme après l'animation
+    toggle_theme()
 
     # Ajouter le chat après l'animation
     add_floating_chat_to_app()
@@ -410,7 +410,7 @@ def main():
         """)
 
     elif selection == "🔧 Projets":
-        display_project_concept()
+        st.title("Mes Projets")
 
         st.info("""
         ### 🖥️ Projet PC Gamer
