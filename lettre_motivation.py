@@ -6,6 +6,8 @@ from presentation import display_presentation
 from floating_chat import add_floating_chat_to_app
 from PIL import Image
 import random
+from projet_gaming import display_project_concept
+
 
 def write_text_slowly(text):
     """Fonction pour l'effet machine à écrire"""
@@ -408,7 +410,7 @@ def main():
         """)
 
     elif selection == "🔧 Projets":
-        st.title("Mes Projets")
+        display_project_concept()
 
         st.info("""
         ### 🖥️ Projet PC Gamer
