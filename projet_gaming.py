@@ -115,7 +115,7 @@ def display_project_concept():
         """, unsafe_allow_html=True)
 
     # Statistiques et résultats
-    st.header("📈 Impact et Résultats")
+    st.header("📈 Chiffres")
     col1, col2 = st.columns(2)
     with col1:
         st.metric(label="Performances comparées aux PC de grandes enseignes en moyenne", value="+20%", delta="20 FPS")
