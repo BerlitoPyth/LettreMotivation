@@ -180,9 +180,9 @@ def main():
             "",
             ["🏠 Accueil",
              "✨ Quiz",
+             "🔧 Projet",
              "👤 Présentation",
              "📈 Parcours",
-             "🔧 Projet",
              "✉️ Motivation"]
         )
 
