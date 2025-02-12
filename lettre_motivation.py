@@ -384,79 +384,16 @@ def main():
     elif selection == "📈 Parcours":
         st.title("Mon Parcours")
 
-        st.info("""
-        ### 💻 Premier Pas dans l'Informatique
-
-        École 42 - La Piscine :
-        - Immersion intensive en programmation
-        - Apprentissage des bases de l'algorithmie
-        - Travail en peer-learning
-        - Développement de la logique de programmation
-        """)
-
-        st.success("""
-        ### 🤿 Plongeur Scaphandrier
-
-        Un métier exigeant qui m'a formé à :
-        - La rigueur technique et la précision
-        - La gestion du stress en conditions difficiles
-        - La résolution de problèmes
-        - La communication efficace en équipe
-        - L'adaptabilité permanente face aux imprévus
-        """)
-
-        st.warning("""
-        ### 🛠️ Projet Entrepreneurial
-
-        Création d'un concept innovant de vente PC Gaming :
-        - Analyse détaillée des besoins clients
-        - Vulgarisation pour les nouveaux utilisateurs de PC
-        - Développement d'un questionnaire structuré pour satisfaire les besoins du client
-        - Création de configurations optimisées 
-        - Démonstration des performances et transparence totale
-        - Approche basée sur les données
-        """)
-
+        
     elif selection == "🔧 Projets":
         display_project_concept()
 
     elif selection == "✉️ Motivation":
         st.title("Ma Motivation")
 
-        st.info("""
-        ### 💫 Mon Parcours vers la Data Science
-
-        Une progression logique à travers :
-        - Première expérience de code à l'École 42
-        - Création d'un projet basé sur les données
-        - Formations Python
-        - Passion continue pour l'analyse et les mathématiques
-        """)
-
-        st.success("""
-        ### 🎯 Pourquoi ce BUT ?
-
-        Cette formation correspond parfaitement à mon projet car elle :
-        - Offre une formation complète et pratique
-        - Combine théorie et applications
-        - Permet une progression structurée
-        - Prépare au monde professionnel
-        """)
-
-        st.warning("""
-        ### 💪 Mes Atouts
-
-        Mon parcours atypique est une force car il démontre :
-        - Une capacité d'adaptation éprouvée
-        - Une expérience concrète du travail en équipe
-        - Un sens aigu de la rigueur et de la précision
-        - Une motivation et une détermination solides
-        - Une approche data-driven déjà mise en pratique
-        """)
-
     # Footer
     st.markdown("---")
-    st.markdown("*Document interactif créé pour accompagner ma candidature au BUT Science des Données*")
+    st.markdown("*Application interactive créé pour accompagner ma candidature au BUT Science des Données*")
 
 if __name__ == "__main__":
     main()
