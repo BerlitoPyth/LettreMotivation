@@ -215,14 +215,17 @@ def add_floating_chat_to_app():
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
-    if "previous_page" not in st.session_state:
-        st.session_state.previous_page = None
-
-    # Get current page and check if it changed
+    # Get current page
     current_page = st.session_state.get('selection', None)
-    if current_page != st.session_state.previous_page:
-        st.session_state.messages = []  # Clear messages on page change
-        st.session_state.previous_page = current_page
+    
+    # Clear messages immediately when page changes
+    if "previous_page" in st.session_state:
+        if current_page != st.session_state.previous_page:
+            st.session_state.messages = []
+            st.rerun()
+    
+    # Update previous page
+    st.session_state.previous_page = current_page
     
     # Initialize OpenAI client
     client = init_chat_client()
