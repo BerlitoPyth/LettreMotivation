@@ -182,7 +182,7 @@ def main():
              "✨ Quiz",
              "👤 Présentation",
              "📈 Parcours",
-             "🔧 Projets",
+             "🔧 Projet",
              "✉️ Motivation"]
         )
 
