@@ -182,15 +182,6 @@ def display_presentation():
                     ]
                 },
                 {
-                    icon: "💻",
-                    title: "Compétences Techniques",
-                    items: [
-                        "Piscine l'École 42 - Introduction à la programmation",
-                        "Certifications Python - Apprentissage autodidacte",
-                        "Bases solides en algorithmique"
-                    ]
-                },
-                {
                     icon: "🎯",
                     title: "Points Forts",
                     items: [
