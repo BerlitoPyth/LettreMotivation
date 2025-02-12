@@ -16,16 +16,15 @@ def write_text_slowly(text):
     placeholder.markdown(f"### {text}")
 
 def display_data_animation():
-    """Animation style Matrix en plein écran avec messages"""
+    """Animation style Matrix en plein écran"""
     loading_container = st.empty()
     
-    # Style CSS Matrix amélioré
+    # Style CSS Matrix modifié pour le plein écran
     st.markdown("""
         <style>
         @keyframes matrix-rain {
-            0% { transform: translateY(-100%); opacity: 1; }
-            85% { opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
         
         @keyframes glow {
@@ -34,114 +33,94 @@ def display_data_animation():
             100% { text-shadow: 0 0 5px #0f0; }
         }
         
-        .matrix-container {
+        .matrix-animation {
+            font-family: 'Courier New', monospace;
+            background-color: rgba(0, 0, 0, 0.95);
+            color: #0f0;
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: black;
             z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
         }
         
-        .matrix-characters {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
-        
-        .rain-column {
-            position: absolute;
-            color: #0f0;
-            font-family: 'Courier New', monospace;
-            font-size: 24px;
-            line-height: 1;
-            white-space: nowrap;
-            text-shadow: 0 0 8px #0f0;
-            animation: matrix-rain linear infinite;
-            animation-duration: var(--duration);
-            animation-delay: var(--delay);
-            transform-origin: 50% -50%;
-        }
-        
-        .message-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10000;
-            text-align: center;
-            width: 100%;
+        .binary-stream {
+            font-size: 16px;
+            letter-spacing: 4px;
+            animation: glow 2s infinite;
+            opacity: 0.8;
+            position: relative;
+            z-index: 2;
         }
         
         .message-text {
-            font-family: 'Courier New', monospace;
-            font-size: 32px;
+            font-size: 24px;
+            margin: 20px 0;
             color: #fff;
-            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
-            animation: glow 2s infinite;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            display: inline-block;
+            text-shadow: 0 0 10px #0f0;
+            animation: glow 1.5s infinite;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .rain-column {
+            animation: matrix-rain 2s linear infinite;
+            animation-delay: var(--delay);
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # Caractères Matrix
-    matrix_chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
+    # Animation Matrix avec colonnes de pluie
+    matrix_chars = "01"
+    rain_columns = 50  # Nombre de colonnes de pluie
     
-    def create_rain_columns(num_columns):
-        columns = []
-        for i in range(num_columns):
-            x_pos = (i / num_columns) * 100
-            delay = random.random() * 2
-            duration = random.uniform(1.5, 3)
-            chars = ''.join(random.choice(matrix_chars) for _ in range(20))
-            columns.append(f"""
-                <div class="rain-column" style="
-                    left: {x_pos}vw;
-                    --duration: {duration}s;
-                    --delay: {delay}s;
-                ">{chars}</div>
-            """)
-        return ''.join(columns)
-
-    # Génération des colonnes initiales
-    rain_html = create_rain_columns(50)
-
-    # Séquence d'animation
-    messages = [
-        "📊 Initialisation de la Matrice...",
-        "🔍 Analyse des données...",
-        "✨ Génération du contenu...",
-        "🚀 Bienvenue et merci pour le temps que vous m'accordez !"
-    ]
-
-    for message in messages[:-1]:  # Tous les messages sauf le dernier
+    for i in range(50):
+        binary = ''.join(random.choice(matrix_chars) for _ in range(40))
+        rain_html = ''.join([
+            f'<div class="rain-column" style="--delay: {random.random() * 2}s">{binary}</div>'
+            for _ in range(rain_columns)
+        ])
+        
         loading_container.markdown(f"""
-            <div class="matrix-container">
-                <div class="matrix-characters">{rain_html}</div>
-                <div class="message-container">
-                    <div class="message-text">{message}</div>
-                </div>
+            <div class="matrix-animation">
+                <div class="matrix-rain">{rain_html}</div>
+                <div class="binary-stream">{binary[:int(i/50*len(binary))]}▌</div>
+                <div class="message-text">📊 Initialisation de la Matrice...</div>
             </div>
         """, unsafe_allow_html=True)
-        time.sleep(1.5)
-
-    # Message final
+        time.sleep(0.02)
+    
+    time.sleep(0.5)
+    
+    # Message final avec effet Matrix
     loading_container.markdown(f"""
-        <div class="matrix-container">
-            <div class="matrix-characters">{rain_html}</div>
-            <div class="message-container">
-                <div class="message-text">{messages[-1]}</div>
-            </div>
+        <div class="matrix-animation">
+            <div class="matrix-rain">{rain_html}</div>
+            <div class="binary-stream">{binary}</div>
+            <div class="message-text">🚀 Bienvenue dans la Matrice. Merci pour le temps que vous m'accordez.</div>
         </div>
     """, unsafe_allow_html=True)
-    time.sleep(2)
+    time.sleep(1.5)
     loading_container.empty()
 
 def main():
