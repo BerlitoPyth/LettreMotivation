@@ -211,9 +211,18 @@ Cette année, je prépare un DAEU B à distance avec l'objectif d'intégrer un B
 
 def add_floating_chat_to_app():
     """Main function to add chat functionality to Streamlit app"""
-    # Initialize chat state
+    # Initialize chat state and previous page state
     if "messages" not in st.session_state:
         st.session_state.messages = []
+    
+    if "previous_page" not in st.session_state:
+        st.session_state.previous_page = None
+
+    # Get current page and check if it changed
+    current_page = st.session_state.get('selection', None)
+    if current_page != st.session_state.previous_page:
+        st.session_state.messages = []  # Clear messages on page change
+        st.session_state.previous_page = current_page
     
     # Initialize OpenAI client
     client = init_chat_client()
