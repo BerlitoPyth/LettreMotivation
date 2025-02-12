@@ -406,5 +406,36 @@ def main():
     st.markdown("---")
     st.markdown("*Application interactive créé pour accompagner ma candidature au BUT Science des Données*")
 
+    # Dans la section des styles personnalisés, modifiez la partie des styles de la sidebar
+    st.markdown("""
+        <style>
+        /* ...existing styles... */
+
+        /* Styles pour la sidebar */
+        [data-testid="stSidebar"] {
+            background-color: #f0f2f6;
+        }
+        [data-testid="stSidebarNav"] {
+            background-color: #f0f2f6;
+        }
+        /* Styles pour le contenu de la sidebar */
+        .css-1d391kg, 
+        .stRadio > div,
+        [data-testid="stMarkdownContainer"],
+        .stInfo,
+        .stSuccess {
+            background-color: #f0f2f6 !important;
+        }
+        /* Style pour le texte dans la sidebar */
+        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
+            color: #262730;
+        }
+        /* Style pour les conteneurs dans la sidebar */
+        [data-testid="stSidebar"] .element-container {
+            background-color: #f0f2f6;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
 if __name__ == "__main__":
     main()
