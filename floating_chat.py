@@ -211,21 +211,16 @@ Cette année, je prépare un DAEU B à distance avec l'objectif d'intégrer un B
 
 def add_floating_chat_to_app():
     """Main function to add chat functionality to Streamlit app"""
-    # Initialize chat state and previous page state
+    # Initialize chat state
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    
-    # Get current page
+        st.session_state.previous_page = None
+
+    # Get current page and check for page change
     current_page = st.session_state.get('selection', None)
-    
-    # Clear messages immediately when page changes
-    if "previous_page" in st.session_state:
-        if current_page != st.session_state.previous_page:
-            st.session_state.messages = []
-            st.rerun()
-    
-    # Update previous page
-    st.session_state.previous_page = current_page
+    if current_page != st.session_state.get('previous_page', None):
+        st.session_state.messages = []
+        st.session_state.previous_page = current_page
     
     # Initialize OpenAI client
     client = init_chat_client()
@@ -248,35 +243,32 @@ def add_floating_chat_to_app():
         
         # Chat input
         if prompt := st.chat_input("Posez votre question..."):
-            # Add user message to state
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            
-            # Generate response
             response = generate_response(client, prompt, st.session_state.messages)
-            
-            # Add assistant response to state
-            st.session_state.messages.append({"role": "assistant", "content": response})
-            
-            # Rerun to update chat display
-            st.rerun()
+            st.session_state.messages.extend([
+                {"role": "user", "content": prompt},
+                {"role": "assistant", "content": response}
+            ])
 
         # Suggestion buttons
         col1, col2, col3 = st.columns(3)
         with col1:
             if st.button("Pourquoi le BUT SD ?"):
-                st.session_state.messages.append({"role": "user", "content": "Pourquoi le BUT SD ?"})
                 response = generate_response(client, "Pourquoi le BUT SD ?", st.session_state.messages)
-                st.session_state.messages.append({"role": "assistant", "content": response})
-                st.rerun()
+                st.session_state.messages.extend([
+                    {"role": "user", "content": "Pourquoi le BUT SD ?"},
+                    {"role": "assistant", "content": response}
+                ])
         with col2:
             if st.button("Ton parcours ?"):
-                st.session_state.messages.append({"role": "user", "content": "Quel est ton parcours ?"})
                 response = generate_response(client, "Quel est ton parcours ?", st.session_state.messages)
-                st.session_state.messages.append({"role": "assistant", "content": response})
-                st.rerun()
+                st.session_state.messages.extend([
+                    {"role": "user", "content": "Quel est ton parcours ?"},
+                    {"role": "assistant", "content": response}
+                ])
         with col3:
             if st.button("Tes motivations ?"):
-                st.session_state.messages.append({"role": "user", "content": "Quelles sont tes motivations ?"})
                 response = generate_response(client, "Quelles sont tes motivations ?", st.session_state.messages)
-                st.session_state.messages.append({"role": "assistant", "content": response})
-                st.rerun()
+                st.session_state.messages.extend([
+                    {"role": "user", "content": "Quelles sont tes motivations ?"},
+                    {"role": "assistant", "content": response}
+                ])
