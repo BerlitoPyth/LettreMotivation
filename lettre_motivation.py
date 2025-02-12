@@ -19,12 +19,13 @@ def display_data_animation():
     """Animation style Matrix en plein écran"""
     loading_container = st.empty()
     
-    # Style CSS Matrix modifié pour le plein écran
+    # Style CSS Matrix amélioré
     st.markdown("""
         <style>
         @keyframes matrix-rain {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+            0% { transform: translateY(-100%); opacity: 1; }
+            85% { opacity: 1; }
+            100% { transform: translateY(1000%); opacity: 0; }
         }
         
         @keyframes glow {
@@ -35,7 +36,7 @@ def display_data_animation():
         
         .matrix-animation {
             font-family: 'Courier New', monospace;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: black;
             color: #0f0;
             position: fixed;
             top: 0;
@@ -51,76 +52,93 @@ def display_data_animation():
         }
         
         .binary-stream {
-            font-size: 16px;
+            font-size: 20px;
             letter-spacing: 4px;
             animation: glow 2s infinite;
-            opacity: 0.8;
+            opacity: 0.9;
             position: relative;
             z-index: 2;
+            text-shadow: 0 0 8px #0f0;
         }
         
         .message-text {
-            font-size: 24px;
+            font-size: 28px;
             margin: 20px 0;
             color: #fff;
-            text-shadow: 0 0 10px #0f0;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
             animation: glow 1.5s infinite;
             position: relative;
             z-index: 2;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
         }
         
-        .matrix-rain {
-            position: absolute;
+        .matrix-characters {
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            opacity: 0.3;
+            right: 0;
+            bottom: 0;
             pointer-events: none;
-            z-index: 1;
+            font-size: 20px;
+            color: #0f0;
         }
         
         .rain-column {
-            animation: matrix-rain 2s linear infinite;
-            animation-delay: var(--delay);
+            position: absolute;
+            top: -100%;
+            animation: matrix-rain linear infinite;
+            width: 20px;
+            text-align: center;
+            text-shadow: 0 0 8px #0f0;
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # Animation Matrix avec colonnes de pluie
-    matrix_chars = "01"
-    rain_columns = 50  # Nombre de colonnes de pluie
+    # Caractères Matrix plus variés
+    matrix_chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ"
     
-    for i in range(50):
-        binary = ''.join(random.choice(matrix_chars) for _ in range(40))
-        rain_html = ''.join([
-            f'<div class="rain-column" style="--delay: {random.random() * 2}s">{binary}</div>'
-            for _ in range(rain_columns)
-        ])
+    # Création des colonnes de pluie
+    columns = 50
+    screen_width = 100  # Largeur virtuelle de l'écran
+    
+    for i in range(40):  # Réduction du nombre d'itérations pour plus de fluidité
+        # Génération des colonnes de pluie
+        rain_html = ""
+        for col in range(columns):
+            x_pos = (col / columns) * screen_width
+            delay = random.random() * 2
+            speed = 2 + random.random() * 3
+            chars = ''.join(random.choice(matrix_chars) for _ in range(20))
+            rain_html += f'''
+                <div class="rain-column" style="
+                    left: {x_pos}vw;
+                    animation-duration: {speed}s;
+                    animation-delay: -{delay}s;
+                ">{chars}</div>
+            '''
         
+        # Affichage de l'animation
+        binary = ''.join(random.choice("01") for _ in range(30))
         loading_container.markdown(f"""
             <div class="matrix-animation">
-                <div class="matrix-rain">{rain_html}</div>
-                <div class="binary-stream">{binary[:int(i/50*len(binary))]}▌</div>
+                <div class="matrix-characters">{rain_html}</div>
+                <div class="binary-stream">{binary[:int(i/40*len(binary))]}▌</div>
                 <div class="message-text">📊 Initialisation de la Matrice...</div>
             </div>
         """, unsafe_allow_html=True)
-        time.sleep(0.02)
+        time.sleep(0.05)
     
-    time.sleep(0.5)
-    
-    # Message final avec effet Matrix
+    # Message final
     loading_container.markdown(f"""
         <div class="matrix-animation">
-            <div class="matrix-rain">{rain_html}</div>
+            <div class="matrix-characters">{rain_html}</div>
             <div class="binary-stream">{binary}</div>
             <div class="message-text">🚀 Bienvenue dans la Matrice. Merci pour le temps que vous m'accordez.</div>
         </div>
     """, unsafe_allow_html=True)
-    time.sleep(1.5)
+    time.sleep(2)
     loading_container.empty()
 
 def main():
