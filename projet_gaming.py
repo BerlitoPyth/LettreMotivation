@@ -10,7 +10,7 @@ def display_project_concept():
         col1, col2 = st.columns([2,1])
         with col1:
             st.markdown("""
-            La hausse de popularité du gaming attire de nouveaux joueurs sur PC. En discutant avec des amis me demandant conseils pour acheter un PC pour jouer, j'ai identifié plusieurs problématiques majeures
+            La hausse de popularité du gaming attire de nouveaux joueurs sur PC. En discutant avec des amis me demandant conseils pour acheter un PC, j'ai identifié plusieurs problématiques majeures
             dans le marché du PC Gaming. En effet, certains ont acheté des machines bien trop puissantes pour leurs besoins et déboursé bien plus d'argent que nécessaire,
             tandis que d'autres ont été déçus par les performances de leur ordinateur. Il y a aussi ceux qui ne sont jamais passés à l'acte se disant que les prix étaient inabordables.
                         
