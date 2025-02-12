@@ -376,7 +376,10 @@ def main():
             """)
 
         st.markdown("---")
-
+        
+    elif selection == "🔧 Projet":
+        display_project_concept()
+        
     elif selection == "✨ Quiz":
         st.title("Découvrez si nous matchons !")
         display_quiz()
@@ -384,9 +387,6 @@ def main():
     elif selection == "📈 Parcours":
         st.title("Mon Parcours")
 
-        
-    elif selection == "🔧 Projets":
-        display_project_concept()
 
     elif selection == "✉️ Motivation":
         st.title("Ma Motivation")
