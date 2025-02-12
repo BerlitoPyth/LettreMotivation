@@ -410,7 +410,7 @@ def main():
         """)
 
     elif selection == "🔧 Projets":
-        st.title("Mon Projet innovant")
+        display_project_concept()
 
     elif selection == "✉️ Motivation":
         st.title("Ma Motivation")
