@@ -347,32 +347,6 @@ def main():
     elif selection == "👤 Présentation":
         display_presentation()
 
-        col1, col2 = st.columns(2)
-        with col1:
-            st.info("""
-            ### 🎯 A propos de moi 
-
-            Un professionnel en reconversion, avec un parcours peu commun :
-            - Terminale STI2D
-            - Première expérience de code à l'École 42
-            - Plongeur Scaphandrier Travaux Publics
-            - Intérêt pour l'informatique et les mathématiques (LA Mathématique ;) )
-            - Entrepreneur en herbe dans le domaine du gaming
-            - Formations certifiantes Python
-            - DAEU B
-            """)
-        with col2:
-            st.success("""
-            ### 🚀 Mon Projet
-
-            Intégrer le BUT Science des Données pour :
-            - Me préparer à un Master ou une école d'ingénieur
-            - Évoluer professionnellement dans un domaine innovant
-            - Apprendre à utiliser la Data pour concrétiser des projets
-            - Combiner mathématiques et programmation
-            - Relever de nouveaux défis stimulants
-            """)
-
         st.markdown("---")
         
     elif selection == "🔧 Projet":
