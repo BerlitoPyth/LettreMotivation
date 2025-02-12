@@ -52,7 +52,7 @@ def display_project_concept():
             st.info("Démo vidéo non disponible")
             print(f"Erreur: {e}")
 
-    # Solution 2: Configurations optimisées
+    # Solution 2: Configurations Optimisées
     st.subheader("⚡ Configurations Optimisées")
     col1, col2 = st.columns([2,1])
     with col1:
@@ -66,19 +66,31 @@ def display_project_concept():
         """)
     with col2:
         try:
-            image = Image.open(".assets/configs.jpg")
-            st.image(image, caption="Exemples de configurations")
-        except:
-            st.info("Image non disponible")
+            video_file = open(".assets/demo_configs.mp4", "rb")
+            video_bytes = video_file.read()
+            st.video(video_bytes, start_time=0)
+        except Exception as e:
+            st.info("Démo vidéo non disponible")
+            print(f"Erreur: {e}")
 
-    # Solution 3: Transparence totale
+    # Solution 3: Transparence Totale
     st.subheader("📊 Transparence Totale")
-    st.markdown("""
-    - Documentation détaillée des performances
-    - Graphiques de performances
-    - Vidéos des performances en jeu
-    - Tests en conditions réelles
-    """)
+    col1, col2 = st.columns([1,2])
+    with col1:
+        st.markdown("""
+        - Documentation détaillée des performances
+        - Graphiques de performances
+        - Vidéos des performances en jeu
+        - Tests en conditions réelles
+        """)
+    with col2:
+        try:
+            video_file = open(".assets/demo_performances.mp4", "rb")
+            video_bytes = video_file.read()
+            st.video(video_bytes, start_time=0)
+        except Exception as e:
+            st.info("Démo vidéo non disponible")
+            print(f"Erreur: {e}")
     
     # Démo du site
     st.header("🌐 Découvrir le Site")
@@ -86,7 +98,7 @@ def display_project_concept():
     with col2:
         st.markdown("""
         <div style='text-align: center;'>
-            <a href='https://votre-site.com' target='_blank'>
+            <a href='https://gamingforall.odoo.com/' target='_blank'>
                 <button style='
                     background-color: #FF4B4B;
                     color: white;
@@ -106,9 +118,9 @@ def display_project_concept():
     st.header("📈 Impact et Résultats")
     col1, col2 = st.columns(2)
     with col1:
-        st.metric(label="Satisfaction Client", value="95%", delta="+15%")
+        st.metric(label="Performances comparées aux PC de grandes enseignes en moyenne", value="+20%", delta="20 FPS")
     with col2:
-        st.metric(label="Économie Moyenne", value="200€", delta="par configuration")
+        st.metric(label="Économie Moyenne", value="210€", delta="par configuration")
 
 if __name__ == "__main__":
     st.set_page_config(page_title="Projet PC Gaming", layout="wide")
