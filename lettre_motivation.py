@@ -185,7 +185,7 @@ def main():
              "📈 Parcours",
              "✉️ Motivation"]
         )
-
+        st.session_state.selection = selection
         # Lettre de recommandation
         st.markdown("### 📄 Lettre de recommandation")
         try:
