@@ -38,8 +38,8 @@ def display_project_concept():
     with col1:
         st.markdown("""
         - Analyse détaillée des besoins
-        - Questions adaptatives
-        - Recommandations personnalisées
+        - Récuparation de la data
+        - Recommandation parfaitement adaptée
         - Interface intuitive
         """)
     with col2:
@@ -57,10 +57,12 @@ def display_project_concept():
     col1, col2 = st.columns([2,1])
     with col1:
         st.markdown("""
-        - 5 gammes adaptées aux différents profils
+        - 5 gammes adaptées aux différents besoins
         - Rapport qualité/prix optimisé
         - Performances garanties
-        - Tests réels sur les jeux populaires
+        - Compatibilité des composants
+        - Évolutivité des configurations
+        - Comparaison intuitive des gammes
         """)
     with col2:
         try:
@@ -73,8 +75,8 @@ def display_project_concept():
     st.subheader("📊 Transparence Totale")
     st.markdown("""
     - Documentation détaillée des performances
-    - Benchmarks personnalisés
-    - Comparatifs visuels
+    - Graphiques de performances
+    - Vidéos des performances en jeu
     - Tests en conditions réelles
     """)
     
