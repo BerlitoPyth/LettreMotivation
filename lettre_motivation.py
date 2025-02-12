@@ -410,48 +410,6 @@ def main():
         """)
 
     elif selection == "🔧 Projets":
-        st.title("Mes Projets")
-
-        st.info("""
-        ### 🖥️ Projet PC Gamer
-
-        Création d'un concept innovant de vente de PC gaming :
-        - **Analyse des Besoins :**
-            - Développement d'un questionnaire client détaillé
-            - Analyse des usages (gaming, streaming, montage)
-            - Étude des exigences techniques par jeu
-
-        - **Solution Innovante :**
-            - Création de 5 gammes (configurations) optimisées et adaptées aux besoins du client
-            - Tableaux de performances détaillés
-            - Tests réels sur différents jeux
-            - Documentation vidéo des performances
-
-        - **Objectif :**
-            - Démocratiser le PC gaming
-            - Permettre au client de ne payer que pour ce dont il a réellement besoin
-            - Conseils personnalisés basés sur les données
-            - Transparence sur les performances réelles
-        """)
-
-        st.success("""
-        ### 💻 École 42 - La Piscine
-
-        Une expérience formatrice :
-        - Un mois d'immersion totale en programmation
-        - Apprentissage de la méthode peer-learning
-        - Développement de la persévérance
-        """)
-
-        st.warning("""
-        ### 📊 Formations Python
-
-        Un parcours complet comprenant :
-        - Apprentissage des fondamentaux Python
-        - Structures de données
-        - Utilisation de Python pour accéder aux données Web
-        - Utilisation des bases de données avec Python
-        """)
 
     elif selection == "✉️ Motivation":
         st.title("Ma Motivation")
