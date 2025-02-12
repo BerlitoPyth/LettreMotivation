@@ -167,6 +167,19 @@ def main():
             border-radius: 5px;
             padding: 5px;
         }
+        /* Nouveaux styles pour la sidebar */
+        .css-1d391kg {
+            background-color: #f0f2f6;
+        }
+        .stRadio > div {
+            background-color: #f0f2f6;
+        }
+        [data-testid="stSidebar"] {
+            background-color: #f0f2f6;
+        }
+        [data-testid="stSidebarNav"] {
+            background-color: #f0f2f6;
+        }
         </style>
     """, unsafe_allow_html=True)
 
@@ -243,8 +256,12 @@ def main():
         # Première rangée avec le titre et la photo
         col1, col2 = st.columns([3, 1])
         with col1:
-            # Animation du titre
-            write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
+            # Ajouter une variable d'état pour l'effet machine à écrire
+            if 'title_written' not in st.session_state:
+                write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
+                st.session_state.title_written = True
+            else:
+                st.markdown("### De la profondeur des océans à la profondeur des données... 🌊➡️📊")
         
         with col2:
             try:
