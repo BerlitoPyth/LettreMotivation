@@ -10,7 +10,7 @@ def display_project_concept():
         col1, col2 = st.columns([2,1])
         with col1:
             st.markdown("""
-            En discutant avec des amis me demandant conseils pour acheter un PC pour jouer, j'ai identifié plusieurs problématiques majeures
+            La hausse de popularité du gaming attire de nouveaux joueurs sur PC. En discutant avec des amis me demandant conseils pour acheter un PC pour jouer, j'ai identifié plusieurs problématiques majeures
             dans le marché du PC Gaming. En effet, certains ont acheté des machines bien trop puissantes pour leurs besoins et déboursé bien plus d'argent que nécessaire,
             tandis que d'autres ont été déçus par les performances de leur ordinateur. Il y a aussi ceux qui ne sont jamais passés à l'acte se disant que les prix étaient inabordables.
                         
@@ -28,6 +28,37 @@ def display_project_concept():
                 st.image(image, caption="Concept PC Gaming")
             except:
                 st.info("Image non disponible")
+
+    st.header("🎯 Objectifs du Projet")
+    
+    col1, col2 = st.columns([1,1])
+    with col1:
+        st.markdown("""
+        ### 💫 Vision Globale
+        - **Démocratiser** le PC Gaming
+        - Rendre le gaming PC **accessible à tous**
+        - Créer une **expérience d'achat sereine**
+        - Offrir un **accompagnement personnalisé**
+        """)
+    
+    with col2:
+        st.markdown("""
+        ### 💰 Bénéfices Clients
+        - **Économies substantielles** sur les configurations
+        - **Transparence totale** sur les performances
+        - **Confiance** dans son achat
+        - **Satisfaction** garantie grâce aux recommandations sur mesure
+        """)
+    
+    st.markdown("""
+    <div style='background-color: rgba(70, 150, 236, 0.1); padding: 20px; border-radius: 10px; border-left: 5px solid #4696EC; margin: 20px 0;'>
+        <h3 style='color: #4696EC; margin: 0;'>Notre Mission 🚀</h3>
+        <p style='font-size: 18px; margin: 10px 0;'>
+            "Permettre à chacun d'accéder au gaming PC en toute confiance, 
+            sans compromis sur la qualité et avec la garantie du meilleur rapport qualité/prix"
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Solutions innovantes
     st.header("🚀 Solutions Innovantes")
