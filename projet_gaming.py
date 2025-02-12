@@ -44,10 +44,13 @@ def display_project_concept():
         """)
     with col2:
         try:
-            image = Image.open(".assets/questionnaire.jpg")
-            st.image(image, caption="Interface du questionnaire")
-        except:
-            st.info("Capture d'écran non disponible")
+            # Remplacer l'image par une vidéo
+            video_file = open(".assets/demo_questionnaire.mp4", "rb")
+            video_bytes = video_file.read()
+            st.video(video_bytes, start_time=0)
+        except Exception as e:
+            st.info("Démo vidéo non disponible")
+            print(f"Erreur: {e}")
 
     # Solution 2: Configurations optimisées
     st.subheader("⚡ Configurations Optimisées")
