@@ -211,22 +211,23 @@ Cette année, je prépare un DAEU B à distance avec l'objectif d'intégrer un B
 
 def add_floating_chat_to_app():
     """Main function to add chat functionality to Streamlit app"""
-    # Initialize or get chat state
+    # Initialize chat state
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    if "previous_page" not in st.session_state:
-        st.session_state.previous_page = None
+    if "current_page" not in st.session_state:
+        st.session_state.current_page = None
     if "waiting_for_response" not in st.session_state:
         st.session_state.waiting_for_response = False
 
-    # Get current page
+    # Get current page and check for page change
     current_page = st.session_state.get('selection', None)
-
-    # Check for page change and clear messages if needed
-    if current_page != st.session_state.previous_page:
+    
+    # Clear messages immediately if page changed
+    if current_page != st.session_state.current_page:
         st.session_state.messages = []
-        st.session_state.previous_page = current_page
         st.session_state.waiting_for_response = False
+        st.session_state.current_page = current_page
+        st.rerun()
 
     # Initialize OpenAI client
     client = init_chat_client()
@@ -236,9 +237,8 @@ def add_floating_chat_to_app():
     # Create chat interface
     create_chat_interface()
 
-    # Chat container
+    # Chat container with message display and input
     chat_container = st.container()
-    
     with chat_container:
         # Display existing messages
         for message in st.session_state.messages:
@@ -249,38 +249,40 @@ def add_floating_chat_to_app():
                 </div>
             """, unsafe_allow_html=True)
 
-        # Handle chat input
+        # Chat input handler
         if prompt := st.chat_input("Posez votre question...", key="chat_input"):
-            if not st.session_state.waiting_for_response:
-                st.session_state.waiting_for_response = True
-                response = generate_response(client, prompt, st.session_state.messages)
-                st.session_state.messages.append({"role": "user", "content": prompt})
-                st.session_state.messages.append({"role": "assistant", "content": response})
-                st.session_state.waiting_for_response = False
-                st.rerun()
+            response = generate_response(client, prompt, st.session_state.messages)
+            st.session_state.messages.extend([
+                {"role": "user", "content": prompt},
+                {"role": "assistant", "content": response}
+            ])
+            st.rerun()
 
-        # Suggestion buttons in columns
+        # Quick access buttons
         col1, col2, col3 = st.columns(3)
-        
-        # Helper function for button handling
-        def handle_button_click(question):
-            if not st.session_state.waiting_for_response:
-                st.session_state.waiting_for_response = True
-                response = generate_response(client, question, st.session_state.messages)
-                st.session_state.messages.append({"role": "user", "content": question})
-                st.session_state.messages.append({"role": "assistant", "content": response})
-                st.session_state.waiting_for_response = False
-                st.rerun()
-
-        # Button columns
         with col1:
             if st.button("Pourquoi le BUT SD ?", key="but_sd_button"):
-                handle_button_click("Pourquoi le BUT SD ?")
-        
+                response = generate_response(client, "Pourquoi le BUT SD ?", st.session_state.messages)
+                st.session_state.messages.extend([
+                    {"role": "user", "content": "Pourquoi le BUT SD ?"},
+                    {"role": "assistant", "content": response}
+                ])
+                st.rerun()
+
         with col2:
             if st.button("Ton parcours ?", key="parcours_button"):
-                handle_button_click("Quel est ton parcours ?")
+                response = generate_response(client, "Quel est ton parcours ?", st.session_state.messages)
+                st.session_state.messages.extend([
+                    {"role": "user", "content": "Quel est ton parcours ?"},
+                    {"role": "assistant", "content": response}
+                ])
+                st.rerun()
         
         with col3:
             if st.button("Tes motivations ?", key="motivations_button"):
-                handle_button_click("Quelles sont tes motivations ?")
+                response = generate_response(client, "Quelles sont tes motivations ?", st.session_state.messages)
+                st.session_state.messages.extend([
+                    {"role": "user", "content": "Quelles sont tes motivations ?"},
+                    {"role": "assistant", "content": response}
+                ])
+                st.rerun()
