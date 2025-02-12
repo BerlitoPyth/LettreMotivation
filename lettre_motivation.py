@@ -23,9 +23,8 @@ def display_data_animation():
     st.markdown("""
         <style>
         @keyframes matrix-rain {
-            0% { transform: translateY(-100%); opacity: 1; }
-            85% { opacity: 1; }
-            100% { transform: translateY(1000%); opacity: 0; }
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
         }
         
         @keyframes glow {
@@ -34,108 +33,93 @@ def display_data_animation():
             100% { text-shadow: 0 0 5px #0f0; }
         }
         
-        .matrix-animation {
-            font-family: 'Courier New', monospace;
-            background-color: black;
-            color: #0f0;
+        .matrix-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
+            background: black;
             z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             overflow: hidden;
-        }
-        
-        .binary-stream {
-            font-size: 20px;
-            letter-spacing: 4px;
-            animation: glow 2s infinite;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-            text-shadow: 0 0 8px #0f0;
-        }
-        
-        .message-text {
-            font-size: 28px;
-            margin: 20px 0;
-            color: #fff;
-            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
-            animation: glow 1.5s infinite;
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-        }
-        
-        .matrix-characters {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            font-size: 20px;
-            color: #0f0;
         }
         
         .rain-column {
             position: absolute;
-            top: -100%;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            line-height: 1;
             animation: matrix-rain linear infinite;
-            width: 20px;
+            text-shadow: 0 0 5px #0f0;
+            white-space: nowrap;
+            transform-origin: top;
+        }
+        
+        .message-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
             text-align: center;
-            text-shadow: 0 0 8px #0f0;
+            width: 100%;
+        }
+        
+        .message-text {
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            color: #fff;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            animation: glow 2s infinite;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # Caractères Matrix plus variés
-    matrix_chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    
-    # Création des colonnes de pluie
+    def create_rain_column(x, delay):
+        chars = ''.join(random.choice("01アイウエオカキクケコサシスセソタチツテト") for _ in range(30))
+        speed = random.uniform(1, 3)
+        return f"""
+            <div class="rain-column" style="
+                left: {x}vw;
+                animation-duration: {speed}s;
+                animation-delay: -{delay}s;
+            ">{chars}</div>
+        """
+
+    # Génération des colonnes de pluie
     columns = 50
-    screen_width = 100  # Largeur virtuelle de l'écran
-    
-    for i in range(40):  # Réduction du nombre d'itérations pour plus de fluidité
-        # Génération des colonnes de pluie
-        rain_html = ""
-        for col in range(columns):
-            x_pos = (col / columns) * screen_width
-            delay = random.random() * 2
-            speed = 2 + random.random() * 3
-            chars = ''.join(random.choice(matrix_chars) for _ in range(20))
-            rain_html += f'''
-                <div class="rain-column" style="
-                    left: {x_pos}vw;
-                    animation-duration: {speed}s;
-                    animation-delay: -{delay}s;
-                ">{chars}</div>
-            '''
-        
-        # Affichage de l'animation
-        binary = ''.join(random.choice("01") for _ in range(30))
+    rain_html = ''.join(
+        create_rain_column(
+            x=(i/columns)*100,
+            delay=random.random()*2
+        )
+        for i in range(columns)
+    )
+
+    # Animation avec message
+    for i in range(30):
         loading_container.markdown(f"""
-            <div class="matrix-animation">
-                <div class="matrix-characters">{rain_html}</div>
-                <div class="binary-stream">{binary[:int(i/40*len(binary))]}▌</div>
-                <div class="message-text">📊 Initialisation de la Matrice...</div>
+            <div class="matrix-container">
+                {rain_html}
+                <div class="message-container">
+                    <div class="message-text">📊 Initialisation de la Matrice...</div>
+                </div>
             </div>
         """, unsafe_allow_html=True)
-        time.sleep(0.05)
-    
+        time.sleep(0.1)
+
     # Message final
     loading_container.markdown(f"""
-        <div class="matrix-animation">
-            <div class="matrix-characters">{rain_html}</div>
-            <div class="binary-stream">{binary}</div>
-            <div class="message-text">🚀 Bienvenue dans la Matrice. Merci pour le temps que vous m'accordez.</div>
+        <div class="matrix-container">
+            {rain_html}
+            <div class="message-container">
+                <div class="message-text">🚀 Bienvenue et merci pour le temps que vous m'accordez !</div>
+            </div>
         </div>
     """, unsafe_allow_html=True)
     time.sleep(2)
