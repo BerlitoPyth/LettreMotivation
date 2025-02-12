@@ -198,6 +198,17 @@ def display_presentation():
                         "Résolution des problèmes",
                         "Rigueur et précision dans le travail"
                     ]
+                },
+                {
+                    icon: "🚀",
+                    title: "Ambition",
+                    items: [
+                        "Me préparer à un Master ou une école d'ingénieur",
+                        "Évoluer professionnellement dans un domaine innovant",
+                        "Apprendre à utiliser la Data pour concrétiser des projets",
+                        "Combiner mathématiques et programmation",
+                        "Relever de nouveaux défis stimulants"
+                    ]
                 }
             ];
 
