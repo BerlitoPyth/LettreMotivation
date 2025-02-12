@@ -34,8 +34,20 @@ def display_presentation():
 
             .section-grid {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 1.5rem;
+            }
+
+            @media (max-width: 1200px) {
+                .section-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .section-grid {
+                    grid-template-columns: 1fr;
+                }
             }
 
             .section {
@@ -130,6 +142,26 @@ def display_presentation():
         <div id="profile-root"></div>
         <script type="text/babel">
             const sections = [
+                {
+                    icon: "👤",
+                    title: "À propos de moi",
+                    items: [
+                        "25 ans, originaire du Sud de la France (Perpignan)",
+                        "Passionné de technologie et d'innovation",
+                        "Amateur de musique classique, particulièrement le piano",
+                        "Sportif et ancien champion de pentathlon"
+                    ]
+                },
+                {
+                    icon: "🌟",
+                    title: "Centres d'intérêt",
+                    items: [
+                        "Exploration de Paris et de sa scène culturelle",
+                        "Concerts de musique classique",
+                        "Veille technologique",
+                        "Sport et bien-être"
+                    ]
+                },
                 {
                     icon: "📚",
                     title: "Formation en cours",
@@ -226,7 +258,8 @@ def display_presentation():
         </style>
     """, unsafe_allow_html=True)
     
-    components.html(presentation_html, height=700, scrolling=False)
+    # Modifiez la dernière ligne de la fonction display_presentation
+    components.html(presentation_html, height=900, scrolling=False)
 
 if __name__ == "__main__":
     st.set_page_config(layout="wide")
