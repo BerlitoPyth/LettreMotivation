@@ -130,21 +130,13 @@ def main():
         layout="wide"
     )
 
-    # Créer un conteneur pour le toggle theme
-    theme_container = st.empty()
-
     # Ajouter l'animation au début
     if 'animation_shown' not in st.session_state:
-        st.session_state.animation_shown = False
         display_data_animation()
         st.session_state.animation_shown = True
-        # Afficher le toggle theme seulement après l'animation
-        with theme_container:
-            toggle_theme()
-    else:
-        # Si l'animation a déjà été montrée, afficher directement le toggle theme
-        with theme_container:
-            toggle_theme()
+    
+    # Afficher le toggle theme après l'animation ou directement si déjà montrée
+    toggle_theme()
 
     # Ajouter le chat après l'animation
     add_floating_chat_to_app()
@@ -339,7 +331,9 @@ def main():
         Adrien BERLIAT
 
         PS : Je tiens à préciser que je n’ai pas créé cette application pour mettre en avant mes compétences en programmation, j’aurais été
-        bien incapable de la réaliser seul. Le véritable objectif était de me démarquer en illustrant l’investissement que je mets dans mes projets
+        bien incapable de la réaliser sans l'aide d'ia génératives. Pour autant je considère ces dernières comme un outil dont il serait dommage de ne pas se servir
+        plutôt que comme une façon de "tricher".
+        Le véritable objectif était de me démarquer en illustrant l’investissement que je mets dans mes projets
         et mon désir de rejoindre votre établissement. J’ai toujours pensé qu’il est préférable d’agir que de parler. J’espère que vous aurez pris le
         temps de me lire jusqu’ici et que cela vous aura convaincu car j’y ai consacré beaucoup de temps et d’efforts. Merci :)
                     
