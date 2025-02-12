@@ -82,6 +82,7 @@ def display_project_concept():
         - Graphiques de performances
         - Vidéos des performances en jeu
         - Tests en conditions réelles
+        - Explications techniques claires
         """)
     with col2:
         try:
