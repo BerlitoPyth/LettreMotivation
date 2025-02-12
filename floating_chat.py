@@ -147,6 +147,8 @@ Cette année, je prépare un DAEU B à distance avec l'objectif d'intégrer un B
     - Tu as une excellente capacité de communication
     - Tu es respectueux et un bon coéquipier
     - Motivation à toute épreuve
+    - J'ai arrêté la plongée professionnelle car je voulais me rediriger vers cette passio qu'est la data science mais aussi car je ne pouvais avoir du situation stable que ça soit
+      financièrement et socialement dût au fait que j'étais beaucoup en déplacement.
 
     Projet entrepreunarial :
 
@@ -213,16 +215,6 @@ def add_floating_chat_to_app():
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
-    # Clear messages when page changes
-    if "previous_page" not in st.session_state:
-        st.session_state.previous_page = None
-    
-    # Get current page from selection
-    current_page = st.session_state.get('selection', None)
-    if current_page != st.session_state.previous_page:
-        st.session_state.messages = []
-        st.session_state.previous_page = current_page
-    
     # Initialize OpenAI client
     client = init_chat_client()
     if not client:
@@ -235,36 +227,44 @@ def add_floating_chat_to_app():
     with st.container():
         # Display chat history
         for message in st.session_state.messages:
-            div_class = "bot-message"  # Only show bot messages
-            if message["role"] == "assistant":
-                st.markdown(f"""
-                    <div class="{div_class}">
-                        {message["content"]}
-                    </div>
-                """, unsafe_allow_html=True)
+            div_class = "user-message" if message["role"] == "user" else "bot-message"
+            st.markdown(f"""
+                <div class="{div_class}">
+                    {message["content"]}
+                </div>
+            """, unsafe_allow_html=True)
         
         # Chat input
         if prompt := st.chat_input("Posez votre question..."):
+            # Add user message to state
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            
             # Generate response
             response = generate_response(client, prompt, st.session_state.messages)
-            # Add only assistant response to state
+            
+            # Add assistant response to state
             st.session_state.messages.append({"role": "assistant", "content": response})
+            
+            # Rerun to update chat display
             st.rerun()
 
-        # Keep suggestion buttons
+        # Suggestion buttons
         col1, col2, col3 = st.columns(3)
         with col1:
             if st.button("Pourquoi le BUT SD ?"):
+                st.session_state.messages.append({"role": "user", "content": "Pourquoi le BUT SD ?"})
                 response = generate_response(client, "Pourquoi le BUT SD ?", st.session_state.messages)
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 st.rerun()
         with col2:
             if st.button("Ton parcours ?"):
+                st.session_state.messages.append({"role": "user", "content": "Quel est ton parcours ?"})
                 response = generate_response(client, "Quel est ton parcours ?", st.session_state.messages)
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 st.rerun()
         with col3:
             if st.button("Tes motivations ?"):
+                st.session_state.messages.append({"role": "user", "content": "Quelles sont tes motivations ?"})
                 response = generate_response(client, "Quelles sont tes motivations ?", st.session_state.messages)
                 st.session_state.messages.append({"role": "assistant", "content": response})
                 st.rerun()
