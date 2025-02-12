@@ -167,10 +167,6 @@ def main():
             border-radius: 5px;
             padding: 5px;
         }
-        /* Style minimal pour la sidebar */
-        [data-testid="stSidebar"] {
-            background-color: #f0f2f6;
-        }
         </style>
     """, unsafe_allow_html=True)
 
@@ -247,12 +243,8 @@ def main():
         # Première rangée avec le titre et la photo
         col1, col2 = st.columns([3, 1])
         with col1:
-            # Ajouter une variable d'état pour l'effet machine à écrire
-            if 'title_written' not in st.session_state:
-                write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
-                st.session_state.title_written = True
-            else:
-                st.markdown("### De la profondeur des océans à la profondeur des données... 🌊➡️📊")
+            # Animation du titre
+            write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
         
         with col2:
             try:
@@ -396,37 +388,6 @@ def main():
     # Footer
     st.markdown("---")
     st.markdown("*Application interactive créé pour accompagner ma candidature au BUT Science des Données*")
-
-    # Dans la section des styles personnalisés, modifiez la partie des styles de la sidebar
-    st.markdown("""
-        <style>
-        /* ...existing styles... */
-
-        /* Styles pour la sidebar */
-        [data-testid="stSidebar"] {
-            background-color: #f0f2f6;
-        }
-        [data-testid="stSidebarNav"] {
-            background-color: #f0f2f6;
-        }
-        /* Styles pour le contenu de la sidebar */
-        .css-1d391kg, 
-        .stRadio > div,
-        [data-testid="stMarkdownContainer"],
-        .stInfo,
-        .stSuccess {
-            background-color: #f0f2f6 !important;
-        }
-        /* Style pour le texte dans la sidebar */
-        [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
-            color: #262730;
-        }
-        /* Style pour les conteneurs dans la sidebar */
-        [data-testid="stSidebar"] .element-container {
-            background-color: #f0f2f6;
-        }
-        </style>
-    """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
