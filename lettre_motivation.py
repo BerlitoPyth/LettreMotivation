@@ -167,17 +167,8 @@ def main():
             border-radius: 5px;
             padding: 5px;
         }
-        /* Nouveaux styles pour la sidebar */
-        .css-1d391kg {
-            background-color: #f0f2f6;
-        }
-        .stRadio > div {
-            background-color: #f0f2f6;
-        }
+        /* Style minimal pour la sidebar */
         [data-testid="stSidebar"] {
-            background-color: #f0f2f6;
-        }
-        [data-testid="stSidebarNav"] {
             background-color: #f0f2f6;
         }
         </style>
