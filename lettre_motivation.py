@@ -9,24 +9,17 @@ import random
 from projet_gaming import display_project_concept
 
 # Remplacer la fonction scroll_to_section par :
-def scroll_to_section():
-    js = '''
+def scroll_to_section(title_id):
+    js = f'''
     <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        });
-
-        setTimeout(() => {
-            const title = document.querySelector('.section-title');
-            if (title) {
-                title.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                observer.observe(title);
-            }
-        }, 100);
+        function scrollToTitle() {{
+            const title = document.getElementById("{title_id}");
+            if (title) {{
+                title.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+            }}
+        }}
+        // Exécuter après un court délai pour s'assurer que le DOM est chargé
+        setTimeout(scrollToTitle, 100);
     </script>
     '''
     st.markdown(js, unsafe_allow_html=True)
@@ -221,6 +214,12 @@ def main():
             align-items: center;
             gap: 8px;
         }
+        .custom-title {
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            padding-top: 2rem;
+            scroll-margin-top: 60px;
+        }
         </style>
     """, unsafe_allow_html=True)
 
@@ -371,8 +370,7 @@ def main():
         de manière autonome et à maintenir un haut niveau d'exigence dans mes études.
         
         Par ailleurs, en parallèle de mes révisions, je me suis formé à Python en passant des formations certifiantes sur Coursera. 
-        J’ai aussi créé un concept innovant (voir section "Projet") de vente de PC gaming basé sur l'analyse détaillée des besoins clients à travers un questionnaire
-        sur mesure et des performances réelles des machines sur les différents jeux. Cette expérience a renforcé ma conviction que l'analyse de données
+        J’ai aussi créé un concept innovant (voir section "Projet") dans le domaine du gaming. Cette expérience a renforcé ma conviction que l'analyse de données
         est un outil puissant et essentiel pour créer des solutions pertinentes.
         
         Lors des journées portes ouvertes de l’IUT, j’ai beaucoup apprécié l’ambiance générale ainsi que les échanges que j’ai pu avoir avec
@@ -386,19 +384,40 @@ def main():
         Je vous prie d'agréer, Madame, Monsieur, l'expression de mes sincères salutations.
         
         Adrien BERLIAT
-
-        <div class="warning-box">
-            <div class="warning-title">
-                ⚠️ Note importante
-            </div>
-            Je tiens à préciser que je n'ai pas créé cette application pour mettre en avant mes compétences en programmation, j'aurais été
-            bien incapable de la réaliser sans l'aide d'ia génératives. Pour autant je considère ces dernières comme un outil dont il serait dommage de ne pas se servir
-            plutôt que comme une façon de "tricher".<br><br>
-            Le véritable objectif était de me démarquer en illustrant l'investissement que je mets dans mes projets
-            et mon désir de rejoindre votre établissement. J'ai toujours pensé qu'il est préférable d'agir que de parler. J'espère que vous aurez pris le
-            temps de me lire jusqu'ici et que cela vous aura convaincu car j'y ai consacré beaucoup de temps et d'efforts. Merci 😊
-        </div>
         """)
+
+        # Ajouter une boîte d'avertissement séparée
+        st.markdown("""
+            <div style="
+                background-color: #fee2e2;
+                border: 1px solid #ef4444;
+                border-radius: 8px;
+                padding: 20px;
+                margin: 20px 0;
+                color: #991b1b;
+            ">
+                <div style="
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    margin-bottom: 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                ">
+                    ⚠️ Note importante
+                </div>
+                <p>
+                Je tiens à préciser que je n'ai pas créé cette application pour mettre en avant mes compétences en programmation, j'aurais été
+                bien incapable de la réaliser sans l'aide d'ia génératives. Pour autant je considère ces dernières comme un outil dont il serait dommage de ne pas se servir
+                plutôt que comme une façon de "tricher".
+                </p>
+                <p style="margin-top: 12px;">
+                Le véritable objectif était de me démarquer en illustrant l'investissement que je mets dans mes projets
+                et mon désir de rejoindre votre établissement. J'ai toujours pensé qu'il est préférable d'agir que de parler. J'espère que vous aurez pris le
+                temps de me lire jusqu'ici et que cela vous aura convaincu car j'y ai consacré beaucoup de temps et d'efforts. Merci 😊
+                </p>
+            </div>
+        """, unsafe_allow_html=True)
 
     elif selection == "👤 Présentation":
         display_presentation()
@@ -409,18 +428,27 @@ def main():
         display_project_concept()
         
     elif selection == "✨ Quiz":
-        st.markdown('<h1 class="section-title">Découvrez si nous matchons ! ❤️</h1>', unsafe_allow_html=True)
-        scroll_to_section()
+        title_html = """
+            <div style="
+                margin-top: 20px;
+                margin-bottom: 30px;
+                scroll-margin-top: 60px;
+            ">
+                <h1 id="quiz-title">Découvrez si nous matchons ! ❤️</h1>
+            </div>
+        """
+        st.markdown(title_html, unsafe_allow_html=True)
+        scroll_to_section("quiz-title")
         display_quiz()
         
     elif selection == "📈 Parcours":
-        st.markdown('<h1 class="section-title">Mon Parcours</h1>', unsafe_allow_html=True)
-        scroll_to_section()
+        st.markdown('<h1 id="parcours-title" class="custom-title">Mon Parcours</h1>', unsafe_allow_html=True)
+        scroll_to_section("parcours-title")
 
 
     elif selection == "✉️ Motivation":
-        st.markdown('<h1 class="section-title">Ma Motivation</h1>', unsafe_allow_html=True)
-        scroll_to_section()
+        st.markdown('<h1 id="motivation-title" class="custom-title">Ma Motivation</h1>', unsafe_allow_html=True)
+        scroll_to_section("motivation-title")
 
     # Footer
     st.markdown("---")
