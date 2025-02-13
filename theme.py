@@ -27,8 +27,10 @@ def toggle_theme():
         }
     }
     
-    # Bouton de bascule avec icône et texte
-    if st.button("🌙 / ☀️ Changer de thème"):
+    # Bouton compact avec juste l'icône
+    if st.button("🌙" if st.session_state.dark_mode else "☀️", 
+                key=f"theme_toggle_btn_{id(st.session_state)}",
+                help="Changer le thème"):
         st.session_state.dark_mode = not st.session_state.dark_mode
         st.rerun()
     
@@ -229,6 +231,26 @@ def toggle_theme():
         margin: 0 !important;
         padding: 0 !important;
         display: block !important;
+    }}
+
+    /* Style pour le bouton de thème */
+    div[data-testid="column"]:has(button:contains("🌙")), 
+    div[data-testid="column"]:has(button:contains("☀️")) {{
+        padding: 0 !important;
+        margin-top: -1rem !important;
+    }}
+    
+    div[data-testid="column"]:has(button:contains("🌙")) button,
+    div[data-testid="column"]:has(button:contains("☀️")) button {{
+        padding: 0 !important;
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 1.2em !important;
+        margin-left: auto !important;
     }}
     </style>
     """
