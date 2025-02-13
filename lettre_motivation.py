@@ -153,7 +153,6 @@ def main():
         st.session_state.animation_shown = True
     
     # Afficher le toggle theme après l'animation ou directement si déjà montrée
-    toggle_theme()
 
     # Ajouter le chat après l'animation
     add_floating_chat_to_app()
@@ -226,10 +225,10 @@ def main():
 
     # Sidebar
     with st.sidebar:
-        # Ajout du bouton de thème en haut de la sidebar
+        # Bouton de thème compact en haut de la sidebar
         col1, col2 = st.columns([4, 1])
         with col2:
-            toggle_theme()  # Déplacé ici
+            toggle_theme()
         
         st.title("🎯 Navigation")
         st.markdown("---")
