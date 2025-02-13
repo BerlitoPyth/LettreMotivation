@@ -26,21 +26,8 @@ def toggle_theme():
         }
     }
     
-    # Modifier la section du bouton pour y inclure le texte "Thème"
-    st.markdown("""
-        <div style="
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 1rem;
-            justify-content: flex-end;
-        ">
-            <span style="font-size: 0.9em;">Thème</span>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    # Bouton compact avec juste l'icône
-    if st.button("🌙" if st.session_state.dark_mode else "☀️", 
+    # Modifier le bouton pour inclure le texte "Thème"
+    if st.button(f"Thème {'🌙' if st.session_state.dark_mode else '☀️'}", 
                 key="unique_theme_toggle_btn",
                 help="Changer le thème"):
         st.session_state.dark_mode = not st.session_state.dark_mode
@@ -246,23 +233,16 @@ def toggle_theme():
     }}
 
     /* Style pour le bouton de thème */
-    div[data-testid="column"]:has(button:contains("🌙")), 
-    div[data-testid="column"]:has(button:contains("☀️")) {{
-        padding: 0 !important;
-        margin-top: -1rem !important;
-    }}
-    
-    div[data-testid="column"]:has(button:contains("🌙")) button,
-    div[data-testid="column"]:has(button:contains("☀️")) button {{
-        padding: 0 !important;
-        width: 40px !important;
+    div[data-testid="column"]:has(button:contains("Thème")) button {{
+        padding: 0 1rem !important;
+        width: auto !important;
         height: 40px !important;
-        border-radius: 50% !important;
+        border-radius: 20px !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: center !important;
-        font-size: 1.2em !important;
-        margin-left: auto !important;
+        justify-content: space-between !important;
+        font-size: 0.9em !important;
+        gap: 8px !important;
     }}
     </style>
     """
