@@ -225,10 +225,20 @@ def main():
 
     # Sidebar
     with st.sidebar:
+        st.markdown("""
+            <style>
+            [data-testid="stSidebarNav"] {
+                padding-top: 0rem;
+                margin-top: -1rem;
+            }
+            </style>
+            """, unsafe_allow_html=True)
+            
         # Bouton de thème en petit en haut
-        col1, col2 = st.columns([4, 1])
+        col1, col2 = st.columns([5, 1])
         with col2:
-            toggle_theme()  # Un seul appel au toggle_theme
+            toggle_theme()
+        
         st.title("🎯 Navigation")
         st.markdown("---")
 
