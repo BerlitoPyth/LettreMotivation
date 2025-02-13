@@ -190,8 +190,8 @@ def display_presentation():
                     items: [
                         "Capacité d'adaptation",
                         "Résolution des problèmes",
-                        "Rigueur et précision dans le travail"
-                        "Détermination et persévérance"
+                        "Rigueur et précision dans le travail",
+                        "Détermination et persévérance",
                         "Esprit d'équipe"
                         
                     ]
