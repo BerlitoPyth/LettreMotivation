@@ -154,9 +154,6 @@ def main():
     
     # Afficher le toggle theme après l'animation ou directement si déjà montrée
 
-    # Ajouter le chat après l'animation
-    add_floating_chat_to_app()
-
     # Style personnalisé
     st.markdown("""
         <style>
@@ -341,6 +338,9 @@ def main():
                 print(f"Erreur: {e}")
         
         st.markdown("---")
+        
+        # Ajouter le chat ici, après le titre et la photo
+        add_floating_chat_to_app()
         
         # Points clés
         col1, col2 = st.columns(2)
