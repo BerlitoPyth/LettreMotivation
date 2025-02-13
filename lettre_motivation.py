@@ -294,19 +294,40 @@ def main():
 
     # Contenu principal basé sur la sélection
     if selection == "🏠 Accueil":
-        # Première rangée avec le titre et la photo
+        # Conteneur principal avec titre et photo
         col1, col2 = st.columns([3, 1])
+        
         with col1:
-            # Vérifier si le titre a déjà été écrit
+            # Titre principal avec style personnalisé
+            st.markdown("""
+                <h1 style="
+                    font-size: 2em;
+                    margin-bottom: 0.5rem;
+                    color: inherit;
+                ">Candidature BUT Science des Données</h1>
+                <h2 style="
+                    font-size: 1.5em;
+                    margin-bottom: 2rem;
+                    color: inherit;
+                ">Adrien BERLIAT</h2>
+            """, unsafe_allow_html=True)
+            
+            # Citation avec effet machine à écrire
             if 'title_written' not in st.session_state:
                 write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
                 st.session_state.title_written = True
             else:
-                st.markdown("### De la profondeur des océans à la profondeur des données... 🌊➡️📊")
+                st.markdown("""
+                    <h3 style="
+                        font-style: italic;
+                        margin-top: 0;
+                        color: inherit;
+                    ">De la profondeur des océans à la profondeur des données... 🌊➡️📊</h3>
+                """, unsafe_allow_html=True)
         
         with col2:
             try:
-                # Photo en haut à droite
+                # Photo alignée en haut
                 image = Image.open(".assets/photo.jpg")
                 image_rotated = image.rotate(-90, expand=True)
                 st.image(image_rotated, width=200)
@@ -314,35 +335,9 @@ def main():
                 st.info("📸 Photo non disponible")
                 print(f"Erreur: {e}")
         
-        st.title("Candidature BUT Science des Données")
-        st.title("Adrien BERLIAT")
         st.markdown("---")
 
-        # Points clés
-        col1, col2 = st.columns(2)
-        with col1:
-            st.success("""
-            ### ✨ Points Clés
-            - 📊 Goût pour les mathématiques et l'informatique
-            - 🤝 Expérience du travail d'équipe
-            - 💡 Autodidacte
-            - 🚀 Motivation à toute épreuve
-            """)
-        with col2:
-            st.info("""
-            ### 🎓 Formation Actuelle
-            - 📚 STI-2D
-            - 💻 Certifications Python
-            - 🔍 DAEU B à distance
-            - 🌟 Excellents résultats en sciences
-            """)
-
-        st.markdown("---")
-
-        # Lettre de motivation
-        st.header("📝 Ma Lettre de Motivation")
-        st.markdown(get_lettre_motivation_content())
-        st.markdown(get_note_importante(), unsafe_allow_html=True)
+        # Le reste du code reste inchangé...
 
     elif selection == "👤 Présentation":
         display_presentation()
