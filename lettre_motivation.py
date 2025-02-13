@@ -220,6 +220,25 @@ def main():
             padding-top: 2rem;
             scroll-margin-top: 60px;
         }
+        /* Masquer les conteneurs vides générés automatiquement */
+        .element-container:has(.stRadio) > div:first-child {
+            display: none;
+        }
+
+        /* Supprimer l'espacement superflu */
+        .css-1544g2n {
+            padding: 0 !important;
+        }
+
+        .stRadio [role="radiogroup"] {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        /* Ajuster l'espacement du conteneur de navigation */
+        .block-container {
+            padding-top: 0 !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
