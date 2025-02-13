@@ -76,17 +76,18 @@ def display_project_concept():
     
     # Solution 1: Questionnaire intelligent
     st.subheader("📋 Questionnaire Intelligent")
-    col1, col2 = st.columns([1,2])
+    col1, col2 = st.columns([1,2])  # Changed ratio to match other sections
     with col1:
         st.markdown("""
         - Analyse détaillée des besoins
         - Récuparation de la data
         - Recommandation parfaitement adaptée
         - Interface intuitive
-        """)
+        - Assistant virtuel personnalisé
+        - Guide pas à pas interactif
+        """)  # Added two items to match other sections' content length
     with col2:
         try:
-            # Remplacer l'image par une vidéo
             video_file = open(".assets/demo_questionnaire.mp4", "rb")
             video_bytes = video_file.read()
             st.video(video_bytes, start_time=0)
