@@ -236,6 +236,37 @@ def main():
         .main > div:first-child h1 {
             margin-top: 2rem !important;
         }
+
+        /* Ajuster l'espacement de la sidebar */
+        .st-emotion-cache-1cypcdb {
+            padding-top: 0 !important;
+        }
+
+        /* Réduire l'espace au-dessus du titre Navigation */
+        .sidebar .block-container {
+            padding-top: 0.5rem !important;
+        }
+
+        /* Ajuster l'espacement du titre Navigation */
+        .sidebar h1 {
+            margin-top: 0.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        /* Ajuster l'espacement des séparateurs dans la sidebar */
+        .sidebar hr {
+            margin: 0.5rem 0 !important;
+        }
+
+        /* Ajuster l'espacement des éléments de la sidebar */
+        .sidebar .element-container {
+            margin-bottom: 0.5rem !important;
+        }
+
+        /* Réduire l'espace au-dessus du menu de navigation */
+        .stRadio {
+            margin-top: 0 !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
