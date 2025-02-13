@@ -48,6 +48,7 @@ def toggle_theme():
     .stSidebar, .stSidebarContent {{
         background-color: {current_theme["sidebar_bg"]} !important;
         color: {current_theme["text_color"]} !important;
+        padding-top: 1rem !important;
     }}
     
     /* Style spécifique pour le menu de navigation */
@@ -63,38 +64,45 @@ def toggle_theme():
         background-color: {current_theme["bg_color"]} !important;
     }}
     
-    /* Masquer le rectangle vide */
-    .element-container:has(.stRadio) > div:first-child {{
+    /* Masquer les éléments vides */
+    .element-container:has(.stRadio) > div:empty {{
         display: none !important;
     }}
     
-    /* Styles pour le sélecteur de radio dans la sidebar */
+    /* Style du conteneur radio principal */
+    .stRadio {{
+        background: none !important;
+    }}
+    
+    /* Styles pour le groupe de boutons radio */
     .stRadio > div[role="radiogroup"] {{
-        background-color: {current_theme["sidebar_bg"]} !important;
         display: flex !important;
         flex-direction: column !important;
         gap: 8px !important;
         padding: 0 !important;
+        background: none !important;
     }}
     
+    /* Style des boutons individuels */
     .stRadio > div[role="radiogroup"] > label {{
         background-color: {current_theme["sidebar_bg"]} !important;
         color: {current_theme["text_color"]} !important;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 4px !important;
         margin: 0 !important;
         padding: 12px !important;
-        transition: all 0.2s ease;
+        transition: all 0.2s ease !important;
         height: 45px !important;
         display: flex !important;
         align-items: center !important;
         width: 100% !important;
         box-sizing: border-box !important;
+        cursor: pointer !important;
     }}
     
     /* Style au survol */
     .stRadio > div[role="radiogroup"] > label:hover {{
-        border-color: rgba(96, 165, 250, 0.4);
+        border-color: rgba(96, 165, 250, 0.4) !important;
         transform: translateX(4px);
         background-color: rgba(255, 255, 255, 0.05) !important;
     }}
@@ -136,6 +144,12 @@ def toggle_theme():
     a {{
         color: {current_theme["text_color"]} !important;
         text-decoration: underline;
+    }}
+
+    /* Supprimer l'espace vide en haut */
+    .block-container {{
+        padding-top: 0 !important;
+        margin-top: 0 !important;
     }}
     </style>
     """
