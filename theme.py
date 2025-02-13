@@ -165,6 +165,39 @@ def toggle_theme():
         margin-top: 1rem !important;
         margin-bottom: 1rem !important;
     }}
+
+    /* Style du bouton de thème */
+    .stButton {{
+        margin-top: 0 !important;
+        margin-bottom: 1rem !important;
+    }}
+
+    .stButton > button {{
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0.5rem !important;
+    }}
+
+    /* Ajustement du conteneur radio */
+    .element-container:has(.stRadio) {{
+        margin-top: -2rem !important;
+    }}
+
+    /* Style spécifique pour le menu de navigation */
+    .stRadio > div[role="radiogroup"] {{
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }}
+
+    /* Supprimer les espaces vides */
+    .element-container:empty {{
+        display: none !important;
+    }}
+
+    /* Ajuster l'espacement global de la sidebar */
+    section[data-testid="stSidebar"] > div {{
+        padding-top: 1rem !important;
+    }}
     </style>
     """
     
