@@ -310,14 +310,22 @@ def main():
                         margin-bottom: 1rem;
                         color: inherit;
                     ">Adrien BERLIAT</h2>
+                </div>
+            """, unsafe_allow_html=True)
+            
+            # Effet machine à écrire pour la citation
+            if 'title_written' not in st.session_state:
+                write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
+                st.session_state.title_written = True
+            else:
+                st.markdown("""
                     <h3 style="
                         font-style: italic;
                         color: inherit;
                         font-size: 1.2em;
-                        margin: 0;
+                        margin: 0 0 2rem 0;
                     ">De la profondeur des océans à la profondeur des données... 🌊➡️📊</h3>
-                </div>
-            """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
         
         with col2:
             try:
@@ -330,7 +338,19 @@ def main():
         
         st.markdown("---")
         
-        # Ajouter le contenu de la lettre de motivation
+        # Titre de la lettre de motivation avec icône
+        st.markdown("""
+            <h2 style="
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin: 2rem 0;
+            ">
+                📜 Ma Lettre de Motivation
+            </h2>
+        """, unsafe_allow_html=True)
+        
+        # Contenu de la lettre et note
         st.markdown(get_lettre_motivation_content())
         st.markdown(get_note_importante(), unsafe_allow_html=True)
 
