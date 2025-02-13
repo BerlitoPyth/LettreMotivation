@@ -293,6 +293,21 @@ def main():
             margin: 0 !important;
             padding: 0 !important;
         }
+
+        /* Supprimer les séparateurs superflus */
+        .stElementContainer:has(.stMarkdown hr) {
+            display: none !important;
+        }
+
+        /* Ajuster l'espacement entre les éléments */
+        .sidebar .element-container + .element-container {
+            margin-top: 0.5rem !important;
+        }
+
+        /* Ajuster l'espacement global de la sidebar */
+        .sidebar .block-container {
+            gap: 0.5rem !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
