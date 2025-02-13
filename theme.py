@@ -26,6 +26,19 @@ def toggle_theme():
         }
     }
     
+    # Modifier le bouton pour inclure le texte "Thème"
+    st.markdown("""
+        <div style="
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-bottom: 1rem;
+        ">
+            <span style="font-size: 0.9em;">Thème</span>
+        </div>
+    """, unsafe_allow_html=True)
+    
     # Bouton compact avec juste l'icône
     if st.button("🌙" if st.session_state.dark_mode else "☀️", 
                 key="unique_theme_toggle_btn",
@@ -251,7 +264,18 @@ def toggle_theme():
         font-size: 1.2em !important;
         margin-left: auto !important;
     }}
-    </style>
+
+    /* Style spécifique pour le bouton en mode jour */
+    body:not(.dark) div[data-testid="column"]:has(button:contains("☀️")) button {{
+        background-color: #f0f0f0 !important;
+        color: #1a1d23 !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    }}
+    
+    body:not(.dark) div[data-testid="column"]:has(button:contains("☀️")) button:hover {{
+        background-color: #e0e0e0 !important;
+        border-color: rgba(0, 0, 0, 0.2) !important;
+    }}
     """
     
     # Application du CSS
