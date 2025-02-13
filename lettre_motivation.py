@@ -316,19 +316,32 @@ def main():
 
         /* Style pour tous les titres principaux */
         .main h1 {
-            margin-top: 3rem !important;
-            padding-top: 1rem !important;
-            scroll-margin-top: 100px !important;  /* Augmenté pour éviter la coupure */
+            margin-top: 2rem !important;  /* Reduced from 3rem */
+            padding-top: 0.5rem !important;  /* Reduced from 1rem */
+            scroll-margin-top: 80px !important;  /* Reduced from 100px */
         }
 
         /* Style spécifique pour le premier titre de chaque section */
         .main > div:first-child h1:first-of-type {
-            margin-top: 1rem !important;
+            margin-top: 0.5rem !important;  /* Reduced from 1rem */
         }
 
         /* Ajuster l'espacement du conteneur principal */
         .stApp {
-            margin-top: 1rem !important;
+            margin-top: 0.5rem !important;  /* Reduced from 1rem */
+        }
+
+        /* Style pour le titre de la lettre de motivation */
+        h2 {
+            margin: 1rem 0 !important;  /* Reduced from 2rem */
+            padding: 0 !important;
+        }
+
+        /* Ajuster spécifiquement le conteneur de la lettre de motivation */
+        h2:contains("Ma Lettre de Motivation") {
+            margin: 1rem 0 !important;
+            line-height: 1.2 !important;
+            height: auto !important;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -482,7 +495,8 @@ def main():
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
-                margin: 2rem 0;
+                margin: 1rem 0;
+                line-height: 1.2;
             ">
                 📜 Ma Lettre de Motivation
             </h2>
