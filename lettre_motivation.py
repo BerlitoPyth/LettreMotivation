@@ -268,8 +268,8 @@ def main():
         with col1:
             st.success("""
             ### ✨ Points Clés
-            - 📊 Goût pour les mathématiques et l'informatique depuis l'enfance
-            - 🤝 Expérience du travail d'équipe en conditions exigeantes
+            - 📊 Goût pour les mathématiques et l'informatique
+            - 🤝 Expérience du travail d'équipe
             - 💡 Autodidacte
             - 🚀 Motivation à toute épreuve
             """)
