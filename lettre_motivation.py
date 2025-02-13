@@ -267,6 +267,32 @@ def main():
         .stRadio {
             margin-top: 0 !important;
         }
+
+        /* Ajuster l'espacement du titre Navigation */
+        .stHeading {
+            margin-top: -0.5rem !important;
+            margin-bottom: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Style spécifique pour le titre Navigation */
+        .stHeading h1 {
+            font-size: 1.5em !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            line-height: 1.2 !important;
+        }
+
+        /* Ajuster l'espace entre le bouton de thème et la navigation */
+        div[data-testid="column"]:has(button:contains("Thème")) {
+            margin-bottom: -0.5rem !important;
+        }
+
+        /* Réduire l'espace du conteneur du titre */
+        .stElementContainer:has(.stHeading) {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
