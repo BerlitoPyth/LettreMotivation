@@ -212,10 +212,29 @@ def main():
             gap: 8px;
         }
         .custom-title {
-            margin-top: 1rem;
+            margin-top: 3rem !important;  /* Augmenté de 1rem à 3rem */
             margin-bottom: 2rem;
             padding-top: 2rem;
-            scroll-margin-top: 60px;
+            scroll-margin-top: 80px;  /* Augmenté de 60px à 80px */
+        }
+
+        /* Ajout d'un style pour tous les h1 */
+        h1 {
+            margin-top: 3rem !important;
+            scroll-margin-top: 80px;
+        }
+
+        /* Style pour les titres des sections */
+        .section-title {
+            margin-top: 3rem !important;
+            scroll-margin-top: 80px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        /* Ajuster la marge du premier titre de la page d'accueil */
+        .main > div:first-child h1 {
+            margin-top: 2rem !important;
         }
         </style>
     """, unsafe_allow_html=True)
