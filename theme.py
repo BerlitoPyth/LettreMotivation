@@ -63,6 +63,26 @@ def toggle_theme():
         background-color: {current_theme["bg_color"]} !important;
     }}
     
+    /* Styles pour le sélecteur de radio dans la sidebar */
+    .stRadio > div[role="radiogroup"] {{
+        background-color: {current_theme["sidebar_bg"]} !important;
+    }}
+    
+    .stRadio > div[role="radiogroup"] > label {{
+        background-color: {current_theme["sidebar_bg"]} !important;
+        color: {current_theme["text_color"]} !important;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        margin-bottom: 4px;
+        padding: 8px;
+        transition: all 0.2s ease;
+    }}
+    
+    .stRadio > div[role="radiogroup"] > label:hover {{
+        border-color: rgba(96, 165, 250, 0.4);
+        transform: translateX(4px);
+    }}
+    
     /* Styles des conteneurs principaux */
     .st-emotion-cache-h4xjwg,
     .st-emotion-cache-15ecox0 {{
