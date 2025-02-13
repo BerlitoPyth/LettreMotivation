@@ -191,6 +191,9 @@ def display_presentation():
                         "Capacité d'adaptation",
                         "Résolution des problèmes",
                         "Rigueur et précision dans le travail"
+                        "Détermination et persévérance"
+                        "Esprit d'équipe"
+                        
                     ]
                 },
                 {
