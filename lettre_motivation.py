@@ -389,12 +389,12 @@ def main():
         # Ajouter une boîte d'avertissement séparée
         st.markdown("""
             <div style="
-                background-color: #fee2e2;
-                border: 1px solid #ef4444;
+                background-color: #7f1d1d;  /* Fond plus sombre */
+                border: 2px solid #ef4444;  /* Bordure plus visible */
                 border-radius: 8px;
                 padding: 20px;
                 margin: 20px 0;
-                color: #991b1b;
+                color: #fecaca;  /* Texte plus clair pour contraste */
             ">
                 <div style="
                     font-size: 1.2em;
@@ -403,15 +403,16 @@ def main():
                     display: flex;
                     align-items: center;
                     gap: 8px;
+                    color: #fee2e2;  /* Titre légèrement plus clair */
                 ">
                     ⚠️ Note importante
                 </div>
-                <p>
+                <p style="line-height: 1.6;">
                 Je tiens à préciser que je n'ai pas créé cette application pour mettre en avant mes compétences en programmation, j'aurais été
                 bien incapable de la réaliser sans l'aide d'ia génératives. Pour autant je considère ces dernières comme un outil dont il serait dommage de ne pas se servir
                 plutôt que comme une façon de "tricher".
                 </p>
-                <p style="margin-top: 12px;">
+                <p style="margin-top: 12px; line-height: 1.6;">
                 Le véritable objectif était de me démarquer en illustrant l'investissement que je mets dans mes projets
                 et mon désir de rejoindre votre établissement. J'ai toujours pensé qu'il est préférable d'agir que de parler. J'espère que vous aurez pris le
                 temps de me lire jusqu'ici et que cela vous aura convaincu car j'y ai consacré beaucoup de temps et d'efforts. Merci 😊
