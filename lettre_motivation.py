@@ -343,6 +343,19 @@ def main():
             line-height: 1.2 !important;
             height: auto !important;
         }
+
+        /* Ensure main title visibility */
+        .main .block-container {
+            padding-top: 1rem !important;
+        }
+
+        /* Style for the project's main title */
+        .main > div:first-child h1:first-of-type {
+            margin-top: 0 !important;
+            padding-top: 1rem !important;
+            margin-bottom: 2rem !important;
+            scroll-margin-top: 0 !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
