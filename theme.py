@@ -48,7 +48,7 @@ def toggle_theme():
     .stSidebar, .stSidebarContent {{
         background-color: {current_theme["sidebar_bg"]} !important;
         color: {current_theme["text_color"]} !important;
-        padding-top: 1rem !important;
+        padding-top: 0 !important;  /* Réduit l'espace en haut */
     }}
     
     /* Style spécifique pour le menu de navigation */
@@ -72,15 +72,17 @@ def toggle_theme():
     /* Style du conteneur radio principal */
     .stRadio {{
         background: none !important;
+        margin-top: -1rem !important;  /* Remonte légèrement tout le menu */
     }}
     
     /* Styles pour le groupe de boutons radio */
     .stRadio > div[role="radiogroup"] {{
         display: flex !important;
         flex-direction: column !important;
-        gap: 8px !important;
+        gap: 4px !important;  /* Réduit l'espace entre les boutons */
         padding: 0 !important;
         background: none !important;
+        margin-bottom: 1rem !important;  /* Ajoute un espace après le dernier bouton */
     }}
     
     /* Style des boutons individuels */
@@ -150,6 +152,18 @@ def toggle_theme():
     .block-container {{
         padding-top: 0 !important;
         margin-top: 0 !important;
+    }}
+
+    /* Supprimer tous les espacements superflus */
+    .element-container {{
+        margin: 0 !important;
+        padding: 0 !important;
+    }}
+    
+    /* Ajuster l'espacement des séparateurs */
+    .stMarkdown {{
+        margin-top: 1rem !important;
+        margin-bottom: 1rem !important;
     }}
     </style>
     """
