@@ -235,7 +235,7 @@ def toggle_theme():
     /* Style pour le bouton de thème */
     div[data-testid="column"]:has(button:contains("Thème")) button {{
         padding: 0 1rem !important;
-        width: auto !important;
+        width: 120px !important;  /* Largeur fixe plus grande */
         height: 40px !important;
         border-radius: 20px !important;
         display: flex !important;
@@ -243,6 +243,22 @@ def toggle_theme():
         justify-content: space-between !important;
         font-size: 0.9em !important;
         gap: 8px !important;
+        white-space: nowrap !important;  /* Empêche le texte de passer à la ligne */
+    }}
+
+    /* Style pour le contenu du bouton */
+    div[data-testid="column"]:has(button:contains("Thème")) button p {{
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin: 0 !important;
+    }}
+
+    /* Style pour la colonne contenant le bouton */
+    div[data-testid="column"]:has(button:contains("Thème")) {{
+        display: flex !important;
+        justify-content: flex-end !important;
+        width: auto !important;
     }}
     </style>
     """
