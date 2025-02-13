@@ -34,8 +34,8 @@ def display_presentation():
 
             .section-grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1.5rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
             }
 
             @media (max-width: 1200px) {
@@ -56,6 +56,9 @@ def display_presentation():
                 padding: 1.5rem;
                 transition: transform 0.2s ease, box-shadow 0.2s ease;
                 border: 1px solid rgba(255, 255, 255, 0.1);
+                min-height: 250px;
+                display: flex;
+                flex-direction: column;
             }
 
             .section:hover {
@@ -261,7 +264,7 @@ def display_presentation():
     """, unsafe_allow_html=True)
     
     # Modifiez la dernière ligne de la fonction display_presentation
-    components.html(presentation_html, height=900, scrolling=False)
+    components.html(presentation_html, height=1200, scrolling=False)  # Increased height from 900 to 1200
 
 if __name__ == "__main__":
     st.set_page_config(layout="wide")
