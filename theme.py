@@ -122,6 +122,12 @@ def toggle_theme():
         color: {current_theme["text_color"]} !important;
     }}
     
+    /* Supprimer le label superflu */
+    .st-emotion-cache-1qg05tj,
+    .st-emotion-cache-1dx5vew0 {{
+        display: none !important;
+    }}
+
     /* Styles de texte */
     h1, h2, h3, h4, h5, h6, p, span, div {{
         color: {current_theme["text_color"]} !important;
@@ -197,6 +203,32 @@ def toggle_theme():
     /* Ajuster l'espacement global de la sidebar */
     section[data-testid="stSidebar"] > div {{
         padding-top: 1rem !important;
+    }}
+
+    /* Style amélioré pour le bouton de thème */
+    .stButton > button {{
+        background-color: {current_theme["sidebar_bg"]} !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: {current_theme["text_color"]} !important;
+        width: 100% !important;
+        padding: 0.75rem !important;
+        margin: 0 0 1rem 0 !important;
+        border-radius: 4px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+    }}
+
+    .stButton > button:hover {{
+        border-color: rgba(96, 165, 250, 0.4) !important;
+        transform: translateX(4px);
+        background-color: rgba(255, 255, 255, 0.05) !important;
+    }}
+
+    /* Ajuster la position du bouton */
+    .stButton {{
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
     }}
     </style>
     """
