@@ -27,8 +27,8 @@ def toggle_theme():
         }
     }
     
-    # Bouton de bascule avec icône et texte
-    if st.button("🌙 / ☀️ Changer de thème"):
+    # Modifier le bouton de thème pour ajouter une clé unique
+    if st.button("🌙/☀️", key="theme_toggle_btn"):
         st.session_state.dark_mode = not st.session_state.dark_mode
         st.rerun()
     
