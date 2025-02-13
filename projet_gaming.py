@@ -123,6 +123,27 @@ def display_project_concept():
         except Exception as e:
             st.info("Démo vidéo non disponible")
             print(f"Erreur: {e}")
+
+    # Solution 4: Guide du Novice
+    st.subheader("📚 Guide du Novice")
+    col1, col2 = st.columns([1,2])
+    with col1:
+        st.markdown("""
+        - Explications simples des composants PC
+        - Guide des résolutions et FPS
+        - Impact des paramètres sur les performances
+        - Comprendre ses besoins en Hz/FPS
+        - Vocabulaire hardware simplifié
+        - Conseils adaptés aux débutants
+        """)
+    with col2:
+        try:
+            video_file = open(".assets/demo_guide.mp4", "rb")
+            video_bytes = video_file.read()
+            st.video(video_bytes, start_time=0)
+        except Exception as e:
+            st.info("Démo vidéo non disponible")
+            print(f"Erreur: {e}")
     
     # Démo du site
     st.header("🌐 Découvrir le Site")
