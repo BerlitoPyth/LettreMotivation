@@ -63,9 +63,18 @@ def toggle_theme():
         background-color: {current_theme["bg_color"]} !important;
     }}
     
+    /* Masquer le rectangle vide */
+    .element-container:has(.stRadio) > div:first-child {{
+        display: none !important;
+    }}
+    
     /* Styles pour le sélecteur de radio dans la sidebar */
     .stRadio > div[role="radiogroup"] {{
         background-color: {current_theme["sidebar_bg"]} !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        padding: 0 !important;
     }}
     
     .stRadio > div[role="radiogroup"] > label {{
@@ -73,14 +82,27 @@ def toggle_theme():
         color: {current_theme["text_color"]} !important;
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 4px;
-        margin-bottom: 4px;
-        padding: 8px;
+        margin: 0 !important;
+        padding: 12px !important;
         transition: all 0.2s ease;
+        height: 45px !important;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }}
     
+    /* Style au survol */
     .stRadio > div[role="radiogroup"] > label:hover {{
         border-color: rgba(96, 165, 250, 0.4);
         transform: translateX(4px);
+        background-color: rgba(255, 255, 255, 0.05) !important;
+    }}
+
+    /* Style pour l'option sélectionnée */
+    .stRadio > div[role="radiogroup"] > label[data-checked="true"] {{
+        border-color: #60a5fa !important;
+        background-color: rgba(96, 165, 250, 0.1) !important;
     }}
     
     /* Styles des conteneurs principaux */
