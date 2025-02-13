@@ -2,7 +2,18 @@ import streamlit as st
 from PIL import Image
 
 def display_project_concept():
-    st.title("🎮 Concept PC Gaming adapté aux réels besoin du client")
+    # Main title with custom styling
+    st.markdown("""
+        <h1 style="
+            margin-top: 0 !important;
+            padding-top: 1rem !important;
+            margin-bottom: 2rem !important;
+            scroll-margin-top: 0 !important;
+        ">🎮 Concept PC Gaming adapté aux réels besoins du client</h1>
+    """, unsafe_allow_html=True)
+    
+    # Add a separator after the main title
+    st.markdown("---")
     
     # Genèse du projet
     st.header("💡 Genèse du Projet")
