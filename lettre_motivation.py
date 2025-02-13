@@ -308,6 +308,28 @@ def main():
         .sidebar .block-container {
             gap: 0.5rem !important;
         }
+
+        /* Ajuster les marges des titres de section */
+        .main .block-container {
+            padding-top: 2rem !important;
+        }
+
+        /* Style pour tous les titres principaux */
+        .main h1 {
+            margin-top: 3rem !important;
+            padding-top: 1rem !important;
+            scroll-margin-top: 100px !important;  /* Augmenté pour éviter la coupure */
+        }
+
+        /* Style spécifique pour le premier titre de chaque section */
+        .main > div:first-child h1:first-of-type {
+            margin-top: 1rem !important;
+        }
+
+        /* Ajuster l'espacement du conteneur principal */
+        .stApp {
+            margin-top: 1rem !important;
+        }
         </style>
     """, unsafe_allow_html=True)
 
