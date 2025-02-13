@@ -8,6 +8,8 @@ from PIL import Image
 import random
 from projet_gaming import display_project_concept
 from lettre_motivation_content import get_lettre_motivation_content, get_note_importante
+from styles.main import get_main_styles
+from animations.matrix import get_matrix_styles
 
 # Remplacer la fonction scroll_to_section par :
 def scroll_to_section(title_id):
@@ -147,386 +149,34 @@ def main():
         layout="wide"
     )
 
-    # Ajouter l'animation au début
+    # Apply styles
+    st.markdown(get_main_styles(), unsafe_allow_html=True)
+    
     if 'animation_shown' not in st.session_state:
+        st.markdown(get_matrix_styles(), unsafe_allow_html=True)
         display_data_animation()
         st.session_state.animation_shown = True
-    
-    # Afficher le toggle theme après l'animation ou directement si déjà montrée
-
-    # Style personnalisé
-    st.markdown("""
-        <style>
-        .main {
-            padding: 2rem;
-        }
-        .highlight {
-            background-color: #f0f2f6;
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
-        .stButton > button {
-            width: 100%;
-        }
-        .stImage {
-            transition: transform 0.3s ease;
-        }
-        .stImage:hover {
-            transform: scale(1.02);
-            cursor: pointer;
-        }
-        .thumbnail-container {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 5px;
-        }
-        .streamlit-title {
-            scroll-margin-top: 20px;
-        }
-        #section-title {
-            margin-top: 0;
-            padding-top: 2rem;
-        }
-        .section-title {
-            scroll-margin-top: 60px;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-        .section-title.visible {
-            opacity: 1;
-        }
-        .warning-box {
-            background-color: #fee2e2;
-            border: 1px solid #ef4444;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 20px 0;
-            color: #991b1b;
-        }
-        .warning-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .custom-title {
-            margin-top: 3rem !important;  /* Augmenté de 1rem à 3rem */
-            margin-bottom: 2rem;
-            padding-top: 2rem;
-            scroll-margin-top: 80px;  /* Augmenté de 60px à 80px */
-        }
-
-        /* Ajout d'un style pour tous les h1 */
-        h1 {
-            margin-top: 3rem !important;
-            scroll-margin-top: 80px;
-        }
-
-        /* Style pour les titres des sections */
-        .section-title {
-            margin-top: 3rem !important;
-            scroll-margin-top: 80px;
-            opacity: 0;
-            transition: opacity 0.5s;
-        }
-
-        /* Ajuster la marge du premier titre de la page d'accueil */
-        .main > div:first-child h1 {
-            margin-top: 2rem !important;
-        }
-
-        /* Ajuster l'espacement de la sidebar */
-        .st-emotion-cache-1cypcdb {
-            padding-top: 0 !important;
-        }
-
-        /* Réduire l'espace au-dessus du titre Navigation */
-        .sidebar .block-container {
-            padding-top: 0.5rem !important;
-        }
-
-        /* Ajuster l'espacement du titre Navigation */
-        .sidebar h1 {
-            margin-top: 0.5rem !important;
-            margin-bottom: 0.5rem !important;
-        }
-
-        /* Ajuster l'espacement des séparateurs dans la sidebar */
-        .sidebar hr {
-            margin: 0.5rem 0 !important;
-        }
-
-        /* Ajuster l'espacement des éléments de la sidebar */
-        .sidebar .element-container {
-            margin-bottom: 0.5rem !important;
-        }
-
-        /* Réduire l'espace au-dessus du menu de navigation */
-        .stRadio {
-            margin-top: 0 !important;
-        }
-
-        /* Ajuster l'espacement du titre Navigation */
-        .stHeading {
-            margin-top: -0.5rem !important;
-            margin-bottom: 0 !important;
-            padding: 0 !important;
-        }
-
-        /* Style spécifique pour le titre Navigation */
-        .stHeading h1 {
-            font-size: 1.5em !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            line-height: 1.2 !important;
-        }
-
-        /* Ajuster l'espace entre le bouton de thème et la navigation */
-        div[data-testid="column"]:has(button:contains("Thème")) {
-            margin-bottom: -0.5rem !important;
-        }
-
-        /* Réduire l'espace du conteneur du titre */
-        .stElementContainer:has(.stHeading) {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        /* Supprimer les séparateurs superflus */
-        .stElementContainer:has(.stMarkdown hr) {
-            display: none !important;
-        }
-
-        /* Ajuster l'espacement entre les éléments */
-        .sidebar .element-container + .element-container {
-            margin-top: 0.5rem !important;
-        }
-
-        /* Ajuster l'espacement global de la sidebar */
-        .sidebar .block-container {
-            gap: 0.5rem !important;
-        }
-
-        /* Ajuster les marges des titres de section */
-        .main .block-container {
-            padding-top: 2rem !important;
-        }
-
-        /* Style pour tous les titres principaux */
-        .main h1 {
-            margin-top: 2rem !important;  /* Reduced from 3rem */
-            padding-top: 0.5rem !important;  /* Reduced from 1rem */
-            scroll-margin-top: 80px !important;  /* Reduced from 100px */
-        }
-
-        /* Style spécifique pour le premier titre de chaque section */
-        .main > div:first-child h1:first-of-type {
-            margin-top: 0.5rem !important;  /* Reduced from 1rem */
-        }
-
-        /* Ajuster l'espacement du conteneur principal */
-        .stApp {
-            margin-top: 0.5rem !important;  /* Reduced from 1rem */
-        }
-
-        /* Style pour le titre de la lettre de motivation */
-        h2 {
-            margin: 1rem 0 !important;  /* Reduced from 2rem */
-            padding: 0 !important;
-        }
-
-        /* Ajuster spécifiquement le conteneur de la lettre de motivation */
-        h2:contains("Ma Lettre de Motivation") {
-            margin: 1rem 0 !important;
-            line-height: 1.2 !important;
-            height: auto !important;
-        }
-
-        /* Ensure main title visibility */
-        .main .block-container {
-            padding-top: 1rem !important;
-        }
-
-        /* Style for the project's main title */
-        .main > div:first-child h1:first-of-type {
-            margin-top: 0 !important;
-            padding-top: 1rem !important;
-            margin-bottom: 2rem !important;
-            scroll-margin-top: 0 !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
 
     # Sidebar
     with st.sidebar:
-        # Bouton de thème compact en haut de la sidebar
         col1, col2 = st.columns([4, 1])
         with col2:
             toggle_theme()
         
         st.title("🎯 Navigation")
-        st.markdown("---")
-
-        # Menu de navigation
-        selection = st.radio(
-            "",
-            ["🏠 Accueil",
-             "✨ Quiz",
-             "🔧 Projet",
-             "👤 Présentation",
-             "📈 Parcours",
-             "✉️ Motivation"]
-        )
-        st.session_state.selection = selection
-        # Lettre de recommandation
-        st.markdown("### 📄 Lettre de recommandation")
-        try:
-            if "lettre_agrandie" not in st.session_state:
-                st.session_state.lettre_agrandie = False
-            
-            lettre = Image.open(".assets/lettre_recommandation.jpg")
-            st.image(lettre, width=200, caption="Lettre de recommandation")
-            if st.button("📄 Voir en plein écran"):
-                st.session_state.lettre_agrandie = True
-        except Exception as e:
-            print(f"Erreur lors du chargement de la lettre: {str(e)}")
-            st.error("Lettre de recommandation non disponible")
-
-        st.markdown("---")
-        st.markdown("### 👤 À propos")
-        st.info("""
-        🎓 DAEU B en cours
-        🤿 Ex-Plongeur Scaphandrier
-        💻 Passionné de programmation
-        🔢 Amateur de mathématiques
-        """)
-
-        st.markdown("---")
-        st.success("""
-        ### 📚 Formations
-        - DAEU B (en cours)
-        - Python for Everybody
-        - Python Data Structures
-        - Using Python to Access Web Data
-        - École 42 - La Piscine
-        - École Nationale des Scaphandriers
-        - Expérience professionnelle
-        """)
-
-    # Affichage plein écran de la lettre si demandé
+        display_navigation()  # Move navigation logic to separate function
+    
+    # Content
     if st.session_state.get('lettre_agrandie', False):
-        # Création d'une overlay pour l'image en plein écran
-        overlay_container = st.container()
-        with overlay_container:
-            col1, col2, col3 = st.columns([1, 6, 1])
-            with col2:
-                try:
-                    lettre = Image.open(".assets/lettre_recommandation.jpg")
-                    st.image(lettre, use_container_width=True)
-                    if st.button("❌ Fermer", key="close_fullscreen"):
-                        st.session_state.lettre_agrandie = False
-                        st.rerun()
-                except Exception as e:
-                    st.error("Impossible d'afficher la lettre en plein écran")
-                    print(f"Erreur: {e}")
-
-    # Contenu principal basé sur la sélection
+        display_fullscreen_letter()
+    
+    # Main content based on selection
     if selection == "🏠 Accueil":
-        # Conteneur principal avec titre et photo
-        col1, col2 = st.columns([3, 1])
-        
-        with col1:
-            st.markdown("""
-                <div style="margin-bottom: 1rem;">
-                    <h1 style="
-                        font-size: 2em;
-                        margin-bottom: 0.5rem;
-                        color: inherit;
-                    ">Candidature BUT Science des Données</h1>
-                    <h2 style="
-                        font-size: 1.5em;
-                        margin-bottom: 1rem;
-                        color: inherit;
-                    ">Adrien BERLIAT</h2>
-                </div>
-            """, unsafe_allow_html=True)
-            
-            # Effet machine à écrire pour la citation
-            if 'title_written' not in st.session_state:
-                write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
-                st.session_state.title_written = True
-            else:
-                st.markdown("""
-                    <h3 style="
-                        font-style: italic;
-                        color: inherit;
-                        font-size: 1.2em;
-                        margin: 0 0 2rem 0;
-                    ">De la profondeur des océans à la profondeur des données... 🌊➡️📊</h3>
-                """, unsafe_allow_html=True)
-        
-        with col2:
-            try:
-                image = Image.open(".assets/photo.jpg")
-                image_rotated = image.rotate(-90, expand=True)
-                st.image(image_rotated, width=200)
-            except Exception as e:
-                st.info("📸 Photo non disponible")
-                print(f"Erreur: {e}")
-        
-        st.markdown("---")
-        
-        # Ajouter le chat ici, après le titre et la photo
-        add_floating_chat_to_app()
-        
-        # Points clés
-        col1, col2 = st.columns(2)
-        with col1:
-            st.success("""
-            ### ✨ Points Clés
-            - 📊 Goût pour les mathématiques et l'informatique
-            - 🤝 Expérience du travail d'équipe
-            - 💡 Autodidacte
-            - 🚀 Motivation à toute épreuve
-            """)
-        with col2:
-            st.info("""
-            ### 🎓 Formation Actuelle
-            - 📚 DAEU B en cours
-            - 💻 Certifications Python
-            - 🔍 École 42 - La Piscine
-            - 🌟 Excellents résultats en sciences
-            """)
-            
-        st.markdown("---")
-        
-        # Titre de la lettre de motivation avec icône
-        st.markdown("""
-            <h2 style="
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                margin: 1rem 0;
-                line-height: 1.2;
-            ">
-                📜 Ma Lettre de Motivation
-            </h2>
-        """, unsafe_allow_html=True)
-        
-        # Contenu de la lettre et note
-        st.markdown(get_lettre_motivation_content())
-        st.markdown(get_note_importante(), unsafe_allow_html=True)
-
+        display_home()
     elif selection == "👤 Présentation":
         display_presentation()
-
-        st.markdown("---")
-        
     elif selection == "🔧 Projet":
         display_project_concept()
-        
     elif selection == "✨ Quiz":
         title_html = """
             <div style="
@@ -540,12 +190,9 @@ def main():
         st.markdown(title_html, unsafe_allow_html=True)
         scroll_to_section("quiz-title")
         display_quiz()
-        
     elif selection == "📈 Parcours":
         st.markdown('<h1 id="parcours-title" class="custom-title">Mon Parcours</h1>', unsafe_allow_html=True)
         scroll_to_section("parcours-title")
-
-
     elif selection == "✉️ Motivation":
         st.markdown('<h1 id="motivation-title" class="custom-title">Ma Motivation</h1>', unsafe_allow_html=True)
         scroll_to_section("motivation-title")
