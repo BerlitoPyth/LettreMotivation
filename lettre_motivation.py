@@ -225,6 +225,7 @@ def main():
 
     # Sidebar
     with st.sidebar:
+        toggle_theme()  # Déplacer le bouton de thème en haut
         st.title("🎯 Navigation")
         st.markdown("---")
 
