@@ -8,15 +8,23 @@ from PIL import Image
 import random
 from projet_gaming import display_project_concept
 
-# Ajoutez cette fonction après les imports
+# Remplacer la fonction scroll_to_section par :
 def scroll_to_section():
     js = '''
     <script>
-        // Attendre que le titre soit chargé
-        setTimeout(function() {
-            const title = document.querySelector('.streamlit-title');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        });
+
+        setTimeout(() => {
+            const title = document.querySelector('.section-title');
             if (title) {
                 title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                observer.observe(title);
             }
         }, 100);
     </script>
@@ -189,6 +197,30 @@ def main():
             margin-top: 0;
             padding-top: 2rem;
         }
+        .section-title {
+            scroll-margin-top: 60px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .section-title.visible {
+            opacity: 1;
+        }
+        .warning-box {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 20px 0;
+            color: #991b1b;
+        }
+        .warning-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         </style>
     """, unsafe_allow_html=True)
 
@@ -355,14 +387,17 @@ def main():
         
         Adrien BERLIAT
 
-        PS : Je tiens à préciser que je n’ai pas créé cette application pour mettre en avant mes compétences en programmation, j’aurais été
-        bien incapable de la réaliser sans l'aide d'ia génératives. Pour autant je considère ces dernières comme un outil dont il serait dommage de ne pas se servir
-        plutôt que comme une façon de "tricher".
-        Le véritable objectif était de me démarquer en illustrant l’investissement que je mets dans mes projets
-        et mon désir de rejoindre votre établissement. J’ai toujours pensé qu’il est préférable d’agir que de parler. J’espère que vous aurez pris le
-        temps de me lire jusqu’ici et que cela vous aura convaincu car j’y ai consacré beaucoup de temps et d’efforts. Merci :)
-                    
-
+        <div class="warning-box">
+            <div class="warning-title">
+                ⚠️ Note importante
+            </div>
+            Je tiens à préciser que je n'ai pas créé cette application pour mettre en avant mes compétences en programmation, j'aurais été
+            bien incapable de la réaliser sans l'aide d'ia génératives. Pour autant je considère ces dernières comme un outil dont il serait dommage de ne pas se servir
+            plutôt que comme une façon de "tricher".<br><br>
+            Le véritable objectif était de me démarquer en illustrant l'investissement que je mets dans mes projets
+            et mon désir de rejoindre votre établissement. J'ai toujours pensé qu'il est préférable d'agir que de parler. J'espère que vous aurez pris le
+            temps de me lire jusqu'ici et que cela vous aura convaincu car j'y ai consacré beaucoup de temps et d'efforts. Merci 😊
+        </div>
         """)
 
     elif selection == "👤 Présentation":
@@ -374,16 +409,18 @@ def main():
         display_project_concept()
         
     elif selection == "✨ Quiz":
-        st.title("Découvrez si nous matchons ! ❤️")
+        st.markdown('<h1 class="section-title">Découvrez si nous matchons ! ❤️</h1>', unsafe_allow_html=True)
         scroll_to_section()
         display_quiz()
         
     elif selection == "📈 Parcours":
-        st.title("Mon Parcours")
+        st.markdown('<h1 class="section-title">Mon Parcours</h1>', unsafe_allow_html=True)
+        scroll_to_section()
 
 
     elif selection == "✉️ Motivation":
-        st.title("Ma Motivation")
+        st.markdown('<h1 class="section-title">Ma Motivation</h1>', unsafe_allow_html=True)
+        scroll_to_section()
 
     # Footer
     st.markdown("---")
