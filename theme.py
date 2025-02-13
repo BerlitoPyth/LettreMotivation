@@ -5,7 +5,6 @@ def toggle_theme():
     Gère les styles CSS pour une expérience utilisateur cohérente.
     Mode sombre activé par défaut.
     """
-    # Initialisation de l'état du thème - mode sombre par défaut
     if "dark_mode" not in st.session_state:
         st.session_state.dark_mode = True
     
@@ -29,7 +28,7 @@ def toggle_theme():
     
     # Bouton compact avec juste l'icône
     if st.button("🌙" if st.session_state.dark_mode else "☀️", 
-                key=f"theme_toggle_btn_{id(st.session_state)}",
+                key="unique_theme_toggle_btn",
                 help="Changer le thème"):
         st.session_state.dark_mode = not st.session_state.dark_mode
         st.rerun()
