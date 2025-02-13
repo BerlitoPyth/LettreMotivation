@@ -338,6 +338,27 @@ def main():
         
         st.markdown("---")
         
+        # Points clés
+        col1, col2 = st.columns(2)
+        with col1:
+            st.success("""
+            ### ✨ Points Clés
+            - 📊 Goût pour les mathématiques et l'informatique
+            - 🤝 Expérience du travail d'équipe
+            - 💡 Autodidacte
+            - 🚀 Motivation à toute épreuve
+            """)
+        with col2:
+            st.info("""
+            ### 🎓 Formation Actuelle
+            - 📚 DAEU B en cours
+            - 💻 Certifications Python
+            - 🔍 École 42 - La Piscine
+            - 🌟 Excellents résultats en sciences
+            """)
+            
+        st.markdown("---")
+        
         # Titre de la lettre de motivation avec icône
         st.markdown("""
             <h2 style="
