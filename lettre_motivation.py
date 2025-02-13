@@ -8,6 +8,21 @@ from PIL import Image
 import random
 from projet_gaming import display_project_concept
 
+# Ajoutez cette fonction après les imports
+def scroll_to_section():
+    js = '''
+    <script>
+        // Attendre que le titre soit chargé
+        setTimeout(function() {
+            const title = document.querySelector('.streamlit-title');
+            if (title) {
+                title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 100);
+    </script>
+    '''
+    st.markdown(js, unsafe_allow_html=True)
+
 def write_text_slowly(text):
     """Fonction pour l'effet machine à écrire"""
     placeholder = st.empty()
@@ -166,6 +181,13 @@ def main():
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 5px;
+        }
+        .streamlit-title {
+            scroll-margin-top: 20px;
+        }
+        #section-title {
+            margin-top: 0;
+            padding-top: 2rem;
         }
         </style>
     """, unsafe_allow_html=True)
@@ -352,7 +374,8 @@ def main():
         display_project_concept()
         
     elif selection == "✨ Quiz":
-        st.title("Découvrez si nous matchons !")
+        st.title("Découvrez si nous matchons ! ❤️")
+        scroll_to_section()
         display_quiz()
         
     elif selection == "📈 Parcours":
