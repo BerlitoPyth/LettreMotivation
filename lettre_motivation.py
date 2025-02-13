@@ -220,25 +220,6 @@ def main():
             padding-top: 2rem;
             scroll-margin-top: 60px;
         }
-        /* Masquer les conteneurs vides générés automatiquement */
-        .element-container:has(.stRadio) > div:first-child {
-            display: none;
-        }
-
-        /* Supprimer l'espacement superflu */
-        .css-1544g2n {
-            padding: 0 !important;
-        }
-
-        .stRadio [role="radiogroup"] {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
-        /* Ajuster l'espacement du conteneur de navigation */
-        .block-container {
-            padding-top: 0 !important;
-        }
         </style>
     """, unsafe_allow_html=True)
 
@@ -247,31 +228,16 @@ def main():
         st.title("🎯 Navigation")
         st.markdown("---")
 
-        nav_container = st.container()
-        with nav_container:
-            st.markdown("""
-                <div style="
-                    background-color: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 8px;
-                    padding: 16px;
-                    margin: 10px 0;
-                ">
-            """, unsafe_allow_html=True)
-            
-            # Menu de navigation
-            selection = st.radio(
-                "",
-                ["🏠 Accueil",
-                 "✨ Quiz",
-                 "🔧 Projet",
-                 "👤 Présentation",
-                 "📈 Parcours",
-                 "✉️ Motivation"]
-            )
-            
-            st.markdown("</div>", unsafe_allow_html=True)
-
+        # Menu de navigation
+        selection = st.radio(
+            "",
+            ["🏠 Accueil",
+             "✨ Quiz",
+             "🔧 Projet",
+             "👤 Présentation",
+             "📈 Parcours",
+             "✉️ Motivation"]
+        )
         st.session_state.selection = selection
         # Lettre de recommandation
         st.markdown("### 📄 Lettre de recommandation")
