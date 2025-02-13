@@ -85,7 +85,7 @@ def display_project_concept():
 
     # Solution 2: Configurations Optimisées
     st.subheader("⚡ Configurations Optimisées")
-    col1, col2 = st.columns([2,1])
+    col1, col2 = st.columns([1,2])
     with col1:
         st.markdown("""
         - 5 gammes adaptées aux différents besoins
