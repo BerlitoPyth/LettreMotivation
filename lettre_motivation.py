@@ -226,6 +226,11 @@ def main():
 
     # Sidebar
     with st.sidebar:
+        # Ajout du bouton de thème en haut de la sidebar
+        col1, col2 = st.columns([4, 1])
+        with col2:
+            toggle_theme()  # Déplacé ici
+        
         st.title("🎯 Navigation")
         st.markdown("---")
 
