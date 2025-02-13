@@ -298,36 +298,29 @@ def main():
         col1, col2 = st.columns([3, 1])
         
         with col1:
-            # Titre principal avec style personnalisé
             st.markdown("""
-                <h1 style="
-                    font-size: 2em;
-                    margin-bottom: 0.5rem;
-                    color: inherit;
-                ">Candidature BUT Science des Données</h1>
-                <h2 style="
-                    font-size: 1.5em;
-                    margin-bottom: 2rem;
-                    color: inherit;
-                ">Adrien BERLIAT</h2>
-            """, unsafe_allow_html=True)
-            
-            # Citation avec effet machine à écrire
-            if 'title_written' not in st.session_state:
-                write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
-                st.session_state.title_written = True
-            else:
-                st.markdown("""
+                <div style="margin-bottom: 1rem;">
+                    <h1 style="
+                        font-size: 2em;
+                        margin-bottom: 0.5rem;
+                        color: inherit;
+                    ">Candidature BUT Science des Données</h1>
+                    <h2 style="
+                        font-size: 1.5em;
+                        margin-bottom: 1rem;
+                        color: inherit;
+                    ">Adrien BERLIAT</h2>
                     <h3 style="
                         font-style: italic;
-                        margin-top: 0;
                         color: inherit;
+                        font-size: 1.2em;
+                        margin: 0;
                     ">De la profondeur des océans à la profondeur des données... 🌊➡️📊</h3>
-                """, unsafe_allow_html=True)
+                </div>
+            """, unsafe_allow_html=True)
         
         with col2:
             try:
-                # Photo alignée en haut
                 image = Image.open(".assets/photo.jpg")
                 image_rotated = image.rotate(-90, expand=True)
                 st.image(image_rotated, width=200)
@@ -336,8 +329,10 @@ def main():
                 print(f"Erreur: {e}")
         
         st.markdown("---")
-
-        # Le reste du code reste inchangé...
+        
+        # Ajouter le contenu de la lettre de motivation
+        st.markdown(get_lettre_motivation_content())
+        st.markdown(get_note_importante(), unsafe_allow_html=True)
 
     elif selection == "👤 Présentation":
         display_presentation()
