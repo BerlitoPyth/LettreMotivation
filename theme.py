@@ -230,6 +230,22 @@ def toggle_theme():
         padding: 0 !important;
         display: block !important;
     }}
+
+    /* Styles pour le bouton de thème dans la sidebar */
+    button[kind="secondary"] {{
+        font-size: 0.8em !important;
+        padding: 0.3rem !important;
+        margin-bottom: 0.5rem !important;
+        opacity: 0.8 !important;
+    }}
+
+    /* Style du conteneur du bouton */
+    .stButton {{
+        position: relative !important;
+        z-index: 1000 !important;
+        margin: 0 0 0.5rem 0 !important;
+        padding: 0 !important;
+    }}
     </style>
     """
     
