@@ -1,4 +1,3 @@
-
 import streamlit as st
 import time
 from theme import toggle_theme
@@ -226,6 +225,20 @@ def main():
 
     # Sidebar
     with st.sidebar:
+        st.markdown("""
+            <style>
+            [data-testid="stSidebarNav"] {
+                padding-top: 0rem;
+                margin-top: -1rem;
+            }
+            </style>
+            """, unsafe_allow_html=True)
+            
+        # Bouton de thème en petit en haut
+        col1, col2 = st.columns([5, 1])
+        with col2:
+            toggle_theme()
+        
         st.title("🎯 Navigation")
         st.markdown("---")
 
@@ -297,6 +310,7 @@ def main():
         # Première rangée avec le titre et la photo
         col1, col2 = st.columns([3, 1])
         with col1:
+            st.title("Candidature BUT Science des Données, BERLIAT Adrien")
             # Vérifier si le titre a déjà été écrit
             if 'title_written' not in st.session_state:
                 write_text_slowly("De la profondeur des océans à la profondeur des données... 🌊➡️📊")
@@ -314,7 +328,6 @@ def main():
                 st.info("📸 Photo non disponible")
                 print(f"Erreur: {e}")
         
-        st.title("Candidature BUT Science des Données, BERLIAT Adrien")
         st.markdown("---")
 
         # Points clés
